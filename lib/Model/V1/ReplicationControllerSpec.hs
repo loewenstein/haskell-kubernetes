@@ -21,7 +21,7 @@ import Model.V1.PodTemplateSpec
 
 data ReplicationControllerSpec = ReplicationControllerSpec
     { _replicas :: Integer
-    , _selector :: Value
+    , _selector :: Any
     , _template :: PodTemplateSpec
     } deriving (Show, Eq, Generic)
 makeLenses ''ReplicationControllerSpec

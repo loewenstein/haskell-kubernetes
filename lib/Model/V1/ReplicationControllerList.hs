@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data ReplicationControllerList = ReplicationControllerList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [ReplicationController]
     } deriving (Show, Eq, Generic)
 makeLenses ''ReplicationControllerList

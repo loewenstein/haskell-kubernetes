@@ -243,6 +243,7 @@ import Servant.API
 import Servant.Client
 import Network.URI (URI (..), URIAuth (..), parseURI)
 import Data.Maybe (fromMaybe)
+import Data.Text (Text)
 import Servant.Common.Text
 import Data.List (intercalate)
 import qualified Data.Text as T
@@ -286,294 +287,66 @@ import Model.V1.PersistentVolumeList
 import Model.V1.PersistentVolume
 import Model.Json.WatchEvent
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
-    :<|> "api" :> "v1" :> "componentstatuses" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ComponentStatusList -- listNamespacedComponentStatus
-    :<|> "api" :> "v1" :> "componentstatuses" :> Capture "name" Text :> QueryParam "pretty" Text :> Get '[JSON] V1.ComponentStatus -- readNamespacedComponentStatus
-    :<|> "api" :> "v1" :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ConfigMapList -- listConfigMap
-    :<|> "api" :> "v1" :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.EndpointsList -- listEndpoints
-    :<|> "api" :> "v1" :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.EventList -- listEvent
-    :<|> "api" :> "v1" :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.LimitRangeList -- listLimitRange
-    :<|> "api" :> "v1" :> "namespaces" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.NamespaceList -- listNamespacedNamespace
-    :<|> "api" :> "v1" :> "namespaces" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Namespace :> Post '[JSON] V1.Namespace -- createNamespacedNamespace
-    :<|> "api" :> "v1" :> "namespaces" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedNamespace
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "bindings" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Binding :> Post '[JSON] V1.Binding -- createNamespacedBinding
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ConfigMapList -- listNamespacedConfigMap
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ConfigMap :> Post '[JSON] V1.ConfigMap -- createNamespacedConfigMap
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedConfigMap
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.ConfigMap -- readNamespacedConfigMap
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ConfigMap :> Put '[JSON] V1.ConfigMap -- replaceNamespacedConfigMap
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedConfigMap
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.ConfigMap -- patchNamespacedConfigMap
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.EndpointsList -- listNamespacedEndpoints
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Endpoints :> Post '[JSON] V1.Endpoints -- createNamespacedEndpoints
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedEndpoints
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.Endpoints -- readNamespacedEndpoints
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Endpoints :> Put '[JSON] V1.Endpoints -- replaceNamespacedEndpoints
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedEndpoints
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.Endpoints -- patchNamespacedEndpoints
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.EventList -- listNamespacedEvent
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Event :> Post '[JSON] V1.Event -- createNamespacedEvent
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedEvent
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.Event -- readNamespacedEvent
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Event :> Put '[JSON] V1.Event -- replaceNamespacedEvent
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedEvent
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.Event -- patchNamespacedEvent
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.LimitRangeList -- listNamespacedLimitRange
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.LimitRange :> Post '[JSON] V1.LimitRange -- createNamespacedLimitRange
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedLimitRange
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.LimitRange -- readNamespacedLimitRange
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.LimitRange :> Put '[JSON] V1.LimitRange -- replaceNamespacedLimitRange
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedLimitRange
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.LimitRange -- patchNamespacedLimitRange
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.PersistentVolumeClaimList -- listNamespacedPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.PersistentVolumeClaim :> Post '[JSON] V1.PersistentVolumeClaim -- createNamespacedPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.PersistentVolumeClaim -- readNamespacedPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.PersistentVolumeClaim :> Put '[JSON] V1.PersistentVolumeClaim -- replaceNamespacedPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.PersistentVolumeClaim -- patchNamespacedPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.PersistentVolumeClaim :> Put '[JSON] V1.PersistentVolumeClaim -- replaceNamespacedPersistentVolumeClaimStatus
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.PodList -- listNamespacedPod
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Pod :> Post '[JSON] V1.Pod -- createNamespacedPod
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedPod
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.Pod -- readNamespacedPod
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Pod :> Put '[JSON] V1.Pod -- replaceNamespacedPod
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedPod
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.Pod -- patchNamespacedPod
+    :<|> "api" :> "v1" :> "componentstatuses" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ComponentStatusList -- listNamespacedComponentStatus
+    :<|> "api" :> "v1" :> "componentstatuses" :> Capture "name" Text :> QueryParam "pretty" Text :> Get '[JSON] ComponentStatus -- readNamespacedComponentStatus
+    :<|> "api" :> "v1" :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ConfigMapList -- listConfigMap
+    :<|> "api" :> "v1" :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] EndpointsList -- listEndpoints
+    :<|> "api" :> "v1" :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] EventList -- listEvent
+    :<|> "api" :> "v1" :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] LimitRangeList -- listLimitRange
+    :<|> "api" :> "v1" :> "namespaces" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] NamespaceList -- listNamespacedNamespace
+    :<|> "api" :> "v1" :> "namespaces" :> QueryParam "pretty" Text :> ReqBody '[JSON] Namespace :> Post '[JSON] Namespace -- createNamespacedNamespace
+    :<|> "api" :> "v1" :> "namespaces" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedNamespace
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "bindings" :> QueryParam "pretty" Text :> ReqBody '[JSON] Binding :> Post '[JSON] Binding -- createNamespacedBinding
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ConfigMapList -- listNamespacedConfigMap
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> QueryParam "pretty" Text :> ReqBody '[JSON] ConfigMap :> Post '[JSON] ConfigMap -- createNamespacedConfigMap
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedConfigMap
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] ConfigMap -- readNamespacedConfigMap
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] ConfigMap :> Put '[JSON] ConfigMap -- replaceNamespacedConfigMap
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedConfigMap
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] ConfigMap -- patchNamespacedConfigMap
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] EndpointsList -- listNamespacedEndpoints
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> ReqBody '[JSON] Endpoints :> Post '[JSON] Endpoints -- createNamespacedEndpoints
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedEndpoints
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Endpoints -- readNamespacedEndpoints
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Endpoints :> Put '[JSON] Endpoints -- replaceNamespacedEndpoints
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedEndpoints
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Endpoints -- patchNamespacedEndpoints
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] EventList -- listNamespacedEvent
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> ReqBody '[JSON] Event :> Post '[JSON] Event -- createNamespacedEvent
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedEvent
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Event -- readNamespacedEvent
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Event :> Put '[JSON] Event -- replaceNamespacedEvent
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedEvent
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Event -- patchNamespacedEvent
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] LimitRangeList -- listNamespacedLimitRange
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> ReqBody '[JSON] LimitRange :> Post '[JSON] LimitRange -- createNamespacedLimitRange
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedLimitRange
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] LimitRange -- readNamespacedLimitRange
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] LimitRange :> Put '[JSON] LimitRange -- replaceNamespacedLimitRange
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedLimitRange
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] LimitRange -- patchNamespacedLimitRange
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PersistentVolumeClaimList -- listNamespacedPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolumeClaim :> Post '[JSON] PersistentVolumeClaim -- createNamespacedPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] PersistentVolumeClaim -- readNamespacedPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolumeClaim :> Put '[JSON] PersistentVolumeClaim -- replaceNamespacedPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] PersistentVolumeClaim -- patchNamespacedPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolumeClaim :> Put '[JSON] PersistentVolumeClaim -- replaceNamespacedPersistentVolumeClaimStatus
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PodList -- listNamespacedPod
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> ReqBody '[JSON] Pod :> Post '[JSON] Pod -- createNamespacedPod
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedPod
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Pod -- readNamespacedPod
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Pod :> Put '[JSON] Pod -- replaceNamespacedPod
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedPod
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Pod -- patchNamespacedPod
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "attach" :> QueryParam "stdin" Bool :> QueryParam "stdout" Bool :> QueryParam "stderr" Bool :> QueryParam "tty" Bool :> QueryParam "container" Text :> Get '[JSON] Text -- connectGetNamespacedPodAttach
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "attach" :> QueryParam "stdin" Bool :> QueryParam "stdout" Bool :> QueryParam "stderr" Bool :> QueryParam "tty" Bool :> QueryParam "container" Text :> Post '[JSON] Text -- connectPostNamespacedPodAttach
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "binding" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Binding :> Post '[JSON] V1.Binding -- createNamespacedBindingBinding
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "binding" :> QueryParam "pretty" Text :> ReqBody '[JSON] Binding :> Post '[JSON] Binding -- createNamespacedBindingBinding
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "exec" :> QueryParam "stdin" Bool :> QueryParam "stdout" Bool :> QueryParam "stderr" Bool :> QueryParam "tty" Bool :> QueryParam "container" Text :> QueryParam "command" Text :> Get '[JSON] Text -- connectGetNamespacedPodExec
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "exec" :> QueryParam "stdin" Bool :> QueryParam "stdout" Bool :> QueryParam "stderr" Bool :> QueryParam "tty" Bool :> QueryParam "container" Text :> QueryParam "command" Text :> Post '[JSON] Text -- connectPostNamespacedPodExec
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "log" :> QueryParam "pretty" Text :> QueryParam "container" Text :> QueryParam "follow" Bool :> QueryParam "previous" Bool :> QueryParam "sinceSeconds" Integer :> QueryParam "sinceTime" Text :> QueryParam "timestamps" Bool :> QueryParam "tailLines" Integer :> QueryParam "limitBytes" Integer :> Get '[JSON] V1.Pod -- readNamespacedPodLog
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "log" :> QueryParam "pretty" Text :> QueryParam "container" Text :> QueryParam "follow" Bool :> QueryParam "previous" Bool :> QueryParam "sinceSeconds" Integer :> QueryParam "sinceTime" Text :> QueryParam "timestamps" Bool :> QueryParam "tailLines" Integer :> QueryParam "limitBytes" Integer :> Get '[JSON] Pod -- readNamespacedPodLog
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "portforward" :> Get '[JSON] Text -- connectGetNamespacedPodPortforward
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "portforward" :> Post '[JSON] Text -- connectPostNamespacedPodPortforward
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Get '[JSON] Text -- connectGetNamespacedPodProxy
@@ -588,76 +361,76 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Post '[JSON] Text -- connectPostNamespacedPodProxy_0
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Delete '[JSON] Text -- connectDeleteNamespacedPodProxy_0
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Options '[JSON] Text -- connectOptionsNamespacedPodProxy_0
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Pod :> Put '[JSON] V1.Pod -- replaceNamespacedPodStatus
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.PodTemplateList -- listNamespacedPodTemplate
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.PodTemplate :> Post '[JSON] V1.PodTemplate -- createNamespacedPodTemplate
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedPodTemplate
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.PodTemplate -- readNamespacedPodTemplate
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.PodTemplate :> Put '[JSON] V1.PodTemplate -- replaceNamespacedPodTemplate
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedPodTemplate
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.PodTemplate -- patchNamespacedPodTemplate
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ReplicationControllerList -- listNamespacedReplicationController
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ReplicationController :> Post '[JSON] V1.ReplicationController -- createNamespacedReplicationController
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedReplicationController
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.ReplicationController -- readNamespacedReplicationController
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ReplicationController :> Put '[JSON] V1.ReplicationController -- replaceNamespacedReplicationController
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedReplicationController
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.ReplicationController -- patchNamespacedReplicationController
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ReplicationController :> Put '[JSON] V1.ReplicationController -- replaceNamespacedReplicationControllerStatus
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ResourceQuotaList -- listNamespacedResourceQuota
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ResourceQuota :> Post '[JSON] V1.ResourceQuota -- createNamespacedResourceQuota
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedResourceQuota
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.ResourceQuota -- readNamespacedResourceQuota
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ResourceQuota :> Put '[JSON] V1.ResourceQuota -- replaceNamespacedResourceQuota
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedResourceQuota
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.ResourceQuota -- patchNamespacedResourceQuota
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ResourceQuota :> Put '[JSON] V1.ResourceQuota -- replaceNamespacedResourceQuotaStatus
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.SecretList -- listNamespacedSecret
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Secret :> Post '[JSON] V1.Secret -- createNamespacedSecret
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedSecret
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.Secret -- readNamespacedSecret
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Secret :> Put '[JSON] V1.Secret -- replaceNamespacedSecret
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedSecret
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.Secret -- patchNamespacedSecret
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ServiceAccountList -- listNamespacedServiceAccount
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ServiceAccount :> Post '[JSON] V1.ServiceAccount -- createNamespacedServiceAccount
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedServiceAccount
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.ServiceAccount -- readNamespacedServiceAccount
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.ServiceAccount :> Put '[JSON] V1.ServiceAccount -- replaceNamespacedServiceAccount
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedServiceAccount
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.ServiceAccount -- patchNamespacedServiceAccount
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ServiceList -- listNamespacedService
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Service :> Post '[JSON] V1.Service -- createNamespacedService
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> Get '[JSON] V1.Service -- readNamespacedService
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Service :> Put '[JSON] V1.Service -- replaceNamespacedService
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> Delete '[JSON] Unversioned.Status -- deleteNamespacedService
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.Service -- patchNamespacedService
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Service :> Put '[JSON] V1.Service -- replaceNamespacedServiceStatus
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.Namespace -- readNamespacedNamespace
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Namespace :> Put '[JSON] V1.Namespace -- replaceNamespacedNamespace
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedNamespace
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.Namespace -- patchNamespacedNamespace
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> "finalize" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Namespace :> Put '[JSON] V1.Namespace -- replaceNamespacedNamespaceFinalize
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Namespace :> Put '[JSON] V1.Namespace -- replaceNamespacedNamespaceStatus
-    :<|> "api" :> "v1" :> "nodes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.NodeList -- listNamespacedNode
-    :<|> "api" :> "v1" :> "nodes" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Node :> Post '[JSON] V1.Node -- createNamespacedNode
-    :<|> "api" :> "v1" :> "nodes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedNode
-    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.Node -- readNamespacedNode
-    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Node :> Put '[JSON] V1.Node -- replaceNamespacedNode
-    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedNode
-    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.Node -- patchNamespacedNode
-    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.Node :> Put '[JSON] V1.Node -- replaceNamespacedNodeStatus
-    :<|> "api" :> "v1" :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.PersistentVolumeClaimList -- listPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "persistentvolumes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.PersistentVolumeList -- listNamespacedPersistentVolume
-    :<|> "api" :> "v1" :> "persistentvolumes" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.PersistentVolume :> Post '[JSON] V1.PersistentVolume -- createNamespacedPersistentVolume
-    :<|> "api" :> "v1" :> "persistentvolumes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Unversioned.Status -- deletecollectionNamespacedPersistentVolume
-    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] V1.PersistentVolume -- readNamespacedPersistentVolume
-    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.PersistentVolume :> Put '[JSON] V1.PersistentVolume -- replaceNamespacedPersistentVolume
-    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.DeleteOptions :> Delete '[JSON] Unversioned.Status -- deleteNamespacedPersistentVolume
-    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Unversioned.Patch :> Patch '[JSON] V1.PersistentVolume -- patchNamespacedPersistentVolume
-    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] V1.PersistentVolume :> Put '[JSON] V1.PersistentVolume -- replaceNamespacedPersistentVolumeStatus
-    :<|> "api" :> "v1" :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.PodList -- listPod
-    :<|> "api" :> "v1" :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.PodTemplateList -- listPodTemplate
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] Pod :> Put '[JSON] Pod -- replaceNamespacedPodStatus
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PodTemplateList -- listNamespacedPodTemplate
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> ReqBody '[JSON] PodTemplate :> Post '[JSON] PodTemplate -- createNamespacedPodTemplate
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedPodTemplate
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] PodTemplate -- readNamespacedPodTemplate
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] PodTemplate :> Put '[JSON] PodTemplate -- replaceNamespacedPodTemplate
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedPodTemplate
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] PodTemplate -- patchNamespacedPodTemplate
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ReplicationControllerList -- listNamespacedReplicationController
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> ReqBody '[JSON] ReplicationController :> Post '[JSON] ReplicationController -- createNamespacedReplicationController
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedReplicationController
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] ReplicationController -- readNamespacedReplicationController
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] ReplicationController :> Put '[JSON] ReplicationController -- replaceNamespacedReplicationController
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedReplicationController
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] ReplicationController -- patchNamespacedReplicationController
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] ReplicationController :> Put '[JSON] ReplicationController -- replaceNamespacedReplicationControllerStatus
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ResourceQuotaList -- listNamespacedResourceQuota
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> ReqBody '[JSON] ResourceQuota :> Post '[JSON] ResourceQuota -- createNamespacedResourceQuota
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedResourceQuota
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] ResourceQuota -- readNamespacedResourceQuota
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] ResourceQuota :> Put '[JSON] ResourceQuota -- replaceNamespacedResourceQuota
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedResourceQuota
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] ResourceQuota -- patchNamespacedResourceQuota
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] ResourceQuota :> Put '[JSON] ResourceQuota -- replaceNamespacedResourceQuotaStatus
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] SecretList -- listNamespacedSecret
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> ReqBody '[JSON] Secret :> Post '[JSON] Secret -- createNamespacedSecret
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedSecret
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Secret -- readNamespacedSecret
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Secret :> Put '[JSON] Secret -- replaceNamespacedSecret
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedSecret
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Secret -- patchNamespacedSecret
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ServiceAccountList -- listNamespacedServiceAccount
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> ReqBody '[JSON] ServiceAccount :> Post '[JSON] ServiceAccount -- createNamespacedServiceAccount
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedServiceAccount
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] ServiceAccount -- readNamespacedServiceAccount
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] ServiceAccount :> Put '[JSON] ServiceAccount -- replaceNamespacedServiceAccount
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedServiceAccount
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] ServiceAccount -- patchNamespacedServiceAccount
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ServiceList -- listNamespacedService
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> QueryParam "pretty" Text :> ReqBody '[JSON] Service :> Post '[JSON] Service -- createNamespacedService
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> Get '[JSON] Service -- readNamespacedService
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Service :> Put '[JSON] Service -- replaceNamespacedService
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> Delete '[JSON] Status -- deleteNamespacedService
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Service -- patchNamespacedService
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] Service :> Put '[JSON] Service -- replaceNamespacedServiceStatus
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Namespace -- readNamespacedNamespace
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Namespace :> Put '[JSON] Namespace -- replaceNamespacedNamespace
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedNamespace
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Namespace -- patchNamespacedNamespace
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> "finalize" :> QueryParam "pretty" Text :> ReqBody '[JSON] Namespace :> Put '[JSON] Namespace -- replaceNamespacedNamespaceFinalize
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] Namespace :> Put '[JSON] Namespace -- replaceNamespacedNamespaceStatus
+    :<|> "api" :> "v1" :> "nodes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] NodeList -- listNamespacedNode
+    :<|> "api" :> "v1" :> "nodes" :> QueryParam "pretty" Text :> ReqBody '[JSON] Node :> Post '[JSON] Node -- createNamespacedNode
+    :<|> "api" :> "v1" :> "nodes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedNode
+    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Node -- readNamespacedNode
+    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Node :> Put '[JSON] Node -- replaceNamespacedNode
+    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedNode
+    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Node -- patchNamespacedNode
+    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] Node :> Put '[JSON] Node -- replaceNamespacedNodeStatus
+    :<|> "api" :> "v1" :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PersistentVolumeClaimList -- listPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "persistentvolumes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PersistentVolumeList -- listNamespacedPersistentVolume
+    :<|> "api" :> "v1" :> "persistentvolumes" :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolume :> Post '[JSON] PersistentVolume -- createNamespacedPersistentVolume
+    :<|> "api" :> "v1" :> "persistentvolumes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedPersistentVolume
+    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] PersistentVolume -- readNamespacedPersistentVolume
+    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolume :> Put '[JSON] PersistentVolume -- replaceNamespacedPersistentVolume
+    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedPersistentVolume
+    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] PersistentVolume -- patchNamespacedPersistentVolume
+    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolume :> Put '[JSON] PersistentVolume -- replaceNamespacedPersistentVolumeStatus
+    :<|> "api" :> "v1" :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PodList -- listPod
+    :<|> "api" :> "v1" :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PodTemplateList -- listPodTemplate
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Get '[JSON] Text -- proxyGETNamespacedPod
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Head '[JSON] Text -- proxyHEADNamespacedPod
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Put '[JSON] Text -- proxyPUTNamespacedPod
@@ -694,53 +467,53 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Post '[JSON] Text -- proxyPOSTNamespacedNode_0
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Delete '[JSON] Text -- proxyDELETENamespacedNode_0
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedNode_0
-    :<|> "api" :> "v1" :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ReplicationControllerList -- listReplicationController
-    :<|> "api" :> "v1" :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ResourceQuotaList -- listResourceQuota
-    :<|> "api" :> "v1" :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.SecretList -- listSecret
-    :<|> "api" :> "v1" :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ServiceAccountList -- listServiceAccount
-    :<|> "api" :> "v1" :> "services" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] V1.ServiceList -- listService
-    :<|> "api" :> "v1" :> "watch" :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchConfigMapList
-    :<|> "api" :> "v1" :> "watch" :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchEndpointsList
-    :<|> "api" :> "v1" :> "watch" :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchEventList
-    :<|> "api" :> "v1" :> "watch" :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchLimitRangeList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedNamespaceList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedConfigMapList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedConfigMap
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedEndpointsList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedEndpoints
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedEventList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedEvent
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedLimitRangeList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedLimitRange
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedPersistentVolumeClaimList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedPodList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedPod
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedPodTemplateList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedPodTemplate
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedReplicationControllerList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedReplicationController
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedResourceQuotaList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedResourceQuota
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedSecretList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedSecret
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedServiceAccountList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedServiceAccount
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "services" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedServiceList
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedService
-    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedNamespace
-    :<|> "api" :> "v1" :> "watch" :> "nodes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedNodeList
-    :<|> "api" :> "v1" :> "watch" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedNode
-    :<|> "api" :> "v1" :> "watch" :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchPersistentVolumeClaimList
-    :<|> "api" :> "v1" :> "watch" :> "persistentvolumes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedPersistentVolumeList
-    :<|> "api" :> "v1" :> "watch" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchNamespacedPersistentVolume
-    :<|> "api" :> "v1" :> "watch" :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchPodList
-    :<|> "api" :> "v1" :> "watch" :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchPodTemplateList
-    :<|> "api" :> "v1" :> "watch" :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchReplicationControllerList
-    :<|> "api" :> "v1" :> "watch" :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchResourceQuotaList
-    :<|> "api" :> "v1" :> "watch" :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchSecretList
-    :<|> "api" :> "v1" :> "watch" :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchServiceAccountList
-    :<|> "api" :> "v1" :> "watch" :> "services" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] Json.WatchEvent -- watchServiceList
+    :<|> "api" :> "v1" :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ReplicationControllerList -- listReplicationController
+    :<|> "api" :> "v1" :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ResourceQuotaList -- listResourceQuota
+    :<|> "api" :> "v1" :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] SecretList -- listSecret
+    :<|> "api" :> "v1" :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ServiceAccountList -- listServiceAccount
+    :<|> "api" :> "v1" :> "services" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ServiceList -- listService
+    :<|> "api" :> "v1" :> "watch" :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchConfigMapList
+    :<|> "api" :> "v1" :> "watch" :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchEndpointsList
+    :<|> "api" :> "v1" :> "watch" :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchEventList
+    :<|> "api" :> "v1" :> "watch" :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchLimitRangeList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedNamespaceList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedConfigMapList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedConfigMap
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedEndpointsList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedEndpoints
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedEventList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedEvent
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedLimitRangeList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedLimitRange
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedPersistentVolumeClaimList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedPodList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedPod
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedPodTemplateList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedPodTemplate
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedReplicationControllerList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedReplicationController
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedResourceQuotaList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedResourceQuota
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedSecretList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedSecret
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedServiceAccountList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedServiceAccount
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "services" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedServiceList
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedService
+    :<|> "api" :> "v1" :> "watch" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedNamespace
+    :<|> "api" :> "v1" :> "watch" :> "nodes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedNodeList
+    :<|> "api" :> "v1" :> "watch" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedNode
+    :<|> "api" :> "v1" :> "watch" :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchPersistentVolumeClaimList
+    :<|> "api" :> "v1" :> "watch" :> "persistentvolumes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedPersistentVolumeList
+    :<|> "api" :> "v1" :> "watch" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchNamespacedPersistentVolume
+    :<|> "api" :> "v1" :> "watch" :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchPodList
+    :<|> "api" :> "v1" :> "watch" :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchPodTemplateList
+    :<|> "api" :> "v1" :> "watch" :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchReplicationControllerList
+    :<|> "api" :> "v1" :> "watch" :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchResourceQuotaList
+    :<|> "api" :> "v1" :> "watch" :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchSecretList
+    :<|> "api" :> "v1" :> "watch" :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchServiceAccountList
+    :<|> "api" :> "v1" :> "watch" :> "services" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] WatchEvent -- watchServiceList
 
 proxyApivApi :: Proxy ApivApi
 proxyApivApi = Proxy

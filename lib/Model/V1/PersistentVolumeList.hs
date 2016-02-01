@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data PersistentVolumeList = PersistentVolumeList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [PersistentVolume]
     } deriving (Show, Eq, Generic)
 makeLenses ''PersistentVolumeList

@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data ServiceList = ServiceList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [Service]
     } deriving (Show, Eq, Generic)
 makeLenses ''ServiceList

@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data NodeList = NodeList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [Node]
     } deriving (Show, Eq, Generic)
 makeLenses ''NodeList
