@@ -1,13 +1,13 @@
-name:                haskell-servant-codegen
+name:                haskell-kubernetes
 version:             0.1.0.0
-synopsis:            Swagger-codegen example for Haskell servant
+synopsis:            Haskell bindings to the Kubernetes API (via swagger & servant)
 description:         Please see README.md
-homepage:            https://github.com/swagger-api/swagger-codegen#readme
-license:             Apache-2.0
+homepage:            https://github.com/soundcloud/haskell-kubernetes
+license:             MIT
 license-file:        LICENSE
-author:              Masahiro Yamauchi
-maintainer:          sgt.yamauchi@gmail.com
-copyright:           2015- Masahiro Yamauchi
+author:              Aaron Levin
+maintainer:          aaron.levin@soundcloud.com
+copyright:           2016 - SoundCloud Ltd.
 category:            Web
 build-type:          Simple
 -- extra-source-files:
@@ -146,19 +146,19 @@ library
   ghc-options:         -Wall -fcontext-stack=10000
   build-depends:       base
                      , aeson
-                     , either
-                     , lens
-                     , text
-                     , split
                      , containers
+                     , either
                      , http-types
+                     , lens
                      , network-uri
                      , QuickCheck
                      , quickcheck-instances
+                     , scientific
                      , servant
                      , servant-client
                      , servant-server
-                     , scientific
+                     , split
+                     , text
                      , unordered-containers
                      , vector
                      , wai
@@ -170,13 +170,13 @@ executable client
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
                      , either
-                     , transformers
-                     , split
+                     , haskell-kubernetes
                      , network-uri
                      , QuickCheck
                      , servant
                      , servant-client
-                     , haskell-servant-codegen
+                     , split
+                     , transformers
   default-language:    Haskell2010
 
 executable server
@@ -184,8 +184,8 @@ executable server
   main-is:             Main.hs
   ghc-options:         -threaded -fcontext-stack=1000 -rtsopts -with-rtsopts=-N
   build-depends:       base
-                     , warp
+                     , haskell-kubernetes
                      , servant-server
                      , servant-mock
-                     , haskell-servant-codegen
+                     , warp
   default-language:    Haskell2010
