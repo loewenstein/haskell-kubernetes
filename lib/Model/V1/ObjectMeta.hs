@@ -29,7 +29,7 @@ data ObjectMeta = ObjectMeta
     , _creationTimestamp :: Text
     , _deletionTimestamp :: Text
     , _deletionGracePeriodSeconds :: Integer
-    , _labels :: Value
+    , _labels :: Any
     , _annotations :: Any
     } deriving (Show, Eq, Generic)
 makeLenses ''ObjectMeta
