@@ -69,17 +69,17 @@ module Api.ApivApi (
     , connectGetNamespacedPodPortforward
     , connectPostNamespacedPodPortforward
     , connectGetNamespacedPodProxy
-    , connectHeadNamespacedPodProxy
+    -- , connectHeadNamespacedPodProxy
     , connectPutNamespacedPodProxy
     , connectPostNamespacedPodProxy
     , connectDeleteNamespacedPodProxy
-    , connectOptionsNamespacedPodProxy
+    -- , connectOptionsNamespacedPodProxy
     , connectGetNamespacedPodProxy_0
-    , connectHeadNamespacedPodProxy_0
+    -- , connectHeadNamespacedPodProxy_0
     , connectPutNamespacedPodProxy_0
     , connectPostNamespacedPodProxy_0
     , connectDeleteNamespacedPodProxy_0
-    , connectOptionsNamespacedPodProxy_0
+    -- , connectOptionsNamespacedPodProxy_0
     , replaceNamespacedPodStatus
     , listNamespacedPodTemplate
     , createNamespacedPodTemplate
@@ -151,41 +151,41 @@ module Api.ApivApi (
     , listPod
     , listPodTemplate
     , proxyGETNamespacedPod
-    , proxyHEADNamespacedPod
+    -- , proxyHEADNamespacedPod
     , proxyPUTNamespacedPod
     , proxyPOSTNamespacedPod
     , proxyDELETENamespacedPod
-    , proxyOPTIONSNamespacedPod
+    -- , proxyOPTIONSNamespacedPod
     , proxyGETNamespacedPod_0
-    , proxyHEADNamespacedPod_0
+    -- , proxyHEADNamespacedPod_0
     , proxyPUTNamespacedPod_0
     , proxyPOSTNamespacedPod_0
     , proxyDELETENamespacedPod_0
-    , proxyOPTIONSNamespacedPod_0
+    -- , proxyOPTIONSNamespacedPod_0
     , proxyGETNamespacedService
-    , proxyHEADNamespacedService
+    -- , proxyHEADNamespacedService
     , proxyPUTNamespacedService
     , proxyPOSTNamespacedService
     , proxyDELETENamespacedService
-    , proxyOPTIONSNamespacedService
+    -- , proxyOPTIONSNamespacedService
     , proxyGETNamespacedService_0
-    , proxyHEADNamespacedService_0
+    -- , proxyHEADNamespacedService_0
     , proxyPUTNamespacedService_0
     , proxyPOSTNamespacedService_0
     , proxyDELETENamespacedService_0
-    , proxyOPTIONSNamespacedService_0
+    -- , proxyOPTIONSNamespacedService_0
     , proxyGETNamespacedNode
-    , proxyHEADNamespacedNode
+    -- , proxyHEADNamespacedNode
     , proxyPUTNamespacedNode
     , proxyPOSTNamespacedNode
     , proxyDELETENamespacedNode
-    , proxyOPTIONSNamespacedNode
+    -- , proxyOPTIONSNamespacedNode
     , proxyGETNamespacedNode_0
-    , proxyHEADNamespacedNode_0
+    -- , proxyHEADNamespacedNode_0
     , proxyPUTNamespacedNode_0
     , proxyPOSTNamespacedNode_0
     , proxyDELETENamespacedNode_0
-    , proxyOPTIONSNamespacedNode_0
+    -- , proxyOPTIONSNamespacedNode_0
     , listReplicationController
     , listResourceQuota
     , listSecret
@@ -261,7 +261,7 @@ import Model.Unversioned.Status
 import Model.V1.Binding
 import Model.V1.ConfigMap
 import Model.V1.DeleteOptions
-import Model.Unversioned.Patch
+import qualified Model.Unversioned.Patch as KubePatch
 import Model.V1.Endpoints
 import Model.V1.Event
 import Model.V1.LimitRange
@@ -304,35 +304,35 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] ConfigMap -- readNamespacedConfigMap
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] ConfigMap :> Put '[JSON] ConfigMap -- replaceNamespacedConfigMap
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedConfigMap
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] ConfigMap -- patchNamespacedConfigMap
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "configmaps" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] ConfigMap -- patchNamespacedConfigMap
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] EndpointsList -- listNamespacedEndpoints
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> ReqBody '[JSON] Endpoints :> Post '[JSON] Endpoints -- createNamespacedEndpoints
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedEndpoints
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Endpoints -- readNamespacedEndpoints
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Endpoints :> Put '[JSON] Endpoints -- replaceNamespacedEndpoints
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedEndpoints
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Endpoints -- patchNamespacedEndpoints
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "endpoints" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] Endpoints -- patchNamespacedEndpoints
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] EventList -- listNamespacedEvent
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> ReqBody '[JSON] Event :> Post '[JSON] Event -- createNamespacedEvent
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedEvent
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Event -- readNamespacedEvent
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Event :> Put '[JSON] Event -- replaceNamespacedEvent
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedEvent
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Event -- patchNamespacedEvent
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "events" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] Event -- patchNamespacedEvent
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] LimitRangeList -- listNamespacedLimitRange
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> ReqBody '[JSON] LimitRange :> Post '[JSON] LimitRange -- createNamespacedLimitRange
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedLimitRange
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] LimitRange -- readNamespacedLimitRange
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] LimitRange :> Put '[JSON] LimitRange -- replaceNamespacedLimitRange
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedLimitRange
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] LimitRange -- patchNamespacedLimitRange
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "limitranges" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] LimitRange -- patchNamespacedLimitRange
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PersistentVolumeClaimList -- listNamespacedPersistentVolumeClaim
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolumeClaim :> Post '[JSON] PersistentVolumeClaim -- createNamespacedPersistentVolumeClaim
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedPersistentVolumeClaim
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] PersistentVolumeClaim -- readNamespacedPersistentVolumeClaim
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolumeClaim :> Put '[JSON] PersistentVolumeClaim -- replaceNamespacedPersistentVolumeClaim
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedPersistentVolumeClaim
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] PersistentVolumeClaim -- patchNamespacedPersistentVolumeClaim
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] PersistentVolumeClaim -- patchNamespacedPersistentVolumeClaim
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "persistentvolumeclaims" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolumeClaim :> Put '[JSON] PersistentVolumeClaim -- replaceNamespacedPersistentVolumeClaimStatus
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PodList -- listNamespacedPod
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> QueryParam "pretty" Text :> ReqBody '[JSON] Pod :> Post '[JSON] Pod -- createNamespacedPod
@@ -340,7 +340,7 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Pod -- readNamespacedPod
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Pod :> Put '[JSON] Pod -- replaceNamespacedPod
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedPod
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Pod -- patchNamespacedPod
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] Pod -- patchNamespacedPod
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "attach" :> QueryParam "stdin" Bool :> QueryParam "stdout" Bool :> QueryParam "stderr" Bool :> QueryParam "tty" Bool :> QueryParam "container" Text :> Get '[JSON] Text -- connectGetNamespacedPodAttach
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "attach" :> QueryParam "stdin" Bool :> QueryParam "stdout" Bool :> QueryParam "stderr" Bool :> QueryParam "tty" Bool :> QueryParam "container" Text :> Post '[JSON] Text -- connectPostNamespacedPodAttach
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "binding" :> QueryParam "pretty" Text :> ReqBody '[JSON] Binding :> Post '[JSON] Binding -- createNamespacedBindingBinding
@@ -350,17 +350,17 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "portforward" :> Get '[JSON] Text -- connectGetNamespacedPodPortforward
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "portforward" :> Post '[JSON] Text -- connectPostNamespacedPodPortforward
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Get '[JSON] Text -- connectGetNamespacedPodProxy
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Head '[JSON] Text -- connectHeadNamespacedPodProxy
+    -- :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Head '[JSON] Text -- connectHeadNamespacedPodProxy
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Put '[JSON] Text -- connectPutNamespacedPodProxy
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Post '[JSON] Text -- connectPostNamespacedPodProxy
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Delete '[JSON] Text -- connectDeleteNamespacedPodProxy
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Options '[JSON] Text -- connectOptionsNamespacedPodProxy
+    -- :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Options '[JSON] Text -- connectOptionsNamespacedPodProxy
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Get '[JSON] Text -- connectGetNamespacedPodProxy_0
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Head '[JSON] Text -- connectHeadNamespacedPodProxy_0
+    -- :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Head '[JSON] Text -- connectHeadNamespacedPodProxy_0
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Put '[JSON] Text -- connectPutNamespacedPodProxy_0
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Post '[JSON] Text -- connectPostNamespacedPodProxy_0
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Delete '[JSON] Text -- connectDeleteNamespacedPodProxy_0
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Options '[JSON] Text -- connectOptionsNamespacedPodProxy_0
+    -- :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Options '[JSON] Text -- connectOptionsNamespacedPodProxy_0
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] Pod :> Put '[JSON] Pod -- replaceNamespacedPodStatus
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PodTemplateList -- listNamespacedPodTemplate
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> QueryParam "pretty" Text :> ReqBody '[JSON] PodTemplate :> Post '[JSON] PodTemplate -- createNamespacedPodTemplate
@@ -368,14 +368,14 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] PodTemplate -- readNamespacedPodTemplate
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] PodTemplate :> Put '[JSON] PodTemplate -- replaceNamespacedPodTemplate
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedPodTemplate
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] PodTemplate -- patchNamespacedPodTemplate
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "podtemplates" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] PodTemplate -- patchNamespacedPodTemplate
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ReplicationControllerList -- listNamespacedReplicationController
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> ReqBody '[JSON] ReplicationController :> Post '[JSON] ReplicationController -- createNamespacedReplicationController
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedReplicationController
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] ReplicationController -- readNamespacedReplicationController
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] ReplicationController :> Put '[JSON] ReplicationController -- replaceNamespacedReplicationController
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedReplicationController
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] ReplicationController -- patchNamespacedReplicationController
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] ReplicationController -- patchNamespacedReplicationController
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "replicationcontrollers" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] ReplicationController :> Put '[JSON] ReplicationController -- replaceNamespacedReplicationControllerStatus
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ResourceQuotaList -- listNamespacedResourceQuota
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> QueryParam "pretty" Text :> ReqBody '[JSON] ResourceQuota :> Post '[JSON] ResourceQuota -- createNamespacedResourceQuota
@@ -383,7 +383,7 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] ResourceQuota -- readNamespacedResourceQuota
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] ResourceQuota :> Put '[JSON] ResourceQuota -- replaceNamespacedResourceQuota
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedResourceQuota
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] ResourceQuota -- patchNamespacedResourceQuota
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] ResourceQuota -- patchNamespacedResourceQuota
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "resourcequotas" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] ResourceQuota :> Put '[JSON] ResourceQuota -- replaceNamespacedResourceQuotaStatus
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] SecretList -- listNamespacedSecret
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> QueryParam "pretty" Text :> ReqBody '[JSON] Secret :> Post '[JSON] Secret -- createNamespacedSecret
@@ -391,25 +391,25 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Secret -- readNamespacedSecret
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Secret :> Put '[JSON] Secret -- replaceNamespacedSecret
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedSecret
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Secret -- patchNamespacedSecret
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "secrets" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] Secret -- patchNamespacedSecret
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ServiceAccountList -- listNamespacedServiceAccount
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> ReqBody '[JSON] ServiceAccount :> Post '[JSON] ServiceAccount -- createNamespacedServiceAccount
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Delete '[JSON] Status -- deletecollectionNamespacedServiceAccount
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] ServiceAccount -- readNamespacedServiceAccount
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] ServiceAccount :> Put '[JSON] ServiceAccount -- replaceNamespacedServiceAccount
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedServiceAccount
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] ServiceAccount -- patchNamespacedServiceAccount
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "serviceaccounts" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] ServiceAccount -- patchNamespacedServiceAccount
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ServiceList -- listNamespacedService
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> QueryParam "pretty" Text :> ReqBody '[JSON] Service :> Post '[JSON] Service -- createNamespacedService
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> Get '[JSON] Service -- readNamespacedService
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Service :> Put '[JSON] Service -- replaceNamespacedService
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> Delete '[JSON] Status -- deleteNamespacedService
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Service -- patchNamespacedService
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] Service -- patchNamespacedService
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] Service :> Put '[JSON] Service -- replaceNamespacedServiceStatus
     :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Namespace -- readNamespacedNamespace
     :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Namespace :> Put '[JSON] Namespace -- replaceNamespacedNamespace
     :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedNamespace
-    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Namespace -- patchNamespacedNamespace
+    :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] Namespace -- patchNamespacedNamespace
     :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> "finalize" :> QueryParam "pretty" Text :> ReqBody '[JSON] Namespace :> Put '[JSON] Namespace -- replaceNamespacedNamespaceFinalize
     :<|> "api" :> "v1" :> "namespaces" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] Namespace :> Put '[JSON] Namespace -- replaceNamespacedNamespaceStatus
     :<|> "api" :> "v1" :> "nodes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] NodeList -- listNamespacedNode
@@ -418,7 +418,7 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] Node -- readNamespacedNode
     :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Node :> Put '[JSON] Node -- replaceNamespacedNode
     :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedNode
-    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] Node -- patchNamespacedNode
+    :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] Node -- patchNamespacedNode
     :<|> "api" :> "v1" :> "nodes" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] Node :> Put '[JSON] Node -- replaceNamespacedNodeStatus
     :<|> "api" :> "v1" :> "persistentvolumeclaims" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PersistentVolumeClaimList -- listPersistentVolumeClaim
     :<|> "api" :> "v1" :> "persistentvolumes" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PersistentVolumeList -- listNamespacedPersistentVolume
@@ -427,46 +427,46 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> QueryParam "export" Bool :> QueryParam "exact" Bool :> Get '[JSON] PersistentVolume -- readNamespacedPersistentVolume
     :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolume :> Put '[JSON] PersistentVolume -- replaceNamespacedPersistentVolume
     :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] DeleteOptions :> Delete '[JSON] Status -- deleteNamespacedPersistentVolume
-    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] Patch :> Patch '[JSON] PersistentVolume -- patchNamespacedPersistentVolume
+    :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> QueryParam "pretty" Text :> ReqBody '[JSON] KubePatch.Patch :> Patch '[JSON] PersistentVolume -- patchNamespacedPersistentVolume
     :<|> "api" :> "v1" :> "persistentvolumes" :> Capture "name" Text :> "status" :> QueryParam "pretty" Text :> ReqBody '[JSON] PersistentVolume :> Put '[JSON] PersistentVolume -- replaceNamespacedPersistentVolumeStatus
     :<|> "api" :> "v1" :> "pods" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PodList -- listPod
     :<|> "api" :> "v1" :> "podtemplates" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] PodTemplateList -- listPodTemplate
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Get '[JSON] Text -- proxyGETNamespacedPod
-    :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Head '[JSON] Text -- proxyHEADNamespacedPod
+    -- :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Head '[JSON] Text -- proxyHEADNamespacedPod
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Put '[JSON] Text -- proxyPUTNamespacedPod
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Post '[JSON] Text -- proxyPOSTNamespacedPod
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Delete '[JSON] Text -- proxyDELETENamespacedPod
-    :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedPod
+    -- :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedPod
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Capture "path" Text :> Get '[JSON] Text -- proxyGETNamespacedPod_0
-    :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Capture "path" Text :> Head '[JSON] Text -- proxyHEADNamespacedPod_0
+    -- :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Capture "path" Text :> Head '[JSON] Text -- proxyHEADNamespacedPod_0
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Capture "path" Text :> Put '[JSON] Text -- proxyPUTNamespacedPod_0
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Capture "path" Text :> Post '[JSON] Text -- proxyPOSTNamespacedPod_0
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Capture "path" Text :> Delete '[JSON] Text -- proxyDELETENamespacedPod_0
-    :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Capture "path" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedPod_0
+    -- :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> Capture "path" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedPod_0
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Get '[JSON] Text -- proxyGETNamespacedService
-    :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Head '[JSON] Text -- proxyHEADNamespacedService
+    -- :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Head '[JSON] Text -- proxyHEADNamespacedService
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Put '[JSON] Text -- proxyPUTNamespacedService
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Post '[JSON] Text -- proxyPOSTNamespacedService
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Delete '[JSON] Text -- proxyDELETENamespacedService
-    :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedService
+    -- :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedService
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Capture "path" Text :> Get '[JSON] Text -- proxyGETNamespacedService_0
-    :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Capture "path" Text :> Head '[JSON] Text -- proxyHEADNamespacedService_0
+    -- :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Capture "path" Text :> Head '[JSON] Text -- proxyHEADNamespacedService_0
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Capture "path" Text :> Put '[JSON] Text -- proxyPUTNamespacedService_0
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Capture "path" Text :> Post '[JSON] Text -- proxyPOSTNamespacedService_0
     :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Capture "path" Text :> Delete '[JSON] Text -- proxyDELETENamespacedService_0
-    :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Capture "path" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedService_0
+    -- :<|> "api" :> "v1" :> "proxy" :> "namespaces" :> Capture "namespace" Text :> "services" :> Capture "name" Text :> Capture "path" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedService_0
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Get '[JSON] Text -- proxyGETNamespacedNode
-    :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Head '[JSON] Text -- proxyHEADNamespacedNode
+    -- :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Head '[JSON] Text -- proxyHEADNamespacedNode
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Put '[JSON] Text -- proxyPUTNamespacedNode
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Post '[JSON] Text -- proxyPOSTNamespacedNode
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Delete '[JSON] Text -- proxyDELETENamespacedNode
-    :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedNode
+    -- :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedNode
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Get '[JSON] Text -- proxyGETNamespacedNode_0
-    :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Head '[JSON] Text -- proxyHEADNamespacedNode_0
+    -- :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Head '[JSON] Text -- proxyHEADNamespacedNode_0
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Put '[JSON] Text -- proxyPUTNamespacedNode_0
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Post '[JSON] Text -- proxyPOSTNamespacedNode_0
     :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Delete '[JSON] Text -- proxyDELETENamespacedNode_0
-    :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedNode_0
+    -- :<|> "api" :> "v1" :> "proxy" :> "nodes" :> Capture "name" Text :> Capture "path" Text :> Options '[JSON] Text -- proxyOPTIONSNamespacedNode_0
     :<|> "api" :> "v1" :> "replicationcontrollers" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ReplicationControllerList -- listReplicationController
     :<|> "api" :> "v1" :> "resourcequotas" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ResourceQuotaList -- listResourceQuota
     :<|> "api" :> "v1" :> "secrets" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] SecretList -- listSecret
@@ -600,17 +600,17 @@ getAPIResources
     :<|> connectGetNamespacedPodPortforward
     :<|> connectPostNamespacedPodPortforward
     :<|> connectGetNamespacedPodProxy
-    :<|> connectHeadNamespacedPodProxy
+    -- :<|> connectHeadNamespacedPodProxy
     :<|> connectPutNamespacedPodProxy
     :<|> connectPostNamespacedPodProxy
     :<|> connectDeleteNamespacedPodProxy
-    :<|> connectOptionsNamespacedPodProxy
+    -- :<|> connectOptionsNamespacedPodProxy
     :<|> connectGetNamespacedPodProxy_0
-    :<|> connectHeadNamespacedPodProxy_0
+    -- :<|> connectHeadNamespacedPodProxy_0
     :<|> connectPutNamespacedPodProxy_0
     :<|> connectPostNamespacedPodProxy_0
     :<|> connectDeleteNamespacedPodProxy_0
-    :<|> connectOptionsNamespacedPodProxy_0
+    -- :<|> connectOptionsNamespacedPodProxy_0
     :<|> replaceNamespacedPodStatus
     :<|> listNamespacedPodTemplate
     :<|> createNamespacedPodTemplate
@@ -682,41 +682,41 @@ getAPIResources
     :<|> listPod
     :<|> listPodTemplate
     :<|> proxyGETNamespacedPod
-    :<|> proxyHEADNamespacedPod
+    -- :<|> proxyHEADNamespacedPod
     :<|> proxyPUTNamespacedPod
     :<|> proxyPOSTNamespacedPod
     :<|> proxyDELETENamespacedPod
-    :<|> proxyOPTIONSNamespacedPod
+    -- :<|> proxyOPTIONSNamespacedPod
     :<|> proxyGETNamespacedPod_0
-    :<|> proxyHEADNamespacedPod_0
+    -- :<|> proxyHEADNamespacedPod_0
     :<|> proxyPUTNamespacedPod_0
     :<|> proxyPOSTNamespacedPod_0
     :<|> proxyDELETENamespacedPod_0
-    :<|> proxyOPTIONSNamespacedPod_0
+    -- :<|> proxyOPTIONSNamespacedPod_0
     :<|> proxyGETNamespacedService
-    :<|> proxyHEADNamespacedService
+    -- :<|> proxyHEADNamespacedService
     :<|> proxyPUTNamespacedService
     :<|> proxyPOSTNamespacedService
     :<|> proxyDELETENamespacedService
-    :<|> proxyOPTIONSNamespacedService
+    -- :<|> proxyOPTIONSNamespacedService
     :<|> proxyGETNamespacedService_0
-    :<|> proxyHEADNamespacedService_0
+    -- :<|> proxyHEADNamespacedService_0
     :<|> proxyPUTNamespacedService_0
     :<|> proxyPOSTNamespacedService_0
     :<|> proxyDELETENamespacedService_0
-    :<|> proxyOPTIONSNamespacedService_0
+    -- :<|> proxyOPTIONSNamespacedService_0
     :<|> proxyGETNamespacedNode
-    :<|> proxyHEADNamespacedNode
+    -- :<|> proxyHEADNamespacedNode
     :<|> proxyPUTNamespacedNode
     :<|> proxyPOSTNamespacedNode
     :<|> proxyDELETENamespacedNode
-    :<|> proxyOPTIONSNamespacedNode
+    -- :<|> proxyOPTIONSNamespacedNode
     :<|> proxyGETNamespacedNode_0
-    :<|> proxyHEADNamespacedNode_0
+    -- :<|> proxyHEADNamespacedNode_0
     :<|> proxyPUTNamespacedNode_0
     :<|> proxyPOSTNamespacedNode_0
     :<|> proxyDELETENamespacedNode_0
-    :<|> proxyOPTIONSNamespacedNode_0
+    -- :<|> proxyOPTIONSNamespacedNode_0
     :<|> listReplicationController
     :<|> listResourceQuota
     :<|> listSecret
