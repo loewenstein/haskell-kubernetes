@@ -29,7 +29,7 @@ data PodSpec = PodSpec
     , _terminationGracePeriodSeconds :: Integer
     , _activeDeadlineSeconds :: Integer
     , _dnsPolicy :: Text
-    , _nodeSelector :: Value
+    , _nodeSelector :: Any
     , _serviceAccountName :: Text
     , _serviceAccount :: Text
     , _nodeName :: Text

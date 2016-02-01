@@ -19,7 +19,7 @@ import Model.V1.Any
 
 
 data ResourceQuotaSpec = ResourceQuotaSpec
-    { _hard :: Value
+    { _hard :: Any
     } deriving (Show, Eq, Generic)
 makeLenses ''ResourceQuotaSpec
 

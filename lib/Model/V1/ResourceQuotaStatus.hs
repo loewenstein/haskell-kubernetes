@@ -19,8 +19,8 @@ import Model.V1.Any
 
 
 data ResourceQuotaStatus = ResourceQuotaStatus
-    { _hard :: Value
-    , _used :: Value
+    { _hard :: Any
+    , _used :: Any
     } deriving (Show, Eq, Generic)
 makeLenses ''ResourceQuotaStatus
 

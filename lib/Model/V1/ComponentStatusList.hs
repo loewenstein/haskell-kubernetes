@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data ComponentStatusList = ComponentStatusList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [ComponentStatus]
     } deriving (Show, Eq, Generic)
 makeLenses ''ComponentStatusList

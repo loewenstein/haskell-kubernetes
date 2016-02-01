@@ -19,8 +19,8 @@ import Model.V1.Any
 
 
 data ResourceRequirements = ResourceRequirements
-    { _limits :: Value
-    , _requests :: Value
+    { _limits :: Any
+    , _requests :: Any
     } deriving (Show, Eq, Generic)
 makeLenses ''ResourceRequirements
 

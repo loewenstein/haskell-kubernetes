@@ -21,7 +21,7 @@ import Model.V1.ServicePort
 
 data ServiceSpec = ServiceSpec
     { _ports :: [ServicePort]
-    , _selector :: Value
+    , _selector :: Any
     , _clusterIP :: Text
     , _type_ :: Text
     , _externalIPs :: [Text]

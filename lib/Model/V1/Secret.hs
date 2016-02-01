@@ -23,7 +23,7 @@ data Secret = Secret
     { _kind :: Text
     , _apiVersion :: Text
     , _metadata :: ObjectMeta
-    , _data_ :: Value
+    , _data_ :: Any
     , _type_ :: Text
     } deriving (Show, Eq, Generic)
 makeLenses ''Secret

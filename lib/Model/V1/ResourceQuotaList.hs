@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data ResourceQuotaList = ResourceQuotaList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [ResourceQuota]
     } deriving (Show, Eq, Generic)
 makeLenses ''ResourceQuotaList

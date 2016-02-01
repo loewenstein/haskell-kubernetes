@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data PodTemplateList = PodTemplateList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [PodTemplate]
     } deriving (Show, Eq, Generic)
 makeLenses ''PodTemplateList

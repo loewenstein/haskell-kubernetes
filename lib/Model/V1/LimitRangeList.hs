@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data LimitRangeList = LimitRangeList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [LimitRange]
     } deriving (Show, Eq, Generic)
 makeLenses ''LimitRangeList

@@ -22,7 +22,7 @@ import Model.V1.PersistentVolumeAccessMode
 data PersistentVolumeClaimStatus = PersistentVolumeClaimStatus
     { _phase :: Text
     , _accessModes :: [PersistentVolumeAccessMode]
-    , _capacity :: Value
+    , _capacity :: Any
     } deriving (Show, Eq, Generic)
 makeLenses ''PersistentVolumeClaimStatus
 

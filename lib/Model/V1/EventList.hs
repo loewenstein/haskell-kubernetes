@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data EventList = EventList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [Event]
     } deriving (Show, Eq, Generic)
 makeLenses ''EventList

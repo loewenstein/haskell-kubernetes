@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data NamespaceList = NamespaceList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [Namespace]
     } deriving (Show, Eq, Generic)
 makeLenses ''NamespaceList

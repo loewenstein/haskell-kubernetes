@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data SecretList = SecretList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [Secret]
     } deriving (Show, Eq, Generic)
 makeLenses ''SecretList

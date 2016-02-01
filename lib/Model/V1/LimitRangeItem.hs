@@ -24,7 +24,7 @@ data LimitRangeItem = LimitRangeItem
     , _min :: Any
     , _default_ :: Any
     , _defaultRequest :: Any
-    , _maxLimitRequestRatio :: Value
+    , _maxLimitRequestRatio :: Any
     } deriving (Show, Eq, Generic)
 makeLenses ''LimitRangeItem
 

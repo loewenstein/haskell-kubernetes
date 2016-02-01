@@ -15,7 +15,7 @@ import Data.Text (Text)
 import GHC.Generics
 import Test.QuickCheck
 import Test.QuickCheck.Instances ()
--- import Model.V1.Any
+import Model.V1.Any
 import Model.V1.ObjectMeta
 
 
@@ -23,7 +23,7 @@ data ConfigMap = ConfigMap
     { _kind :: Text
     , _apiVersion :: Text
     , _metadata :: ObjectMeta
-    , _data_ :: Value
+    , _data_ :: Any
     } deriving (Show, Eq, Generic)
 makeLenses ''ConfigMap
 

@@ -22,7 +22,7 @@ import Model.Unversioned.ListMeta
 data ConfigMapList = ConfigMapList
     { _kind :: Text
     , _apiVersion :: Text
-    , _metadata :: Unversioned.ListMeta
+    , _metadata :: ListMeta
     , _items :: [ConfigMap]
     } deriving (Show, Eq, Generic)
 makeLenses ''ConfigMapList

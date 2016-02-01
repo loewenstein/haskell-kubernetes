@@ -33,7 +33,7 @@ import Model.V1.RBDVolumeSource
 
 
 data PersistentVolumeSpec = PersistentVolumeSpec
-    { _capacity :: Value
+    { _capacity :: Any
     , _gcePersistentDisk :: GCEPersistentDiskVolumeSource
     , _awsElasticBlockStore :: AWSElasticBlockStoreVolumeSource
     , _hostPath :: HostPathVolumeSource
