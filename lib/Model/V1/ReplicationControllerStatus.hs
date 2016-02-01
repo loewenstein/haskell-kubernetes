@@ -11,7 +11,6 @@ module Model.V1.ReplicationControllerStatus
 
 import Control.Lens.TH (makeLenses)
 import Data.Aeson
-import Data.Text (Text)
 import GHC.Generics
 import Test.QuickCheck
 import Test.QuickCheck.Instances ()
