@@ -17,7 +17,6 @@ library
   hs-source-dirs:      lib
   exposed-modules:     Kubernetes.Apis
                      , Kubernetes.Api.ApivApi
-                     --, Kubernetes.Model.Integer
                      , Kubernetes.Model.Json.WatchEvent
                      , Kubernetes.Model.Unversioned.ListMeta
                      , Kubernetes.Model.Unversioned.Patch
