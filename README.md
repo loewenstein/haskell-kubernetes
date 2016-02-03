@@ -5,7 +5,7 @@ This project contains haskell bindings to the `v1` Kubernetes api generated via 
 
 ## About the Datatypes Generated
 
-- Non-required types are represented as a `Maybe`, even for lists.
+- Non-required fields are represented as a `Maybe`, even when that field contains a list (e.g. `Maybe [Foo]`).
 - `aeson` instances are generated for each type with the appropriate keys
 - Lenses are generated for every field, with plain names for each lens (e.g. `min`, `object`, etc.). So be careful with unqualified imports.
 
