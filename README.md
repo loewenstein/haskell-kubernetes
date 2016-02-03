@@ -19,3 +19,4 @@ Most additional processing is documented in the `codegen` folder.
 
 1. client and server bindings are largely untested.
 2. API coverage is almost full. As `servant-0.4.4` lacks support for `HEAD` and `OPTIONS` endpoints, those endpoints were excluded from the **client** *and* **server** implementation (though any related datatypes are still generated).
+3. The `server` executable takes over 15 minutes to compile.
