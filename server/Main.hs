@@ -4,7 +4,7 @@
 
 module Main where
 
-import Apis
+import Kubernetes.Apis
 import Servant
 import Servant.Mock
 import qualified Network.Wai.Handler.Warp as Warp
