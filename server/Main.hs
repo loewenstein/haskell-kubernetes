@@ -1,3 +1,10 @@
+-- This source code is distributed under the terms of a MIT license,
+-- Copyright (c) 2016-present, SoundCloud Ltd.
+-- All rights reserved.
+--
+-- This source code is distributed under the terms of a MIT license,
+-- found in the LICENSE file.
+
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
 {-# LANGUAGE TypeOperators #-}
