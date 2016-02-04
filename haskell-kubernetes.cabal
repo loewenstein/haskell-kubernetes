@@ -145,6 +145,7 @@ library
   ghc-options:         -Wall -fcontext-stack=10000
   build-depends:       base
                      , aeson
+                     , bytestring
                      , containers
                      , either
                      , http-types
