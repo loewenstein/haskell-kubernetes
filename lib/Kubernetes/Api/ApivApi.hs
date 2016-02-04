@@ -5,6 +5,8 @@
 -- This source code is distributed under the terms of a MIT license,
 -- found in the LICENSE file.
 
+{-# OPTIONS_GHC -fno-warn-missing-signatures #-}
+
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE TypeFamilies #-}
 {-# LANGUAGE DeriveGeneric #-}
@@ -244,17 +246,11 @@ module Kubernetes.Api.ApivApi (
     , ApivApi
     ) where
 
-import GHC.Generics
 import Data.Proxy
+import Data.Text (Text)
 import Servant.API
 import Servant.Client
-import Network.URI (URI (..), URIAuth (..), parseURI)
-import Data.Maybe (fromMaybe)
-import Data.Text (Text)
-import Servant.Common.Text
-import Data.List (intercalate)
-import qualified Data.Text as T
-import Test.QuickCheck
+import Network.URI (URIAuth (..), parseURI)
 import Kubernetes.Model.V1.ComponentStatusList
 import Kubernetes.Model.V1.ComponentStatus
 import Kubernetes.Model.V1.ConfigMapList
@@ -292,7 +288,6 @@ import Kubernetes.Model.V1.Node
 import Kubernetes.Model.V1.PersistentVolumeList
 import Kubernetes.Model.V1.PersistentVolume
 import Kubernetes.Model.Json.WatchEvent
-import Kubernetes.Utils
 
 type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "componentstatuses" :> QueryParam "pretty" Text :> QueryParam "labelSelector" Text :> QueryParam "fieldSelector" Text :> QueryParam "watch" Bool :> QueryParam "resourceVersion" Text :> QueryParam "timeoutSeconds" Integer :> Get '[JSON] ComponentStatusList -- listNamespacedComponentStatus
@@ -530,17 +525,17 @@ serverPath :: String
 serverPath = "https://127.0.0.1:8080/"
 
 parseHostPort :: String -> (String, Int)
-parseHostPort path = (host,port)
+parseHostPort path = (h,p)
     where
         authority = case parseURI path of
             Just x -> uriAuthority x
             _      -> Nothing
-        (host, port) = case authority of
+        (h, p) = case authority of
             Just y -> (uriRegName y, (getPort . uriPort) y)
             _      -> ("localhost", 8080)
-        getPort p = case (length p) of
+        getPort p' = case (length p') of
             0 -> 80
-            _ -> (read . drop 1) p
+            _ -> (read . drop 1) p'
 
 (host, port) = parseHostPort serverPath
 
