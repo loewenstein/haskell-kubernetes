@@ -1,9 +1,17 @@
-Generating the Haskell Code
-===========================
+Getting Started
+===============
 
-The client and server code generation mostly works. However, lots of massaging is needed on the Models. There is a bash script that one can run to handle this massaging (this should be done in `swagger-codegen` but would require some work on the haskell generation side).
+## Use in a Haskell Project
 
-## 1. Generate the code
+For use in a Haskell project, simply include `haskell-kubernetes` in your `.cabal` or `stack.yaml`.
+
+## Generate your own Kubernetes bindings!
+
+We used [swagger-codegen](https://github.com/swagger-api/swagger-codegen) to generate the datatypes. We do some additional massaging and processing to deal with some of Kubernetes' nuances (they *really* like to prefix object names with `v1.`) and use a custom template to generate the Models.
+
+To generate the source yourself:
+
+### 1. Generate the code
 
 We're going to generate the code and put the Model files in: `haskell-kubernetes/tmp123/`
 

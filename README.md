@@ -1,22 +1,58 @@
-Haskell-Kubernetes
+haskell-kubernetes
 ==================
+
+[![Build Status](https://secure.travis-ci.org/sferik/twitter.png?branch=master)][travis]
+[![Code Climate](https://codeclimate.com/github/sferik/twitter.png)][codeclimate]
+[![Coverage](https://coveralls.io/repos/sferik/twitter/badge.png?branch=master)][coveralls]
+
+[travis]: http://travis-ci.org/sferik/twitter
+[codeclimate]: https://codeclimate.com/github/sferik/twitter
+[coveralls]: https://coveralls.io/r/sferik/twitter
 
 This project contains haskell bindings to the `v1` Kubernetes api generated via [swagger-codegen](https://github.com/swagger-api/swagger-codegen). The client and (mock) server generated use the [servant](https://github.com/haskell-servant/servant) project, thanks to the work of [Masahiro Yamauchi](https://github.com/algas)!
 
-## About the Datatypes Generated
+### About the Generated Code
 
-- Fields specified as "not required" (missing a `"required"` field in the swagger description) are represented as a `Maybe`, even when that field refers to a list (e.g. `Maybe [Foo]`).
-- `aeson` instances are generated for each type with the appropriate keys
-- Lenses are generated for every field, with plain names for each lens (e.g. `min`, `object`, etc.). So be careful with unqualified imports.
+* Fields specified as "not required" (missing a `"required"` field in the swagger description) are represented as a `Maybe`, even when that field refers to a list (e.g. `Maybe [Foo]`).
+* `aeson` instances are generated for each type with the appropriate keys
+* Lenses are generated for every field, with plain names for each lens (e.g. `min`, `object`, etc.). So be careful with unqualified imports.
+* API coverage is almost full. As `servant-0.4.4` lacks support for `HEAD` and `OPTIONS` endpoints, those endpoints were excluded from the **client** *and* **server** implementation (any related datatypes are still generated).
+* client and server bindings are largely untested.
 
-## About the Code Generation Process
+## Dependencies
 
-We used [swagger-codegen](https://github.com/swagger-api/swagger-codegen) to generate the datatypes. We do some additional massaging and processing to deal with some of Kubernetes' nuances (they *really* like to prefix object names with `v1.`) and use a custom template to generate the Models.
+_haskell-kubernetes_ depends on the following software:
 
-Most additional processing is documented in the `codegen` folder.
+* [Glasgow Haskell Compiler](https://www.haskell.org/ghc/) `7.8.4` or `7.10.*`
+* (for code generation: [swagger-codegen](https://github.com/swagger-api/swagger-codegen))
 
-## Limitations of this Project
+## Documentation
 
-1. client and server bindings are largely untested.
-2. API coverage is almost full. As `servant-0.4.4` lacks support for `HEAD` and `OPTIONS` endpoints, those endpoints were excluded from the **client** *and* **server** implementation (though any related datatypes are still generated).
-3. The `server` executable takes over 15 minutes to compile.
+In addition to the `README` (this file), there is a [directory of additional documentation](/doc):
+
+* The [Getting started](doc/GETTING_STARTED.md) information helps to understand limitations of the library, nuances about the generated datatypes, and the code generation process in general.
+* The [Contributing to _project-name_](doc/CONTRIBUTING.md) page lists severals ways that you can improve _project-name_.
+* The list of [potential improvements](doc/TODO.md) are prioritized.
+
+## Versioning
+
+_haskell-kubernetes_ adheres to Semantic Versioning 2.0.0. If there is a violation of this scheme, report it as a bug.Specifically, if a patch or minor version is
+released and breaks backward compatibility, that version should be immediately yanked and/or a new version should be immediately released that restores
+compatibility. Any change that breaks the public API will only be introduced at a major-version release. As a result of this policy, you can (and should)
+specify any dependency on <haskell-kubernetes> by using the Pessimistic Version Constraint with two digits of precision.
+
+## Licensing
+
+See the [LICENSE](LICENSE.md) file for details.
+
+<!-- The content of the LICENSE.md file is as follows: 
+The MIT License (MIT)
+
+Copyright &copy; 2014 _name-of-copyright-holder_
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
+ 
