@@ -17,24 +17,27 @@ module Kubernetes.Model.V1.FlexVolumeSource
     , options
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.Any (Any)
+import           Control.Lens.TH                          (makeLenses)
+import           Data.Aeson.TH                            (defaultOptions,
+                                                           deriveJSON,
+                                                           fieldLabelModifier)
+import           Data.Text                                (Text)
+import           GHC.Generics                             (Generic)
+import           Kubernetes.Model.V1.Any                  (Any)
 import           Kubernetes.Model.V1.LocalObjectReference (LocalObjectReference)
+import           Prelude                                  hiding (drop, error,
+                                                           max, min)
+import qualified Prelude                                  as P
+import           Test.QuickCheck                          (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances                ()
 
 -- | FlexVolume represents a generic volume resource that is provisioned/attached using a exec based plugin. This is an alpha feature and may change in future.
 data FlexVolumeSource = FlexVolumeSource
-    { _driver :: Text
-    , _fsType :: Maybe Text
+    { _driver    :: Text
+    , _fsType    :: Maybe Text
     , _secretRef :: Maybe LocalObjectReference
-    , _readOnly :: Maybe Bool
-    , _options :: Maybe Any
+    , _readOnly  :: Maybe Bool
+    , _options   :: Maybe Any
     } deriving (Show, Eq, Generic)
 
 makeLenses ''FlexVolumeSource

@@ -13,13 +13,14 @@ module Kubernetes.Model.V1.SecretVolumeSource
     , secretName
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | Adapts a Secret into a volume.\n\nThe contents of the target Secret&#39;s Data field will be presented in a volume as files using the keys in the Data field as the file names. Secret volumes support ownership management and SELinux relabeling.

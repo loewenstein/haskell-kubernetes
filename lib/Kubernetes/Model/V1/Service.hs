@@ -17,25 +17,27 @@ module Kubernetes.Model.V1.Service
     , status
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.ObjectMeta (ObjectMeta)
-import           Kubernetes.Model.V1.ServiceSpec (ServiceSpec)
+import           Control.Lens.TH                   (makeLenses)
+import           Data.Aeson.TH                     (defaultOptions, deriveJSON,
+                                                    fieldLabelModifier)
+import           Data.Text                         (Text)
+import           GHC.Generics                      (Generic)
+import           Kubernetes.Model.V1.ObjectMeta    (ObjectMeta)
+import           Kubernetes.Model.V1.ServiceSpec   (ServiceSpec)
 import           Kubernetes.Model.V1.ServiceStatus (ServiceStatus)
+import           Prelude                           hiding (drop, error, max,
+                                                    min)
+import qualified Prelude                           as P
+import           Test.QuickCheck                   (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances         ()
 
 -- | Service is a named abstraction of software service (for example, mysql) consisting of local port (for example 3306) that the proxy listens on, and the selector that determines which pods will answer requests sent through the proxy.
 data Service = Service
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ObjectMeta
-    , _spec :: Maybe ServiceSpec
-    , _status :: Maybe ServiceStatus
+    , _metadata   :: Maybe ObjectMeta
+    , _spec       :: Maybe ServiceSpec
+    , _status     :: Maybe ServiceStatus
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Service

@@ -16,23 +16,26 @@ module Kubernetes.Model.V1.PersistentVolumeList
     , items
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                       (makeLenses)
+import           Data.Aeson.TH                         (defaultOptions,
+                                                        deriveJSON,
+                                                        fieldLabelModifier)
+import           Data.Text                             (Text)
+import           GHC.Generics                          (Generic)
 import           Kubernetes.Model.Unversioned.ListMeta (ListMeta)
-import           Kubernetes.Model.V1.PersistentVolume (PersistentVolume)
+import           Kubernetes.Model.V1.PersistentVolume  (PersistentVolume)
+import           Prelude                               hiding (drop, error, max,
+                                                        min)
+import qualified Prelude                               as P
+import           Test.QuickCheck                       (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances             ()
 
 -- | PersistentVolumeList is a list of PersistentVolume items.
 data PersistentVolumeList = PersistentVolumeList
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ListMeta
-    , _items :: [PersistentVolume]
+    , _metadata   :: Maybe ListMeta
+    , _items      :: [PersistentVolume]
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeList

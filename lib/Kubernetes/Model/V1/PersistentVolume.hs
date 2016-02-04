@@ -17,25 +17,29 @@ module Kubernetes.Model.V1.PersistentVolume
     , status
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.ObjectMeta (ObjectMeta)
-import           Kubernetes.Model.V1.PersistentVolumeSpec (PersistentVolumeSpec)
+import           Control.Lens.TH                            (makeLenses)
+import           Data.Aeson.TH                              (defaultOptions,
+                                                             deriveJSON,
+                                                             fieldLabelModifier)
+import           Data.Text                                  (Text)
+import           GHC.Generics                               (Generic)
+import           Kubernetes.Model.V1.ObjectMeta             (ObjectMeta)
+import           Kubernetes.Model.V1.PersistentVolumeSpec   (PersistentVolumeSpec)
 import           Kubernetes.Model.V1.PersistentVolumeStatus (PersistentVolumeStatus)
+import           Prelude                                    hiding (drop, error,
+                                                             max, min)
+import qualified Prelude                                    as P
+import           Test.QuickCheck                            (Arbitrary,
+                                                             arbitrary)
+import           Test.QuickCheck.Instances                  ()
 
 -- | PersistentVolume (PV) is a storage resource provisioned by an administrator. It is analogous to a node. More info: http://releases.k8s.io/HEAD/docs/user-guide/persistent-volumes.md
 data PersistentVolume = PersistentVolume
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ObjectMeta
-    , _spec :: Maybe PersistentVolumeSpec
-    , _status :: Maybe PersistentVolumeStatus
+    , _metadata   :: Maybe ObjectMeta
+    , _spec       :: Maybe PersistentVolumeSpec
+    , _status     :: Maybe PersistentVolumeStatus
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolume

@@ -17,22 +17,23 @@ module Kubernetes.Model.V1.ContainerPort
     , hostIP
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | ContainerPort represents a network port in a single container.
 data ContainerPort = ContainerPort
-    { _name :: Maybe Text
-    , _hostPort :: Maybe Integer
+    { _name          :: Maybe Text
+    , _hostPort      :: Maybe Integer
     , _containerPort :: Integer
-    , _protocol :: Maybe Text
-    , _hostIP :: Maybe Text
+    , _protocol      :: Maybe Text
+    , _hostIP        :: Maybe Text
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ContainerPort

@@ -16,21 +16,22 @@ module Kubernetes.Model.V1.ComponentCondition
     , error
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | Information about the condition of a component.
 data ComponentCondition = ComponentCondition
-    { _type_ :: Text
-    , _status :: Text
+    { _type_   :: Text
+    , _status  :: Text
     , _message :: Maybe Text
-    , _error :: Maybe Text
+    , _error   :: Maybe Text
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ComponentCondition

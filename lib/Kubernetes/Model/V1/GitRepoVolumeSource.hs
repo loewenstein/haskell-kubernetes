@@ -15,20 +15,21 @@ module Kubernetes.Model.V1.GitRepoVolumeSource
     , directory
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | Represents a volume that is populated with the contents of a git repository. Git repo volumes do not support ownership management. Git repo volumes support SELinux relabeling.
 data GitRepoVolumeSource = GitRepoVolumeSource
     { _repository :: Text
-    , _revision :: Maybe Text
-    , _directory :: Maybe Text
+    , _revision   :: Maybe Text
+    , _directory  :: Maybe Text
     } deriving (Show, Eq, Generic)
 
 makeLenses ''GitRepoVolumeSource

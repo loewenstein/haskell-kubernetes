@@ -27,37 +27,40 @@ module Kubernetes.Model.V1.PodSpec
     , imagePullSecrets
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.Any (Any)
-import           Kubernetes.Model.V1.Container (Container)
+import           Control.Lens.TH                          (makeLenses)
+import           Data.Aeson.TH                            (defaultOptions,
+                                                           deriveJSON,
+                                                           fieldLabelModifier)
+import           Data.Text                                (Text)
+import           GHC.Generics                             (Generic)
+import           Kubernetes.Model.V1.Any                  (Any)
+import           Kubernetes.Model.V1.Container            (Container)
 import           Kubernetes.Model.V1.LocalObjectReference (LocalObjectReference)
-import           Kubernetes.Model.V1.PodSecurityContext (PodSecurityContext)
-import           Kubernetes.Model.V1.Volume (Volume)
+import           Kubernetes.Model.V1.PodSecurityContext   (PodSecurityContext)
+import           Kubernetes.Model.V1.Volume               (Volume)
+import           Prelude                                  hiding (drop, error,
+                                                           max, min)
+import qualified Prelude                                  as P
+import           Test.QuickCheck                          (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances                ()
 
 -- | PodSpec is a description of a pod.
 data PodSpec = PodSpec
-    { _volumes :: Maybe [Volume]
-    , _containers :: [Container]
-    , _restartPolicy :: Maybe Text
+    { _volumes                       :: Maybe [Volume]
+    , _containers                    :: [Container]
+    , _restartPolicy                 :: Maybe Text
     , _terminationGracePeriodSeconds :: Maybe Integer
-    , _activeDeadlineSeconds :: Maybe Integer
-    , _dnsPolicy :: Maybe Text
-    , _nodeSelector :: Maybe Any
-    , _serviceAccountName :: Maybe Text
-    , _serviceAccount :: Maybe Text
-    , _nodeName :: Maybe Text
-    , _hostNetwork :: Maybe Bool
-    , _hostPID :: Maybe Bool
-    , _hostIPC :: Maybe Bool
-    , _securityContext :: Maybe PodSecurityContext
-    , _imagePullSecrets :: Maybe [LocalObjectReference]
+    , _activeDeadlineSeconds         :: Maybe Integer
+    , _dnsPolicy                     :: Maybe Text
+    , _nodeSelector                  :: Maybe Any
+    , _serviceAccountName            :: Maybe Text
+    , _serviceAccount                :: Maybe Text
+    , _nodeName                      :: Maybe Text
+    , _hostNetwork                   :: Maybe Bool
+    , _hostPID                       :: Maybe Bool
+    , _hostIPC                       :: Maybe Bool
+    , _securityContext               :: Maybe PodSecurityContext
+    , _imagePullSecrets              :: Maybe [LocalObjectReference]
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodSpec

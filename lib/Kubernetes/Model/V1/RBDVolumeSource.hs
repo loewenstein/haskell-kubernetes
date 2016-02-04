@@ -20,26 +20,29 @@ module Kubernetes.Model.V1.RBDVolumeSource
     , readOnly
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                          (makeLenses)
+import           Data.Aeson.TH                            (defaultOptions,
+                                                           deriveJSON,
+                                                           fieldLabelModifier)
+import           Data.Text                                (Text)
+import           GHC.Generics                             (Generic)
 import           Kubernetes.Model.V1.LocalObjectReference (LocalObjectReference)
+import           Prelude                                  hiding (drop, error,
+                                                           max, min)
+import qualified Prelude                                  as P
+import           Test.QuickCheck                          (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances                ()
 
 -- | Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership management and SELinux relabeling.
 data RBDVolumeSource = RBDVolumeSource
-    { _monitors :: [Text]
-    , _image :: Text
-    , _fsType :: Maybe Text
-    , _pool :: Text
-    , _user :: Text
-    , _keyring :: Text
+    { _monitors  :: [Text]
+    , _image     :: Text
+    , _fsType    :: Maybe Text
+    , _pool      :: Text
+    , _user      :: Text
+    , _keyring   :: Text
     , _secretRef :: LocalObjectReference
-    , _readOnly :: Maybe Bool
+    , _readOnly  :: Maybe Bool
     } deriving (Show, Eq, Generic)
 
 makeLenses ''RBDVolumeSource

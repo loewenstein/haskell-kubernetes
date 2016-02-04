@@ -15,21 +15,24 @@ module Kubernetes.Model.V1.ContainerState
     , terminated
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.ContainerStateRunning (ContainerStateRunning)
+import           Control.Lens.TH                              (makeLenses)
+import           Data.Aeson.TH                                (defaultOptions,
+                                                               deriveJSON, fieldLabelModifier)
+import           GHC.Generics                                 (Generic)
+import           Kubernetes.Model.V1.ContainerStateRunning    (ContainerStateRunning)
 import           Kubernetes.Model.V1.ContainerStateTerminated (ContainerStateTerminated)
-import           Kubernetes.Model.V1.ContainerStateWaiting (ContainerStateWaiting)
+import           Kubernetes.Model.V1.ContainerStateWaiting    (ContainerStateWaiting)
+import           Prelude                                      hiding (drop,
+                                                               error, max, min)
+import qualified Prelude                                      as P
+import           Test.QuickCheck                              (Arbitrary,
+                                                               arbitrary)
+import           Test.QuickCheck.Instances                    ()
 
 -- | ContainerState holds a possible state of container. Only one of its members may be specified. If none of them is specified, the default one is ContainerStateWaiting.
 data ContainerState = ContainerState
-    { _waiting :: Maybe ContainerStateWaiting
-    , _running :: Maybe ContainerStateRunning
+    { _waiting    :: Maybe ContainerStateWaiting
+    , _running    :: Maybe ContainerStateRunning
     , _terminated :: Maybe ContainerStateTerminated
     } deriving (Show, Eq, Generic)
 

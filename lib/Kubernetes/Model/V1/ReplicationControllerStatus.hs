@@ -14,17 +14,18 @@ module Kubernetes.Model.V1.ReplicationControllerStatus
     , observedGeneration
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | ReplicationControllerStatus represents the current status of a replication controller.
 data ReplicationControllerStatus = ReplicationControllerStatus
-    { _replicas :: Integer
+    { _replicas           :: Integer
     , _observedGeneration :: Maybe Integer
     } deriving (Show, Eq, Generic)
 

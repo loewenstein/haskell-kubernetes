@@ -16,23 +16,26 @@ module Kubernetes.Model.V1.ResourceQuotaList
     , items
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                       (makeLenses)
+import           Data.Aeson.TH                         (defaultOptions,
+                                                        deriveJSON,
+                                                        fieldLabelModifier)
+import           Data.Text                             (Text)
+import           GHC.Generics                          (Generic)
 import           Kubernetes.Model.Unversioned.ListMeta (ListMeta)
-import           Kubernetes.Model.V1.ResourceQuota (ResourceQuota)
+import           Kubernetes.Model.V1.ResourceQuota     (ResourceQuota)
+import           Prelude                               hiding (drop, error, max,
+                                                        min)
+import qualified Prelude                               as P
+import           Test.QuickCheck                       (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances             ()
 
 -- | ResourceQuotaList is a list of ResourceQuota items.
 data ResourceQuotaList = ResourceQuotaList
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ListMeta
-    , _items :: [ResourceQuota]
+    , _metadata   :: Maybe ListMeta
+    , _items      :: [ResourceQuota]
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ResourceQuotaList

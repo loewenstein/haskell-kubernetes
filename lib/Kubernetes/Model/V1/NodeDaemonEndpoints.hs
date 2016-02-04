@@ -13,14 +13,16 @@ module Kubernetes.Model.V1.NodeDaemonEndpoints
     , kubeletEndpoint
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                    (makeLenses)
+import           Data.Aeson.TH                      (defaultOptions, deriveJSON,
+                                                     fieldLabelModifier)
+import           GHC.Generics                       (Generic)
 import           Kubernetes.Model.V1.DaemonEndpoint (DaemonEndpoint)
+import           Prelude                            hiding (drop, error, max,
+                                                     min)
+import qualified Prelude                            as P
+import           Test.QuickCheck                    (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances          ()
 
 -- | NodeDaemonEndpoints lists ports opened by daemons running on the Node.
 data NodeDaemonEndpoints = NodeDaemonEndpoints

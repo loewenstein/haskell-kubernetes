@@ -18,23 +18,24 @@ module Kubernetes.Model.V1.NodeCondition
     , message
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | NodeCondition contains condition infromation for a node.
 data NodeCondition = NodeCondition
-    { _type_ :: Text
-    , _status :: Text
-    , _lastHeartbeatTime :: Maybe Text
+    { _type_              :: Text
+    , _status             :: Text
+    , _lastHeartbeatTime  :: Maybe Text
     , _lastTransitionTime :: Maybe Text
-    , _reason :: Maybe Text
-    , _message :: Maybe Text
+    , _reason             :: Maybe Text
+    , _message            :: Maybe Text
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NodeCondition

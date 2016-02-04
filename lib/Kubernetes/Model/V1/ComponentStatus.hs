@@ -16,22 +16,25 @@ module Kubernetes.Model.V1.ComponentStatus
     , conditions
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                        (makeLenses)
+import           Data.Aeson.TH                          (defaultOptions,
+                                                         deriveJSON,
+                                                         fieldLabelModifier)
+import           Data.Text                              (Text)
+import           GHC.Generics                           (Generic)
 import           Kubernetes.Model.V1.ComponentCondition (ComponentCondition)
-import           Kubernetes.Model.V1.ObjectMeta (ObjectMeta)
+import           Kubernetes.Model.V1.ObjectMeta         (ObjectMeta)
+import           Prelude                                hiding (drop, error,
+                                                         max, min)
+import qualified Prelude                                as P
+import           Test.QuickCheck                        (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances              ()
 
 -- | ComponentStatus (and ComponentStatusList) holds the cluster validation info.
 data ComponentStatus = ComponentStatus
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ObjectMeta
+    , _metadata   :: Maybe ObjectMeta
     , _conditions :: Maybe [ComponentCondition]
     } deriving (Show, Eq, Generic)
 

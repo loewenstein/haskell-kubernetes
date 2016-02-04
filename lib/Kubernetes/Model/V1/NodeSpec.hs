@@ -16,20 +16,21 @@ module Kubernetes.Model.V1.NodeSpec
     , unschedulable
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | NodeSpec describes the attributes that a node is created with.
 data NodeSpec = NodeSpec
-    { _podCIDR :: Maybe Text
-    , _externalID :: Maybe Text
-    , _providerID :: Maybe Text
+    { _podCIDR       :: Maybe Text
+    , _externalID    :: Maybe Text
+    , _providerID    :: Maybe Text
     , _unschedulable :: Maybe Bool
     } deriving (Show, Eq, Generic)
 

@@ -15,21 +15,24 @@ module Kubernetes.Model.V1.Handler
     , tcpSocket
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.ExecAction (ExecAction)
-import           Kubernetes.Model.V1.HTTPGetAction (HTTPGetAction)
+import           Control.Lens.TH                     (makeLenses)
+import           Data.Aeson.TH                       (defaultOptions,
+                                                      deriveJSON,
+                                                      fieldLabelModifier)
+import           GHC.Generics                        (Generic)
+import           Kubernetes.Model.V1.ExecAction      (ExecAction)
+import           Kubernetes.Model.V1.HTTPGetAction   (HTTPGetAction)
 import           Kubernetes.Model.V1.TCPSocketAction (TCPSocketAction)
+import           Prelude                             hiding (drop, error, max,
+                                                      min)
+import qualified Prelude                             as P
+import           Test.QuickCheck                     (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances           ()
 
 -- | Handler defines a specific action that should be taken
 data Handler = Handler
-    { _exec :: Maybe ExecAction
-    , _httpGet :: Maybe HTTPGetAction
+    { _exec      :: Maybe ExecAction
+    , _httpGet   :: Maybe HTTPGetAction
     , _tcpSocket :: Maybe TCPSocketAction
     } deriving (Show, Eq, Generic)
 

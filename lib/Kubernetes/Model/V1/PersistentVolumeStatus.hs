@@ -15,20 +15,21 @@ module Kubernetes.Model.V1.PersistentVolumeStatus
     , reason
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | PersistentVolumeStatus is the current status of a persistent volume.
 data PersistentVolumeStatus = PersistentVolumeStatus
-    { _phase :: Maybe Text
+    { _phase   :: Maybe Text
     , _message :: Maybe Text
-    , _reason :: Maybe Text
+    , _reason  :: Maybe Text
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeStatus

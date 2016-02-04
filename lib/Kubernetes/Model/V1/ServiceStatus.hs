@@ -13,14 +13,17 @@ module Kubernetes.Model.V1.ServiceStatus
     , loadBalancer
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                        (makeLenses)
+import           Data.Aeson.TH                          (defaultOptions,
+                                                         deriveJSON,
+                                                         fieldLabelModifier)
+import           GHC.Generics                           (Generic)
 import           Kubernetes.Model.V1.LoadBalancerStatus (LoadBalancerStatus)
+import           Prelude                                hiding (drop, error,
+                                                         max, min)
+import qualified Prelude                                as P
+import           Test.QuickCheck                        (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances              ()
 
 -- | ServiceStatus represents the current status of a service.
 data ServiceStatus = ServiceStatus

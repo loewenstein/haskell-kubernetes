@@ -15,20 +15,21 @@ module Kubernetes.Model.V1.EnvVar
     , valueFrom
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                  (makeLenses)
+import           Data.Aeson.TH                    (defaultOptions, deriveJSON,
+                                                   fieldLabelModifier)
+import           Data.Text                        (Text)
+import           GHC.Generics                     (Generic)
 import           Kubernetes.Model.V1.EnvVarSource (EnvVarSource)
+import           Prelude                          hiding (drop, error, max, min)
+import qualified Prelude                          as P
+import           Test.QuickCheck                  (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances        ()
 
 -- | EnvVar represents an environment variable present in a Container.
 data EnvVar = EnvVar
-    { _name :: Text
-    , _value :: Maybe Text
+    { _name      :: Text
+    , _value     :: Maybe Text
     , _valueFrom :: Maybe EnvVarSource
     } deriving (Show, Eq, Generic)
 

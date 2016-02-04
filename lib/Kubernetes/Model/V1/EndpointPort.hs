@@ -15,19 +15,20 @@ module Kubernetes.Model.V1.EndpointPort
     , protocol
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | EndpointPort is a tuple that describes a single port.
 data EndpointPort = EndpointPort
-    { _name :: Maybe Text
-    , _port :: Integer
+    { _name     :: Maybe Text
+    , _port     :: Integer
     , _protocol :: Maybe Text
     } deriving (Show, Eq, Generic)
 

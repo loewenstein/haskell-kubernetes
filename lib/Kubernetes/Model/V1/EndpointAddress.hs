@@ -14,19 +14,22 @@ module Kubernetes.Model.V1.EndpointAddress
     , targetRef
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                     (makeLenses)
+import           Data.Aeson.TH                       (defaultOptions,
+                                                      deriveJSON,
+                                                      fieldLabelModifier)
+import           Data.Text                           (Text)
+import           GHC.Generics                        (Generic)
 import           Kubernetes.Model.V1.ObjectReference (ObjectReference)
+import           Prelude                             hiding (drop, error, max,
+                                                      min)
+import qualified Prelude                             as P
+import           Test.QuickCheck                     (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances           ()
 
 -- | EndpointAddress is a tuple that describes single IP address.
 data EndpointAddress = EndpointAddress
-    { _ip :: Text
+    { _ip        :: Text
     , _targetRef :: Maybe ObjectReference
     } deriving (Show, Eq, Generic)
 

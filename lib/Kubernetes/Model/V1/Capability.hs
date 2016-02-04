@@ -13,13 +13,14 @@ module Kubernetes.Model.V1.Capability
     ) where
 
 import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
+import           Data.Aeson.TH   (defaultOptions, deriveJSON,
+                                  fieldLabelModifier)
+import           GHC.Generics    (Generic)
+import           Prelude         hiding (drop, error, max, min)
+import qualified Prelude         as P
 import           Test.QuickCheck (Arbitrary, arbitrary)
 
--- | 
+-- |
 data Capability = Capability deriving (Show, Eq, Generic)
 
 makeLenses ''Capability

@@ -16,23 +16,26 @@ module Kubernetes.Model.V1.SecretList
     , items
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                       (makeLenses)
+import           Data.Aeson.TH                         (defaultOptions,
+                                                        deriveJSON,
+                                                        fieldLabelModifier)
+import           Data.Text                             (Text)
+import           GHC.Generics                          (Generic)
 import           Kubernetes.Model.Unversioned.ListMeta (ListMeta)
-import           Kubernetes.Model.V1.Secret (Secret)
+import           Kubernetes.Model.V1.Secret            (Secret)
+import           Prelude                               hiding (drop, error, max,
+                                                        min)
+import qualified Prelude                               as P
+import           Test.QuickCheck                       (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances             ()
 
 -- | SecretList is a list of Secret.
 data SecretList = SecretList
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ListMeta
-    , _items :: [Secret]
+    , _metadata   :: Maybe ListMeta
+    , _items      :: [Secret]
     } deriving (Show, Eq, Generic)
 
 makeLenses ''SecretList

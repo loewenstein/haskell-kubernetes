@@ -17,25 +17,26 @@ module Kubernetes.Model.V1.Node
     , status
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.NodeSpec (NodeSpec)
+import           Control.Lens.TH                (makeLenses)
+import           Data.Aeson.TH                  (defaultOptions, deriveJSON,
+                                                 fieldLabelModifier)
+import           Data.Text                      (Text)
+import           GHC.Generics                   (Generic)
+import           Kubernetes.Model.V1.NodeSpec   (NodeSpec)
 import           Kubernetes.Model.V1.NodeStatus (NodeStatus)
 import           Kubernetes.Model.V1.ObjectMeta (ObjectMeta)
+import           Prelude                        hiding (drop, error, max, min)
+import qualified Prelude                        as P
+import           Test.QuickCheck                (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances      ()
 
 -- | Node is a worker node in Kubernetes, formerly known as minion. Each node will have a unique identifier in the cache (i.e. in etcd).
 data Node = Node
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ObjectMeta
-    , _spec :: Maybe NodeSpec
-    , _status :: Maybe NodeStatus
+    , _metadata   :: Maybe ObjectMeta
+    , _spec       :: Maybe NodeSpec
+    , _status     :: Maybe NodeStatus
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Node

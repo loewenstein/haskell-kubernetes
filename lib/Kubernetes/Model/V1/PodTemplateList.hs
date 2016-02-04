@@ -16,23 +16,26 @@ module Kubernetes.Model.V1.PodTemplateList
     , items
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                       (makeLenses)
+import           Data.Aeson.TH                         (defaultOptions,
+                                                        deriveJSON,
+                                                        fieldLabelModifier)
+import           Data.Text                             (Text)
+import           GHC.Generics                          (Generic)
 import           Kubernetes.Model.Unversioned.ListMeta (ListMeta)
-import           Kubernetes.Model.V1.PodTemplate (PodTemplate)
+import           Kubernetes.Model.V1.PodTemplate       (PodTemplate)
+import           Prelude                               hiding (drop, error, max,
+                                                        min)
+import qualified Prelude                               as P
+import           Test.QuickCheck                       (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances             ()
 
 -- | PodTemplateList is a list of PodTemplates.
 data PodTemplateList = PodTemplateList
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ListMeta
-    , _items :: [PodTemplate]
+    , _metadata   :: Maybe ListMeta
+    , _items      :: [PodTemplate]
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodTemplateList

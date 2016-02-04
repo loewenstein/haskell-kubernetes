@@ -15,20 +15,21 @@ module Kubernetes.Model.V1.GlusterfsVolumeSource
     , readOnly
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support ownership management or SELinux relabeling.
 data GlusterfsVolumeSource = GlusterfsVolumeSource
     { _endpoints :: Text
-    , _path :: Text
-    , _readOnly :: Maybe Bool
+    , _path      :: Text
+    , _readOnly  :: Maybe Bool
     } deriving (Show, Eq, Generic)
 
 makeLenses ''GlusterfsVolumeSource

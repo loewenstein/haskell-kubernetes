@@ -13,10 +13,11 @@ module Kubernetes.Model.Unversioned.Patch
     ) where
 
 import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
+import           Data.Aeson.TH   (defaultOptions, deriveJSON,
+                                  fieldLabelModifier)
+import           GHC.Generics    (Generic)
+import           Prelude         hiding (drop, error, max, min)
+import qualified Prelude         as P
 import           Test.QuickCheck (Arbitrary, arbitrary)
 
 -- | Patch is provided to give a concrete name and type to the Kubernetes PATCH request body.

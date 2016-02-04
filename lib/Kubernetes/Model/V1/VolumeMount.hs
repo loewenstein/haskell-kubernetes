@@ -15,19 +15,20 @@ module Kubernetes.Model.V1.VolumeMount
     , mountPath
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | VolumeMount describes a mounting of a Volume within a container.
 data VolumeMount = VolumeMount
-    { _name :: Text
-    , _readOnly :: Maybe Bool
+    { _name      :: Text
+    , _readOnly  :: Maybe Bool
     , _mountPath :: Text
     } deriving (Show, Eq, Generic)
 

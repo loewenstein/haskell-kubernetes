@@ -19,24 +19,25 @@ module Kubernetes.Model.V1.ObjectReference
     , fieldPath
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | ObjectReference contains enough information to let you inspect or modify the referred object.
 data ObjectReference = ObjectReference
-    { _kind :: Maybe Text
-    , _namespace :: Maybe Text
-    , _name :: Maybe Text
-    , _uid :: Maybe Text
-    , _apiVersion :: Maybe Text
+    { _kind            :: Maybe Text
+    , _namespace       :: Maybe Text
+    , _name            :: Maybe Text
+    , _uid             :: Maybe Text
+    , _apiVersion      :: Maybe Text
     , _resourceVersion :: Maybe Text
-    , _fieldPath :: Maybe Text
+    , _fieldPath       :: Maybe Text
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ObjectReference

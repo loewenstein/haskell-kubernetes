@@ -20,27 +20,30 @@ module Kubernetes.Model.V1.Probe
     , failureThreshold
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.ExecAction (ExecAction)
-import           Kubernetes.Model.V1.HTTPGetAction (HTTPGetAction)
+import           Control.Lens.TH                     (makeLenses)
+import           Data.Aeson.TH                       (defaultOptions,
+                                                      deriveJSON,
+                                                      fieldLabelModifier)
+import           GHC.Generics                        (Generic)
+import           Kubernetes.Model.V1.ExecAction      (ExecAction)
+import           Kubernetes.Model.V1.HTTPGetAction   (HTTPGetAction)
 import           Kubernetes.Model.V1.TCPSocketAction (TCPSocketAction)
+import           Prelude                             hiding (drop, error, max,
+                                                      min)
+import qualified Prelude                             as P
+import           Test.QuickCheck                     (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances           ()
 
 -- | Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
 data Probe = Probe
-    { _exec :: Maybe ExecAction
-    , _httpGet :: Maybe HTTPGetAction
-    , _tcpSocket :: Maybe TCPSocketAction
+    { _exec                :: Maybe ExecAction
+    , _httpGet             :: Maybe HTTPGetAction
+    , _tcpSocket           :: Maybe TCPSocketAction
     , _initialDelaySeconds :: Maybe Integer
-    , _timeoutSeconds :: Maybe Integer
-    , _periodSeconds :: Maybe Integer
-    , _successThreshold :: Maybe Integer
-    , _failureThreshold :: Maybe Integer
+    , _timeoutSeconds      :: Maybe Integer
+    , _periodSeconds       :: Maybe Integer
+    , _successThreshold    :: Maybe Integer
+    , _failureThreshold    :: Maybe Integer
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Probe

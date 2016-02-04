@@ -17,22 +17,24 @@ module Kubernetes.Model.V1.PodSecurityContext
     , fsGroup
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                    (makeLenses)
+import           Data.Aeson.TH                      (defaultOptions, deriveJSON,
+                                                     fieldLabelModifier)
+import           GHC.Generics                       (Generic)
 import           Kubernetes.Model.V1.SELinuxOptions (SELinuxOptions)
+import           Prelude                            hiding (drop, error, max,
+                                                     min)
+import qualified Prelude                            as P
+import           Test.QuickCheck                    (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances          ()
 
 -- | PodSecurityContext holds pod-level security attributes and common container settings. Some fields are also present in container.securityContext.  Field values of container.securityContext take precedence over field values of PodSecurityContext.
 data PodSecurityContext = PodSecurityContext
-    { _seLinuxOptions :: Maybe SELinuxOptions
-    , _runAsUser :: Maybe Integer
-    , _runAsNonRoot :: Maybe Bool
+    { _seLinuxOptions     :: Maybe SELinuxOptions
+    , _runAsUser          :: Maybe Integer
+    , _runAsNonRoot       :: Maybe Bool
     , _supplementalGroups :: Maybe [Integer]
-    , _fsGroup :: Maybe Integer
+    , _fsGroup            :: Maybe Integer
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodSecurityContext

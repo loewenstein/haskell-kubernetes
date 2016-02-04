@@ -14,19 +14,20 @@ module Kubernetes.Model.V1.Lifecycle
     , preStop
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH             (makeLenses)
+import           Data.Aeson.TH               (defaultOptions, deriveJSON,
+                                              fieldLabelModifier)
+import           GHC.Generics                (Generic)
 import           Kubernetes.Model.V1.Handler (Handler)
+import           Prelude                     hiding (drop, error, max, min)
+import qualified Prelude                     as P
+import           Test.QuickCheck             (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances   ()
 
 -- | Lifecycle describes actions that the management system should take in response to container lifecycle events. For the PostStart and PreStop lifecycle handlers, management of the container blocks until the action is complete, unless the container process fails, in which case the handler is aborted.
 data Lifecycle = Lifecycle
     { _postStart :: Maybe Handler
-    , _preStop :: Maybe Handler
+    , _preStop   :: Maybe Handler
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Lifecycle

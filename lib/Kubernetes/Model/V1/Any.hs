@@ -9,15 +9,15 @@ module Kubernetes.Model.V1.Any
     ( Any (..)
     ) where
 
-import Control.Lens.TH (makeLenses)
-import Control.Monad (replicateM)
-import Data.Aeson
-import qualified Data.HashMap.Strict as HMap
-import Data.Text (Text)
-import Data.Vector (fromList)
-import GHC.Generics
-import Test.QuickCheck
-import Test.QuickCheck.Instances ()
+import           Control.Lens.TH           (makeLenses)
+import           Control.Monad             (replicateM)
+import           Data.Aeson
+import qualified Data.HashMap.Strict       as HMap
+import           Data.Text                 (Text)
+import           Data.Vector               (fromList)
+import           GHC.Generics
+import           Test.QuickCheck
+import           Test.QuickCheck.Instances ()
 
 newtype Any =
   Any { _any :: Object

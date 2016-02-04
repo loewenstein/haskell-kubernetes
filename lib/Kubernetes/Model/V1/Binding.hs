@@ -16,23 +16,26 @@ module Kubernetes.Model.V1.Binding
     , target
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.ObjectMeta (ObjectMeta)
+import           Control.Lens.TH                     (makeLenses)
+import           Data.Aeson.TH                       (defaultOptions,
+                                                      deriveJSON,
+                                                      fieldLabelModifier)
+import           Data.Text                           (Text)
+import           GHC.Generics                        (Generic)
+import           Kubernetes.Model.V1.ObjectMeta      (ObjectMeta)
 import           Kubernetes.Model.V1.ObjectReference (ObjectReference)
+import           Prelude                             hiding (drop, error, max,
+                                                      min)
+import qualified Prelude                             as P
+import           Test.QuickCheck                     (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances           ()
 
 -- | Binding ties one object to another. For example, a pod is bound to a node by a scheduler.
 data Binding = Binding
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ObjectMeta
-    , _target :: ObjectReference
+    , _metadata   :: Maybe ObjectMeta
+    , _target     :: ObjectReference
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Binding

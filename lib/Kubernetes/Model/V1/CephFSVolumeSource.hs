@@ -17,23 +17,26 @@ module Kubernetes.Model.V1.CephFSVolumeSource
     , readOnly
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                          (makeLenses)
+import           Data.Aeson.TH                            (defaultOptions,
+                                                           deriveJSON,
+                                                           fieldLabelModifier)
+import           Data.Text                                (Text)
+import           GHC.Generics                             (Generic)
 import           Kubernetes.Model.V1.LocalObjectReference (LocalObjectReference)
+import           Prelude                                  hiding (drop, error,
+                                                           max, min)
+import qualified Prelude                                  as P
+import           Test.QuickCheck                          (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances                ()
 
 -- | Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support ownership management or SELinux relabeling.
 data CephFSVolumeSource = CephFSVolumeSource
-    { _monitors :: [Text]
-    , _user :: Maybe Text
+    { _monitors   :: [Text]
+    , _user       :: Maybe Text
     , _secretFile :: Maybe Text
-    , _secretRef :: Maybe LocalObjectReference
-    , _readOnly :: Maybe Bool
+    , _secretRef  :: Maybe LocalObjectReference
+    , _readOnly   :: Maybe Bool
     } deriving (Show, Eq, Generic)
 
 makeLenses ''CephFSVolumeSource

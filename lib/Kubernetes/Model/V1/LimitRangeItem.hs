@@ -18,23 +18,24 @@ module Kubernetes.Model.V1.LimitRangeItem
     , maxLimitRequestRatio
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Kubernetes.Model.V1.Any   (Any)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.Any (Any)
 
 -- | LimitRangeItem defines a min/max usage limit for any resource that matches on kind.
 data LimitRangeItem = LimitRangeItem
-    { _type_ :: Maybe Text
-    , _max :: Maybe Any
-    , _min :: Maybe Any
-    , _default_ :: Maybe Any
-    , _defaultRequest :: Maybe Any
+    { _type_                :: Maybe Text
+    , _max                  :: Maybe Any
+    , _min                  :: Maybe Any
+    , _default_             :: Maybe Any
+    , _defaultRequest       :: Maybe Any
     , _maxLimitRequestRatio :: Maybe Any
     } deriving (Show, Eq, Generic)
 

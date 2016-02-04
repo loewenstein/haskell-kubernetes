@@ -14,18 +14,19 @@ module Kubernetes.Model.V1.ResourceRequirements
     , requests
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           GHC.Generics              (Generic)
+import           Kubernetes.Model.V1.Any   (Any)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.Any (Any)
 
 -- | ResourceRequirements describes the compute resource requirements.
 data ResourceRequirements = ResourceRequirements
-    { _limits :: Maybe Any
+    { _limits   :: Maybe Any
     , _requests :: Maybe Any
     } deriving (Show, Eq, Generic)
 

@@ -15,22 +15,26 @@ module Kubernetes.Model.V1.PersistentVolumeClaimSpec
     , volumeName
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                                (makeLenses)
+import           Data.Aeson.TH                                  (defaultOptions,
+                                                                 deriveJSON, fieldLabelModifier)
+import           Data.Text                                      (Text)
+import           GHC.Generics                                   (Generic)
 import           Kubernetes.Model.V1.PersistentVolumeAccessMode (PersistentVolumeAccessMode)
-import           Kubernetes.Model.V1.ResourceRequirements (ResourceRequirements)
+import           Kubernetes.Model.V1.ResourceRequirements       (ResourceRequirements)
+import           Prelude                                        hiding (drop,
+                                                                 error, max,
+                                                                 min)
+import qualified Prelude                                        as P
+import           Test.QuickCheck                                (Arbitrary,
+                                                                 arbitrary)
+import           Test.QuickCheck.Instances                      ()
 
 -- | PersistentVolumeClaimSpec describes the common attributes of storage devices and allows a Source for provider-specific attributes
 data PersistentVolumeClaimSpec = PersistentVolumeClaimSpec
     { _accessModes :: Maybe [PersistentVolumeAccessMode]
-    , _resources :: Maybe ResourceRequirements
-    , _volumeName :: Maybe Text
+    , _resources   :: Maybe ResourceRequirements
+    , _volumeName  :: Maybe Text
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeClaimSpec

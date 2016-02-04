@@ -16,23 +16,25 @@ module Kubernetes.Model.V1.LimitRange
     , spec
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                    (makeLenses)
+import           Data.Aeson.TH                      (defaultOptions, deriveJSON,
+                                                     fieldLabelModifier)
+import           Data.Text                          (Text)
+import           GHC.Generics                       (Generic)
 import           Kubernetes.Model.V1.LimitRangeSpec (LimitRangeSpec)
-import           Kubernetes.Model.V1.ObjectMeta (ObjectMeta)
+import           Kubernetes.Model.V1.ObjectMeta     (ObjectMeta)
+import           Prelude                            hiding (drop, error, max,
+                                                     min)
+import qualified Prelude                            as P
+import           Test.QuickCheck                    (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances          ()
 
 -- | LimitRange sets resource usage limits for each kind of resource in a Namespace.
 data LimitRange = LimitRange
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ObjectMeta
-    , _spec :: Maybe LimitRangeSpec
+    , _metadata   :: Maybe ObjectMeta
+    , _spec       :: Maybe LimitRangeSpec
     } deriving (Show, Eq, Generic)
 
 makeLenses ''LimitRange

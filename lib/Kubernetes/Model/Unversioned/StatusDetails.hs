@@ -17,22 +17,25 @@ module Kubernetes.Model.Unversioned.StatusDetails
     , retryAfterSeconds
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                          (makeLenses)
+import           Data.Aeson.TH                            (defaultOptions,
+                                                           deriveJSON,
+                                                           fieldLabelModifier)
+import           Data.Text                                (Text)
+import           GHC.Generics                             (Generic)
 import           Kubernetes.Model.Unversioned.StatusCause (StatusCause)
+import           Prelude                                  hiding (drop, error,
+                                                           max, min)
+import qualified Prelude                                  as P
+import           Test.QuickCheck                          (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances                ()
 
 -- | StatusDetails is a set of additional properties that MAY be set by the server to provide additional information about a response. The Reason field of a Status object defines what attributes will be set. Clients must ignore fields that do not match the defined type of each attribute, and should assume that any attribute may be empty, invalid, or under defined.
 data StatusDetails = StatusDetails
-    { _name :: Maybe Text
-    , _group :: Maybe Text
-    , _kind :: Maybe Text
-    , _causes :: Maybe [StatusCause]
+    { _name              :: Maybe Text
+    , _group             :: Maybe Text
+    , _kind              :: Maybe Text
+    , _causes            :: Maybe [StatusCause]
     , _retryAfterSeconds :: Maybe Integer
     } deriving (Show, Eq, Generic)
 

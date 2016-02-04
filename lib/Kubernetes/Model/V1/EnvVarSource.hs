@@ -15,22 +15,25 @@ module Kubernetes.Model.V1.EnvVarSource
     , secretKeyRef
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                          (makeLenses)
+import           Data.Aeson.TH                            (defaultOptions,
+                                                           deriveJSON,
+                                                           fieldLabelModifier)
+import           GHC.Generics                             (Generic)
 import           Kubernetes.Model.V1.ConfigMapKeySelector (ConfigMapKeySelector)
-import           Kubernetes.Model.V1.ObjectFieldSelector (ObjectFieldSelector)
-import           Kubernetes.Model.V1.SecretKeySelector (SecretKeySelector)
+import           Kubernetes.Model.V1.ObjectFieldSelector  (ObjectFieldSelector)
+import           Kubernetes.Model.V1.SecretKeySelector    (SecretKeySelector)
+import           Prelude                                  hiding (drop, error,
+                                                           max, min)
+import qualified Prelude                                  as P
+import           Test.QuickCheck                          (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances                ()
 
 -- | EnvVarSource represents a source for the value of an EnvVar.
 data EnvVarSource = EnvVarSource
-    { _fieldRef :: Maybe ObjectFieldSelector
+    { _fieldRef        :: Maybe ObjectFieldSelector
     , _configMapKeyRef :: Maybe ConfigMapKeySelector
-    , _secretKeyRef :: Maybe SecretKeySelector
+    , _secretKeyRef    :: Maybe SecretKeySelector
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EnvVarSource

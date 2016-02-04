@@ -15,20 +15,21 @@ module Kubernetes.Model.Unversioned.StatusCause
     , field
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Control.Lens.TH           (makeLenses)
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
+import           Data.Text                 (Text)
+import           GHC.Generics              (Generic)
+import           Prelude                   hiding (drop, error, max, min)
+import qualified Prelude                   as P
+import           Test.QuickCheck           (Arbitrary, arbitrary)
 import           Test.QuickCheck.Instances ()
 
 -- | StatusCause provides more information about an api.Status failure, including cases when multiple errors are encountered.
 data StatusCause = StatusCause
-    { _reason :: Maybe Text
+    { _reason  :: Maybe Text
     , _message :: Maybe Text
-    , _field :: Maybe Text
+    , _field   :: Maybe Text
     } deriving (Show, Eq, Generic)
 
 makeLenses ''StatusCause

@@ -527,7 +527,7 @@ proxyApivApi = Proxy
 
 
 serverPath :: String
-serverPath = "https://10.10.10.10:6443/"
+serverPath = "https://127.0.0.1:8080/"
 
 parseHostPort :: String -> (String, Int)
 parseHostPort path = (host,port)

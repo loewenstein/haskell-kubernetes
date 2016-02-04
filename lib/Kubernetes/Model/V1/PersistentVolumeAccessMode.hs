@@ -13,13 +13,14 @@ module Kubernetes.Model.V1.PersistentVolumeAccessMode
     ) where
 
 import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
+import           Data.Aeson.TH   (defaultOptions, deriveJSON,
+                                  fieldLabelModifier)
+import           GHC.Generics    (Generic)
+import           Prelude         hiding (drop, error, max, min)
+import qualified Prelude         as P
 import           Test.QuickCheck (Arbitrary, arbitrary)
 
--- | 
+-- |
 data PersistentVolumeAccessMode = PersistentVolumeAccessMode deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeAccessMode

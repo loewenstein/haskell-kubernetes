@@ -30,42 +30,45 @@ module Kubernetes.Model.V1.Container
     , tty
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
-import           Kubernetes.Model.V1.ContainerPort (ContainerPort)
-import           Kubernetes.Model.V1.EnvVar (EnvVar)
-import           Kubernetes.Model.V1.Lifecycle (Lifecycle)
-import           Kubernetes.Model.V1.Probe (Probe)
+import           Control.Lens.TH                          (makeLenses)
+import           Data.Aeson.TH                            (defaultOptions,
+                                                           deriveJSON,
+                                                           fieldLabelModifier)
+import           Data.Text                                (Text)
+import           GHC.Generics                             (Generic)
+import           Kubernetes.Model.V1.ContainerPort        (ContainerPort)
+import           Kubernetes.Model.V1.EnvVar               (EnvVar)
+import           Kubernetes.Model.V1.Lifecycle            (Lifecycle)
+import           Kubernetes.Model.V1.Probe                (Probe)
 import           Kubernetes.Model.V1.ResourceRequirements (ResourceRequirements)
-import           Kubernetes.Model.V1.SecurityContext (SecurityContext)
-import           Kubernetes.Model.V1.VolumeMount (VolumeMount)
+import           Kubernetes.Model.V1.SecurityContext      (SecurityContext)
+import           Kubernetes.Model.V1.VolumeMount          (VolumeMount)
+import           Prelude                                  hiding (drop, error,
+                                                           max, min)
+import qualified Prelude                                  as P
+import           Test.QuickCheck                          (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances                ()
 
 -- | A single application container that you want to run within a pod.
 data Container = Container
-    { _name :: Text
-    , _image :: Maybe Text
-    , _command :: Maybe [Text]
-    , _args :: Maybe [Text]
-    , _workingDir :: Maybe Text
-    , _ports :: Maybe [ContainerPort]
-    , _env :: Maybe [EnvVar]
-    , _resources :: Maybe ResourceRequirements
-    , _volumeMounts :: Maybe [VolumeMount]
-    , _livenessProbe :: Maybe Probe
-    , _readinessProbe :: Maybe Probe
-    , _lifecycle :: Maybe Lifecycle
+    { _name                   :: Text
+    , _image                  :: Maybe Text
+    , _command                :: Maybe [Text]
+    , _args                   :: Maybe [Text]
+    , _workingDir             :: Maybe Text
+    , _ports                  :: Maybe [ContainerPort]
+    , _env                    :: Maybe [EnvVar]
+    , _resources              :: Maybe ResourceRequirements
+    , _volumeMounts           :: Maybe [VolumeMount]
+    , _livenessProbe          :: Maybe Probe
+    , _readinessProbe         :: Maybe Probe
+    , _lifecycle              :: Maybe Lifecycle
     , _terminationMessagePath :: Maybe Text
-    , _imagePullPolicy :: Maybe Text
-    , _securityContext :: Maybe SecurityContext
-    , _stdin :: Maybe Bool
-    , _stdinOnce :: Maybe Bool
-    , _tty :: Maybe Bool
+    , _imagePullPolicy        :: Maybe Text
+    , _securityContext        :: Maybe SecurityContext
+    , _stdin                  :: Maybe Bool
+    , _stdinOnce              :: Maybe Bool
+    , _tty                    :: Maybe Bool
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Container

@@ -16,23 +16,26 @@ module Kubernetes.Model.V1.EventList
     , items
     ) where
 
-import           Control.Lens.TH (makeLenses)
-import           Data.Aeson.TH (deriveJSON, defaultOptions, fieldLabelModifier)
-import           Data.Text (Text)
-import           GHC.Generics (Generic)
-import           Prelude hiding (drop, error, max, min)
-import qualified Prelude as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
-import           Test.QuickCheck.Instances ()
+import           Control.Lens.TH                       (makeLenses)
+import           Data.Aeson.TH                         (defaultOptions,
+                                                        deriveJSON,
+                                                        fieldLabelModifier)
+import           Data.Text                             (Text)
+import           GHC.Generics                          (Generic)
 import           Kubernetes.Model.Unversioned.ListMeta (ListMeta)
-import           Kubernetes.Model.V1.Event (Event)
+import           Kubernetes.Model.V1.Event             (Event)
+import           Prelude                               hiding (drop, error, max,
+                                                        min)
+import qualified Prelude                               as P
+import           Test.QuickCheck                       (Arbitrary, arbitrary)
+import           Test.QuickCheck.Instances             ()
 
 -- | EventList is a list of events.
 data EventList = EventList
-    { _kind :: Maybe Text
+    { _kind       :: Maybe Text
     , _apiVersion :: Maybe Text
-    , _metadata :: Maybe ListMeta
-    , _items :: [Event]
+    , _metadata   :: Maybe ListMeta
+    , _items      :: [Event]
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EventList
