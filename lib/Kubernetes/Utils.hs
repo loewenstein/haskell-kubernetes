@@ -27,10 +27,14 @@ import           Data.Text.Read  (decimal)
 import           GHC.Generics
 import           Servant.API
 import           Test.QuickCheck
+import           Test.QuickCheck.Instances ()
 
 newtype IntegerOrText = IntegerOrText { unIntOrText :: Either Integer T.Text } deriving (Eq, Show, Generic)
 
 makeLenses ''IntegerOrText
+
+instance Arbitrary IntegerOrText where
+  arbitrary = IntegerOrText <$> oneof [ Left <$> arbitrary , Right <$> arbitrary ]
 
 instance FromJSON IntegerOrText where
   parseJSON (A.Number i) = return . IntegerOrText . Left . coefficient $ i
@@ -60,6 +64,3 @@ instance ToText [String] where
 lkp inputs l = case lookup l inputs of
         Nothing -> Left $ "label " ++ T.unpack l ++ " not found"
         Just v  -> Right $ read (T.unpack v)
-
-instance (Ord k, Arbitrary k, Arbitrary v) => Arbitrary (Map.Map k v) where
-    arbitrary = Map.fromList <$> arbitrary

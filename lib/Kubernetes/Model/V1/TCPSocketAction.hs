@@ -16,8 +16,8 @@ module Kubernetes.Model.V1.TCPSocketAction
 import           Control.Lens.TH           (makeLenses)
 import           Data.Aeson.TH             (defaultOptions, deriveJSON,
                                             fieldLabelModifier)
-import           Data.Text                 (Text)
 import           GHC.Generics              (Generic)
+import           Kubernetes.Utils          (IntegerOrText)
 import           Prelude                   hiding (drop, error, max, min)
 import qualified Prelude                   as P
 import           Test.QuickCheck           (Arbitrary, arbitrary)
@@ -25,7 +25,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | TCPSocketAction describes an action based on opening a socket
 data TCPSocketAction = TCPSocketAction
-    { _port :: Text
+    { _port :: IntegerOrText
     } deriving (Show, Eq, Generic)
 
 makeLenses ''TCPSocketAction

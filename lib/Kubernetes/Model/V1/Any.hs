@@ -1,3 +1,10 @@
+-- This source code is distributed under the terms of a BSD license,
+-- Copyright (c) 2016-present, SoundCloud Ltd.
+-- All rights reserved.
+--
+-- This source code is distributed under the terms of a BSD license,
+-- found in the LICENSE file.
+
 {-# LANGUAGE DataKinds                  #-}
 {-# LANGUAGE DeriveGeneric              #-}
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
@@ -7,22 +14,29 @@
 
 module Kubernetes.Model.V1.Any
     ( Any (..)
+    , any
     ) where
 
 import           Control.Lens.TH           (makeLenses)
 import           Control.Monad             (replicateM)
 import           Data.Aeson
+import           Data.Aeson.TH             (defaultOptions, deriveJSON,
+                                            fieldLabelModifier)
 import qualified Data.HashMap.Strict       as HMap
 import           Data.Text                 (Text)
 import           Data.Vector               (fromList)
 import           GHC.Generics
+import           Prelude                   hiding (any)
 import           Test.QuickCheck
 import           Test.QuickCheck.Instances ()
 
 newtype Any =
   Any { _any :: Object
-      } deriving (Show, Eq, FromJSON, ToJSON, Generic)
+      } deriving (Show, Eq, Generic)
+
 makeLenses ''Any
+
+$(deriveJSON defaultOptions{fieldLabelModifier = drop 1} ''Any)
 
 arbValue :: Gen Value
 arbValue =

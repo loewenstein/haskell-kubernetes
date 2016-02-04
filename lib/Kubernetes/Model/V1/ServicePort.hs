@@ -22,6 +22,7 @@ import           Data.Aeson.TH             (defaultOptions, deriveJSON,
                                             fieldLabelModifier)
 import           Data.Text                 (Text)
 import           GHC.Generics              (Generic)
+import           Kubernetes.Utils          (IntegerOrText)
 import           Prelude                   hiding (drop, error, max, min)
 import qualified Prelude                   as P
 import           Test.QuickCheck           (Arbitrary, arbitrary)
@@ -32,7 +33,7 @@ data ServicePort = ServicePort
     { _name       :: Maybe Text
     , _protocol   :: Maybe Text
     , _port       :: Integer
-    , _targetPort :: Maybe Integer
+    , _targetPort :: Maybe IntegerOrText
     , _nodePort   :: Maybe Integer
     } deriving (Show, Eq, Generic)
 

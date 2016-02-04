@@ -142,6 +142,16 @@ remove_text_import_io() {
 # one off weird fixes
 one_off_io() {
   sed -i 's/Port/port/g' ./lib/Kubernetes/Model/V1/DaemonEndpoint.hs
+
+  # import Integer Or Text
+  sed -i 's/Data\.Text (Text)/Data.Text (Text)\nimport Kubernetes.Utils (IntegerOrText)/g' "./lib/Kubernetes/Model/V1/ServicePort.hs"
+  sed -i 's/Data\.Text (Text)/Data.Text (Text)\nimport Kubernetes.Utils (IntegerOrText)/g' "./lib/Kubernetes/Model/V1/HTTPGetAction.hs"
+  sed -i 's/Data\.Text (Text)/Kubernetes.Utils (IntegerOrText)/g' "./lib/Kubernetes/Model/V1/TCPSocketAction.hs"
+
+  # switch specific ports to use IntegerOrText
+  sed -i 's/_port :: Text/_port :: IntegerOrText/g' "./lib/Kubernetes/Model/V1/TCPSocketAction.hs"
+  sed -i 's/_port :: Text/_port :: IntegerOrText/g' "./lib/Kubernetes/Model/V1/HTTPGetAction.hs"
+  sed -i 's/_targetPort :: Maybe Text/_targetPort :: Maybe IntegerOrText/g' "./lib/Kubernetes/Model/V1/ServicePort.hs"
 }
 
 # style!
@@ -194,13 +204,14 @@ main() {
   one_off_io
   echo "... done!"
 
+  echo "move Any.hs back"
+  cp codegen/Any.hs ./lib/Kubernetes/Model/V1/Any.hs
+  echo "... done!"
+
   echo "stylizing haskell"
   stylish_io
   echo "... done!"
 
-  echo "move Any.hs back"
-  cp codegen/Any.hs ./lib/Kubernetes/Model/V1/Any.hs
-  echo "... done!"
 
 
 }
