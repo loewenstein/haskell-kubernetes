@@ -3,7 +3,7 @@ version:             0.1.0
 synopsis:            Haskell bindings to the Kubernetes API (via swagger & servant)
 description:         Please see README.md
 homepage:            https://github.com/soundcloud/haskell-kubernetes
-license:             BSD3
+license:             MIT
 license-file:        LICENSE
 author:              Aaron Levin
 maintainer:          aaron.levin@soundcloud.com
