@@ -25,16 +25,17 @@ import qualified Data.HashMap.Strict as HMap
 import Data.Text (Text)
 import Data.Vector (fromList)
 import GHC.Generics
+import Prelude hiding (any)
 import Test.QuickCheck
 import Test.QuickCheck.Instances ()
 
 newtype Any =
   Any { _any :: Object
-      } deriving (Show, Eq, FromJSON, ToJSON, Generic)
+      } deriving (Show, Eq, Generic)
 
 makeLenses ''Any
 
-$(deriveJSON defaultOptions{fieldLabelModifier = drop 1} ''{{classname}})
+$(deriveJSON defaultOptions{fieldLabelModifier = drop 1} ''Any)
 
 arbValue :: Gen Value
 arbValue =
