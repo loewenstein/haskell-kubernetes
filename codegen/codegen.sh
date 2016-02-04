@@ -144,6 +144,13 @@ one_off_io() {
   sed -i 's/Port/port/g' ./lib/Kubernetes/Model/V1/DaemonEndpoint.hs
 }
 
+# style!
+stylish_io() {
+  stylish-haskell -i ./lib/Kubernetes/Model/Json/*.hs
+  stylish-haskell -i ./lib/Kubernetes/Model/Unversioned/*.hs
+  stylish-haskell -i ./lib/Kubernetes/Model/V1/*.hs
+}
+
 main() {
 
   local tmpdir="${1}"
@@ -185,6 +192,10 @@ main() {
 
   echo "perform one offs"
   one_off_io
+  echo "... done!"
+
+  echo "stylizing haskell"
+  stylish_io
   echo "... done!"
 
   echo "move Any.hs back"
