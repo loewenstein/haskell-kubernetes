@@ -24,7 +24,9 @@ This project contains haskell bindings to the `v1` Kubernetes api generated via 
 _haskell-kubernetes_ depends on the following software:
 
 * [Glasgow Haskell Compiler](https://www.haskell.org/ghc/) `7.8.4` or `7.10.*`
-* (for code generation: [swagger-codegen](https://github.com/swagger-api/swagger-codegen))
+* for code generation: [swagger-codegen](https://github.com/swagger-api/swagger-codegen))
+* for code generation: [stylish-haskell](https://github.com/jaspervdj/stylish-haskell) to clean up the generated code.
+* for code generation: GNU `sed` (code generation may not work with the `sed` shipped with Mac OS X)
 
 ## Documentation
 
