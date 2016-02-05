@@ -1,5 +1,5 @@
 name:                haskell-kubernetes
-version:             0.2.1
+version:             0.3.0
 synopsis:            Haskell bindings to the Kubernetes API (via swagger & servant)
 description:         Please see README.md
 homepage:            https://github.com/soundcloud/haskell-kubernetes
