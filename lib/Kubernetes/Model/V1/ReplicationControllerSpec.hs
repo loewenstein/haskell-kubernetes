@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.ReplicationControllerSpec
     , replicas
     , selector
     , template
+    , mkReplicationControllerSpec
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -41,3 +42,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ReplicationControllerSpec where
     arbitrary = ReplicationControllerSpec <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ReplicationControllerSpec
+mkReplicationControllerSpec :: ReplicationControllerSpec
+mkReplicationControllerSpec = ReplicationControllerSpec Nothing Nothing Nothing

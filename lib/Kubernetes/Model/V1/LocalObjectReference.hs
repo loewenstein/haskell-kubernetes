@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.LocalObjectReference
     ( LocalObjectReference (..)
     , name
+    , mkLocalObjectReference
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary LocalObjectReference where
     arbitrary = LocalObjectReference <$> arbitrary
+
+-- | Use this method to build a LocalObjectReference
+mkLocalObjectReference :: LocalObjectReference
+mkLocalObjectReference = LocalObjectReference Nothing

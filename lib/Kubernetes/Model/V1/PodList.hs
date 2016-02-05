@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.PodList
     , apiVersion
     , metadata
     , items
+    , mkPodList
     ) where
 
 import           Control.Lens.TH                       (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PodList where
     arbitrary = PodList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PodList
+mkPodList :: [Pod] -> PodList
+mkPodList xitemsx = PodList Nothing Nothing Nothing xitemsx

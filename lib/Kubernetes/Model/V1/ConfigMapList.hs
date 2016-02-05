@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.ConfigMapList
     , apiVersion
     , metadata
     , items
+    , mkConfigMapList
     ) where
 
 import           Control.Lens.TH                       (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ConfigMapList where
     arbitrary = ConfigMapList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ConfigMapList
+mkConfigMapList :: ConfigMapList
+mkConfigMapList = ConfigMapList Nothing Nothing Nothing Nothing

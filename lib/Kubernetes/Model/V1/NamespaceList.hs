@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.NamespaceList
     , apiVersion
     , metadata
     , items
+    , mkNamespaceList
     ) where
 
 import           Control.Lens.TH                       (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NamespaceList where
     arbitrary = NamespaceList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a NamespaceList
+mkNamespaceList :: [Namespace] -> NamespaceList
+mkNamespaceList xitemsx = NamespaceList Nothing Nothing Nothing xitemsx

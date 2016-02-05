@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.DownwardAPIVolumeFile
     ( DownwardAPIVolumeFile (..)
     , path
     , fieldRef
+    , mkDownwardAPIVolumeFile
     ) where
 
 import           Control.Lens.TH                         (makeLenses)
@@ -39,3 +40,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary DownwardAPIVolumeFile where
     arbitrary = DownwardAPIVolumeFile <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a DownwardAPIVolumeFile
+mkDownwardAPIVolumeFile :: Text -> ObjectFieldSelector -> DownwardAPIVolumeFile
+mkDownwardAPIVolumeFile xpathx xfieldRefx = DownwardAPIVolumeFile xpathx xfieldRefx

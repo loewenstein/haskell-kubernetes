@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.Lifecycle
     ( Lifecycle (..)
     , postStart
     , preStop
+    , mkLifecycle
     ) where
 
 import           Control.Lens.TH             (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Lifecycle where
     arbitrary = Lifecycle <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a Lifecycle
+mkLifecycle :: Lifecycle
+mkLifecycle = Lifecycle Nothing Nothing

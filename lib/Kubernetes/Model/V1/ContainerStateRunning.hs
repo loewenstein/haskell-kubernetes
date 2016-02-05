@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.ContainerStateRunning
     ( ContainerStateRunning (..)
     , startedAt
+    , mkContainerStateRunning
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ContainerStateRunning where
     arbitrary = ContainerStateRunning <$> arbitrary
+
+-- | Use this method to build a ContainerStateRunning
+mkContainerStateRunning :: ContainerStateRunning
+mkContainerStateRunning = ContainerStateRunning Nothing

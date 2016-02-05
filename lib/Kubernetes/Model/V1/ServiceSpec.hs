@@ -18,6 +18,7 @@ module Kubernetes.Model.V1.ServiceSpec
     , deprecatedPublicIPs
     , sessionAffinity
     , loadBalancerIP
+    , mkServiceSpec
     ) where
 
 import           Control.Lens.TH                 (makeLenses)
@@ -50,3 +51,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ServiceSpec where
     arbitrary = ServiceSpec <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ServiceSpec
+mkServiceSpec :: [ServicePort] -> ServiceSpec
+mkServiceSpec xportsx = ServiceSpec xportsx Nothing Nothing Nothing Nothing Nothing Nothing Nothing

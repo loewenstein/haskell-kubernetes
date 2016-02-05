@@ -26,6 +26,7 @@ module Kubernetes.Model.V1.PersistentVolumeSpec
     , accessModes
     , claimRef
     , persistentVolumeReclaimPolicy
+    , mkPersistentVolumeSpec
     ) where
 
 import           Control.Lens.TH                                      (makeLenses)
@@ -81,3 +82,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PersistentVolumeSpec where
     arbitrary = PersistentVolumeSpec <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PersistentVolumeSpec
+mkPersistentVolumeSpec :: PersistentVolumeSpec
+mkPersistentVolumeSpec = PersistentVolumeSpec Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing

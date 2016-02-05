@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.PersistentVolumeClaimStatus
     , phase
     , accessModes
     , capacity
+    , mkPersistentVolumeClaimStatus
     ) where
 
 import           Control.Lens.TH                                (makeLenses)
@@ -43,3 +44,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PersistentVolumeClaimStatus where
     arbitrary = PersistentVolumeClaimStatus <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PersistentVolumeClaimStatus
+mkPersistentVolumeClaimStatus :: PersistentVolumeClaimStatus
+mkPersistentVolumeClaimStatus = PersistentVolumeClaimStatus Nothing Nothing Nothing

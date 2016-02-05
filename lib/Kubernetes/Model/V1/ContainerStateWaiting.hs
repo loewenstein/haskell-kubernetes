@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.ContainerStateWaiting
     ( ContainerStateWaiting (..)
     , reason
     , message
+    , mkContainerStateWaiting
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ContainerStateWaiting where
     arbitrary = ContainerStateWaiting <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a ContainerStateWaiting
+mkContainerStateWaiting :: ContainerStateWaiting
+mkContainerStateWaiting = ContainerStateWaiting Nothing Nothing

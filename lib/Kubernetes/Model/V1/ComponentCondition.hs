@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.ComponentCondition
     , status
     , message
     , error
+    , mkComponentCondition
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -40,3 +41,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ComponentCondition where
     arbitrary = ComponentCondition <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ComponentCondition
+mkComponentCondition :: Text -> Text -> ComponentCondition
+mkComponentCondition xtype_x xstatusx = ComponentCondition xtype_x xstatusx Nothing Nothing

@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.ServiceAccount
     , metadata
     , secrets
     , imagePullSecrets
+    , mkServiceAccount
     ) where
 
 import           Control.Lens.TH                          (makeLenses)
@@ -47,3 +48,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ServiceAccount where
     arbitrary = ServiceAccount <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ServiceAccount
+mkServiceAccount :: ServiceAccount
+mkServiceAccount = ServiceAccount Nothing Nothing Nothing Nothing Nothing

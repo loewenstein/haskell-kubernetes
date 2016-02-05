@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.ServiceStatus
     ( ServiceStatus (..)
     , loadBalancer
+    , mkServiceStatus
     ) where
 
 import           Control.Lens.TH                        (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ServiceStatus where
     arbitrary = ServiceStatus <$> arbitrary
+
+-- | Use this method to build a ServiceStatus
+mkServiceStatus :: ServiceStatus
+mkServiceStatus = ServiceStatus Nothing

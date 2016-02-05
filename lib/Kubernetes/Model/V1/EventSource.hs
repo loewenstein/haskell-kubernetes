@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.EventSource
     ( EventSource (..)
     , component
     , host
+    , mkEventSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary EventSource where
     arbitrary = EventSource <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a EventSource
+mkEventSource :: EventSource
+mkEventSource = EventSource Nothing Nothing

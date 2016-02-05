@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.NodeList
     , apiVersion
     , metadata
     , items
+    , mkNodeList
     ) where
 
 import           Control.Lens.TH                       (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NodeList where
     arbitrary = NodeList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a NodeList
+mkNodeList :: [Node] -> NodeList
+mkNodeList xitemsx = NodeList Nothing Nothing Nothing xitemsx

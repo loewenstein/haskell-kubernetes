@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.EnvVarSource
     , fieldRef
     , configMapKeyRef
     , secretKeyRef
+    , mkEnvVarSource
     ) where
 
 import           Control.Lens.TH                          (makeLenses)
@@ -42,3 +43,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary EnvVarSource where
     arbitrary = EnvVarSource <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a EnvVarSource
+mkEnvVarSource :: EnvVarSource
+mkEnvVarSource = EnvVarSource Nothing Nothing Nothing

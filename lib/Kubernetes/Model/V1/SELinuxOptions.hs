@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.SELinuxOptions
     , role
     , type_
     , level
+    , mkSELinuxOptions
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -40,3 +41,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary SELinuxOptions where
     arbitrary = SELinuxOptions <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a SELinuxOptions
+mkSELinuxOptions :: SELinuxOptions
+mkSELinuxOptions = SELinuxOptions Nothing Nothing Nothing Nothing

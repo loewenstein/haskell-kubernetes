@@ -18,6 +18,7 @@ module Kubernetes.Model.V1.ContainerStatus
     , image
     , imageID
     , containerID
+    , mkContainerStatus
     ) where
 
 import           Control.Lens.TH                    (makeLenses)
@@ -50,3 +51,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ContainerStatus where
     arbitrary = ContainerStatus <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ContainerStatus
+mkContainerStatus :: Text -> Bool -> Integer -> Text -> Text -> ContainerStatus
+mkContainerStatus xnamex xreadyx xrestartCountx ximagex ximageIDx = ContainerStatus xnamex Nothing Nothing xreadyx xrestartCountx ximagex ximageIDx Nothing

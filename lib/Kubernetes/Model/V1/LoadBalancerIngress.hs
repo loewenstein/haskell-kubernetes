@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.LoadBalancerIngress
     ( LoadBalancerIngress (..)
     , ip
     , hostname
+    , mkLoadBalancerIngress
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary LoadBalancerIngress where
     arbitrary = LoadBalancerIngress <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a LoadBalancerIngress
+mkLoadBalancerIngress :: LoadBalancerIngress
+mkLoadBalancerIngress = LoadBalancerIngress Nothing Nothing

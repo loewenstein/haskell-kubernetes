@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.NodeAddress
     ( NodeAddress (..)
     , type_
     , address
+    , mkNodeAddress
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NodeAddress where
     arbitrary = NodeAddress <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a NodeAddress
+mkNodeAddress :: Text -> Text -> NodeAddress
+mkNodeAddress xtype_x xaddressx = NodeAddress xtype_x xaddressx

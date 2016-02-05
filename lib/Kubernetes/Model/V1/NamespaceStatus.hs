@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.NamespaceStatus
     ( NamespaceStatus (..)
     , phase
+    , mkNamespaceStatus
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NamespaceStatus where
     arbitrary = NamespaceStatus <$> arbitrary
+
+-- | Use this method to build a NamespaceStatus
+mkNamespaceStatus :: NamespaceStatus
+mkNamespaceStatus = NamespaceStatus Nothing

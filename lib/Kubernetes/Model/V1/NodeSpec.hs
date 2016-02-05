@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.NodeSpec
     , externalID
     , providerID
     , unschedulable
+    , mkNodeSpec
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -40,3 +41,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NodeSpec where
     arbitrary = NodeSpec <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a NodeSpec
+mkNodeSpec :: NodeSpec
+mkNodeSpec = NodeSpec Nothing Nothing Nothing Nothing

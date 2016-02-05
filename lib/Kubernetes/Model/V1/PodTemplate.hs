@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.PodTemplate
     , apiVersion
     , metadata
     , template
+    , mkPodTemplate
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PodTemplate where
     arbitrary = PodTemplate <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PodTemplate
+mkPodTemplate :: PodTemplate
+mkPodTemplate = PodTemplate Nothing Nothing Nothing Nothing

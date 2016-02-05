@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.PersistentVolumeClaimVolumeSource
     ( PersistentVolumeClaimVolumeSource (..)
     , claimName
     , readOnly
+    , mkPersistentVolumeClaimVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PersistentVolumeClaimVolumeSource where
     arbitrary = PersistentVolumeClaimVolumeSource <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a PersistentVolumeClaimVolumeSource
+mkPersistentVolumeClaimVolumeSource :: Text -> PersistentVolumeClaimVolumeSource
+mkPersistentVolumeClaimVolumeSource xclaimNamex = PersistentVolumeClaimVolumeSource xclaimNamex Nothing

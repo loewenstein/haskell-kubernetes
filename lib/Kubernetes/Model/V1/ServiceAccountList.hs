@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.ServiceAccountList
     , apiVersion
     , metadata
     , items
+    , mkServiceAccountList
     ) where
 
 import           Control.Lens.TH                       (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ServiceAccountList where
     arbitrary = ServiceAccountList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ServiceAccountList
+mkServiceAccountList :: [ServiceAccount] -> ServiceAccountList
+mkServiceAccountList xitemsx = ServiceAccountList Nothing Nothing Nothing xitemsx

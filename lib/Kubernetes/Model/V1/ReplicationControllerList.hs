@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.ReplicationControllerList
     , apiVersion
     , metadata
     , items
+    , mkReplicationControllerList
     ) where
 
 import           Control.Lens.TH                           (makeLenses)
@@ -45,3 +46,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ReplicationControllerList where
     arbitrary = ReplicationControllerList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ReplicationControllerList
+mkReplicationControllerList :: [ReplicationController] -> ReplicationControllerList
+mkReplicationControllerList xitemsx = ReplicationControllerList Nothing Nothing Nothing xitemsx

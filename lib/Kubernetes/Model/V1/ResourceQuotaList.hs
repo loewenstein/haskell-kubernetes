@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.ResourceQuotaList
     , apiVersion
     , metadata
     , items
+    , mkResourceQuotaList
     ) where
 
 import           Control.Lens.TH                       (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ResourceQuotaList where
     arbitrary = ResourceQuotaList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ResourceQuotaList
+mkResourceQuotaList :: [ResourceQuota] -> ResourceQuotaList
+mkResourceQuotaList xitemsx = ResourceQuotaList Nothing Nothing Nothing xitemsx

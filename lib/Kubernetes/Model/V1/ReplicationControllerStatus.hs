@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.ReplicationControllerStatus
     ( ReplicationControllerStatus (..)
     , replicas
     , observedGeneration
+    , mkReplicationControllerStatus
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -35,3 +36,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ReplicationControllerStatus where
     arbitrary = ReplicationControllerStatus <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a ReplicationControllerStatus
+mkReplicationControllerStatus :: Integer -> ReplicationControllerStatus
+mkReplicationControllerStatus xreplicasx = ReplicationControllerStatus xreplicasx Nothing

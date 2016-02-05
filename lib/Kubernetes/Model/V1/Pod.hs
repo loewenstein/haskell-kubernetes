@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.Pod
     , metadata
     , spec
     , status
+    , mkPod
     ) where
 
 import           Control.Lens.TH                (makeLenses)
@@ -45,3 +46,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Pod where
     arbitrary = Pod <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Pod
+mkPod :: Pod
+mkPod = Pod Nothing Nothing Nothing Nothing Nothing

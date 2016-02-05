@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.PodSecurityContext
     , runAsNonRoot
     , supplementalGroups
     , fsGroup
+    , mkPodSecurityContext
     ) where
 
 import           Control.Lens.TH                    (makeLenses)
@@ -43,3 +44,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PodSecurityContext where
     arbitrary = PodSecurityContext <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PodSecurityContext
+mkPodSecurityContext :: PodSecurityContext
+mkPodSecurityContext = PodSecurityContext Nothing Nothing Nothing Nothing Nothing

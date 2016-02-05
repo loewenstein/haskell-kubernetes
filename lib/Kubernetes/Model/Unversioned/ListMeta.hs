@@ -12,6 +12,7 @@ module Kubernetes.Model.Unversioned.ListMeta
     ( ListMeta (..)
     , selfLink
     , resourceVersion
+    , mkListMeta
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ListMeta where
     arbitrary = ListMeta <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a ListMeta
+mkListMeta :: ListMeta
+mkListMeta = ListMeta Nothing Nothing

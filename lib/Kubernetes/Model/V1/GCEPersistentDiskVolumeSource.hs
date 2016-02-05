@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.GCEPersistentDiskVolumeSource
     , fsType
     , partition
     , readOnly
+    , mkGCEPersistentDiskVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -40,3 +41,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary GCEPersistentDiskVolumeSource where
     arbitrary = GCEPersistentDiskVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a GCEPersistentDiskVolumeSource
+mkGCEPersistentDiskVolumeSource :: Text -> Text -> GCEPersistentDiskVolumeSource
+mkGCEPersistentDiskVolumeSource xpdNamex xfsTypex = GCEPersistentDiskVolumeSource xpdNamex xfsTypex Nothing Nothing

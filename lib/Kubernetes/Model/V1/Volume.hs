@@ -28,6 +28,7 @@ module Kubernetes.Model.V1.Volume
     , flocker
     , downwardAPI
     , fc
+    , mkVolume
     ) where
 
 import           Control.Lens.TH                                       (makeLenses)
@@ -88,3 +89,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Volume where
     arbitrary = Volume <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Volume
+mkVolume :: Text -> Volume
+mkVolume xnamex = Volume xnamex Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing

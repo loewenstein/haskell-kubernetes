@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.ComponentStatus
     , apiVersion
     , metadata
     , conditions
+    , mkComponentStatus
     ) where
 
 import           Control.Lens.TH                        (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ComponentStatus where
     arbitrary = ComponentStatus <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ComponentStatus
+mkComponentStatus :: ComponentStatus
+mkComponentStatus = ComponentStatus Nothing Nothing Nothing Nothing

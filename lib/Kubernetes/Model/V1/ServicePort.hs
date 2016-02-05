@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.ServicePort
     , port
     , targetPort
     , nodePort
+    , mkServicePort
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -43,3 +44,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ServicePort where
     arbitrary = ServicePort <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ServicePort
+mkServicePort :: Integer -> ServicePort
+mkServicePort xportx = ServicePort Nothing Nothing xportx Nothing Nothing

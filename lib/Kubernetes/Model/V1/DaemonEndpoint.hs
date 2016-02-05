@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.DaemonEndpoint
     ( DaemonEndpoint (..)
     , port
+    , mkDaemonEndpoint
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -33,3 +34,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary DaemonEndpoint where
     arbitrary = DaemonEndpoint <$> arbitrary
+
+-- | Use this method to build a DaemonEndpoint
+mkDaemonEndpoint :: Integer -> DaemonEndpoint
+mkDaemonEndpoint xportx = DaemonEndpoint xportx

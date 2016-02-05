@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.PersistentVolumeStatus
     , phase
     , message
     , reason
+    , mkPersistentVolumeStatus
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -38,3 +39,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PersistentVolumeStatus where
     arbitrary = PersistentVolumeStatus <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PersistentVolumeStatus
+mkPersistentVolumeStatus :: PersistentVolumeStatus
+mkPersistentVolumeStatus = PersistentVolumeStatus Nothing Nothing Nothing

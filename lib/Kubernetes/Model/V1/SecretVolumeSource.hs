@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.SecretVolumeSource
     ( SecretVolumeSource (..)
     , secretName
+    , mkSecretVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary SecretVolumeSource where
     arbitrary = SecretVolumeSource <$> arbitrary
+
+-- | Use this method to build a SecretVolumeSource
+mkSecretVolumeSource :: SecretVolumeSource
+mkSecretVolumeSource = SecretVolumeSource Nothing

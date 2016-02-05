@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.HostPathVolumeSource
     ( HostPathVolumeSource (..)
     , path
+    , mkHostPathVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary HostPathVolumeSource where
     arbitrary = HostPathVolumeSource <$> arbitrary
+
+-- | Use this method to build a HostPathVolumeSource
+mkHostPathVolumeSource :: Text -> HostPathVolumeSource
+mkHostPathVolumeSource xpathx = HostPathVolumeSource xpathx

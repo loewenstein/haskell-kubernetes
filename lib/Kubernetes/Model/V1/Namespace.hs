@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.Namespace
     , metadata
     , spec
     , status
+    , mkNamespace
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -47,3 +48,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Namespace where
     arbitrary = Namespace <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Namespace
+mkNamespace :: Namespace
+mkNamespace = Namespace Nothing Nothing Nothing Nothing Nothing

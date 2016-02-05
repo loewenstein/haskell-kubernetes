@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.EndpointAddress
     ( EndpointAddress (..)
     , ip
     , targetRef
+    , mkEndpointAddress
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -39,3 +40,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary EndpointAddress where
     arbitrary = EndpointAddress <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a EndpointAddress
+mkEndpointAddress :: Text -> EndpointAddress
+mkEndpointAddress xipx = EndpointAddress xipx Nothing

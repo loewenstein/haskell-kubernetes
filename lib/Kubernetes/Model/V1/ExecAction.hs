@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.ExecAction
     ( ExecAction (..)
     , command
+    , mkExecAction
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ExecAction where
     arbitrary = ExecAction <$> arbitrary
+
+-- | Use this method to build a ExecAction
+mkExecAction :: ExecAction
+mkExecAction = ExecAction Nothing

@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.VolumeMount
     , name
     , readOnly
     , mountPath
+    , mkVolumeMount
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -38,3 +39,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary VolumeMount where
     arbitrary = VolumeMount <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a VolumeMount
+mkVolumeMount :: Text -> Text -> VolumeMount
+mkVolumeMount xnamex xmountPathx = VolumeMount xnamex Nothing xmountPathx

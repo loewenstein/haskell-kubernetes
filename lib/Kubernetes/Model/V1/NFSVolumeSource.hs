@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.NFSVolumeSource
     , server
     , path
     , readOnly
+    , mkNFSVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -38,3 +39,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NFSVolumeSource where
     arbitrary = NFSVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a NFSVolumeSource
+mkNFSVolumeSource :: Text -> Text -> NFSVolumeSource
+mkNFSVolumeSource xserverx xpathx = NFSVolumeSource xserverx xpathx Nothing

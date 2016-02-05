@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.SecretKeySelector
     ( SecretKeySelector (..)
     , name
     , key
+    , mkSecretKeySelector
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary SecretKeySelector where
     arbitrary = SecretKeySelector <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a SecretKeySelector
+mkSecretKeySelector :: Text -> SecretKeySelector
+mkSecretKeySelector xkeyx = SecretKeySelector Nothing xkeyx

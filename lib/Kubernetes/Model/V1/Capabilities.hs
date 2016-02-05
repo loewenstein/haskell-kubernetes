@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.Capabilities
     ( Capabilities (..)
     , add
     , drop
+    , mkCapabilities
     ) where
 
 import           Control.Lens.TH                (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Capabilities where
     arbitrary = Capabilities <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a Capabilities
+mkCapabilities :: Capabilities
+mkCapabilities = Capabilities Nothing Nothing

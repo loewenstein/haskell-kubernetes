@@ -10,6 +10,7 @@
 
 module Kubernetes.Model.V1.FinalizerName
     ( FinalizerName (..)
+    , mkFinalizerName
     ) where
 
 import           Control.Lens.TH (makeLenses)
@@ -29,3 +30,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary FinalizerName where
     arbitrary = return FinalizerName
+
+-- | Use this method to build a FinalizerName
+mkFinalizerName :: FinalizerName
+mkFinalizerName = FinalizerName

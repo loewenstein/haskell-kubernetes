@@ -14,6 +14,7 @@ module Kubernetes.V1.{{package}}.{{classname}}
     ( {{classname}} (..){{#hasVars}}
     , {{#vars}}{{& name}}{{#hasMore}}
     , {{/hasMore}}{{/vars}}{{/hasVars}}
+    , mk{{classname}}
     ) where
 {{/model}}
 {{/models}}
@@ -66,5 +67,9 @@ instance Arbitrary {{classname}} where
 instance Arbitrary {{classname}} where
     arbitrary = return {{classname}}
 {{/hasVars}}
+
+-- | Use this method to build a {{classname}}
+{{^hasVars}}mk{{classname}} :: {{classname}}{{/hasVars}}{{#hasVars}}mk{{classname}} :: {{#vars}}{{#required}}{{datatype}} -> {{/required}}{{#hasMore}}{{/hasMore}}{{/vars}}{{classname}}{{/hasVars}}
+mk{{classname}} {{#hasVars}}{{#vars}}{{#required}}x{{& name}}x {{/required}}{{#hasMore}}{{/hasMore}}{{/vars}}{{/hasVars}}= {{classname}}{{#hasVars}}{{#vars}}{{#required}} x{{& name}}x{{/required}}{{^required}} Nothing{{/required}}{{#hasMore}}{{/hasMore}}{{/vars}}{{/hasVars}}
 {{/model}}
 {{/models}}

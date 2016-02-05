@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.ContainerState
     , waiting
     , running
     , terminated
+    , mkContainerState
     ) where
 
 import           Control.Lens.TH                              (makeLenses)
@@ -42,3 +43,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ContainerState where
     arbitrary = ContainerState <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ContainerState
+mkContainerState :: ContainerState
+mkContainerState = ContainerState Nothing Nothing Nothing

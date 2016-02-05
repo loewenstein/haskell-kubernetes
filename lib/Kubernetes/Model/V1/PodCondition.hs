@@ -16,6 +16,7 @@ module Kubernetes.Model.V1.PodCondition
     , lastTransitionTime
     , reason
     , message
+    , mkPodCondition
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PodCondition where
     arbitrary = PodCondition <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PodCondition
+mkPodCondition :: Text -> Text -> PodCondition
+mkPodCondition xtype_x xstatusx = PodCondition xtype_x xstatusx Nothing Nothing Nothing Nothing

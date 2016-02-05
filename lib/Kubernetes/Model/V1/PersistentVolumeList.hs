@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.PersistentVolumeList
     , apiVersion
     , metadata
     , items
+    , mkPersistentVolumeList
     ) where
 
 import           Control.Lens.TH                       (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PersistentVolumeList where
     arbitrary = PersistentVolumeList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PersistentVolumeList
+mkPersistentVolumeList :: [PersistentVolume] -> PersistentVolumeList
+mkPersistentVolumeList xitemsx = PersistentVolumeList Nothing Nothing Nothing xitemsx

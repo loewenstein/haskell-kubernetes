@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.ContainerPort
     , containerPort
     , protocol
     , hostIP
+    , mkContainerPort
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -42,3 +43,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ContainerPort where
     arbitrary = ContainerPort <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ContainerPort
+mkContainerPort :: Integer -> ContainerPort
+mkContainerPort xcontainerPortx = ContainerPort Nothing Nothing xcontainerPortx Nothing Nothing

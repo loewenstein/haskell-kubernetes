@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.Secret
     , metadata
     , data_
     , type_
+    , mkSecret
     ) where
 
 import           Control.Lens.TH                (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Secret where
     arbitrary = Secret <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Secret
+mkSecret :: Secret
+mkSecret = Secret Nothing Nothing Nothing Nothing Nothing

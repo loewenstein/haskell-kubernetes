@@ -13,6 +13,7 @@ module Kubernetes.Model.Unversioned.StatusCause
     , reason
     , message
     , field
+    , mkStatusCause
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -38,3 +39,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary StatusCause where
     arbitrary = StatusCause <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a StatusCause
+mkStatusCause :: StatusCause
+mkStatusCause = StatusCause Nothing Nothing Nothing

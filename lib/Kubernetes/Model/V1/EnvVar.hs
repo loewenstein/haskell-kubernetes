@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.EnvVar
     , name
     , value
     , valueFrom
+    , mkEnvVar
     ) where
 
 import           Control.Lens.TH                  (makeLenses)
@@ -39,3 +40,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary EnvVar where
     arbitrary = EnvVar <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a EnvVar
+mkEnvVar :: Text -> EnvVar
+mkEnvVar xnamex = EnvVar xnamex Nothing Nothing

@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.EventList
     , apiVersion
     , metadata
     , items
+    , mkEventList
     ) where
 
 import           Control.Lens.TH                       (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary EventList where
     arbitrary = EventList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a EventList
+mkEventList :: [Event] -> EventList
+mkEventList xitemsx = EventList Nothing Nothing Nothing xitemsx

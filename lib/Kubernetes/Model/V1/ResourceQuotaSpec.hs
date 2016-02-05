@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.ResourceQuotaSpec
     ( ResourceQuotaSpec (..)
     , hard
+    , mkResourceQuotaSpec
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ResourceQuotaSpec where
     arbitrary = ResourceQuotaSpec <$> arbitrary
+
+-- | Use this method to build a ResourceQuotaSpec
+mkResourceQuotaSpec :: ResourceQuotaSpec
+mkResourceQuotaSpec = ResourceQuotaSpec Nothing

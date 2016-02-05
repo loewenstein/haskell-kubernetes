@@ -10,6 +10,7 @@
 
 module Kubernetes.Model.Unversioned.Patch
     ( Patch (..)
+    , mkPatch
     ) where
 
 import           Control.Lens.TH (makeLenses)
@@ -29,3 +30,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Patch where
     arbitrary = return Patch
+
+-- | Use this method to build a Patch
+mkPatch :: Patch
+mkPatch = Patch

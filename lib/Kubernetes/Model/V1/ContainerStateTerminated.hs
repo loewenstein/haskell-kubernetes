@@ -17,6 +17,7 @@ module Kubernetes.Model.V1.ContainerStateTerminated
     , startedAt
     , finishedAt
     , containerID
+    , mkContainerStateTerminated
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -46,3 +47,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ContainerStateTerminated where
     arbitrary = ContainerStateTerminated <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ContainerStateTerminated
+mkContainerStateTerminated :: Integer -> ContainerStateTerminated
+mkContainerStateTerminated xexitCodex = ContainerStateTerminated xexitCodex Nothing Nothing Nothing Nothing Nothing Nothing

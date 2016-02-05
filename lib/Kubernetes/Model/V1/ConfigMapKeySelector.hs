@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.ConfigMapKeySelector
     ( ConfigMapKeySelector (..)
     , name
     , key
+    , mkConfigMapKeySelector
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ConfigMapKeySelector where
     arbitrary = ConfigMapKeySelector <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a ConfigMapKeySelector
+mkConfigMapKeySelector :: Text -> ConfigMapKeySelector
+mkConfigMapKeySelector xkeyx = ConfigMapKeySelector Nothing xkeyx

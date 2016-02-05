@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.EmptyDirVolumeSource
     ( EmptyDirVolumeSource (..)
     , medium
+    , mkEmptyDirVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary EmptyDirVolumeSource where
     arbitrary = EmptyDirVolumeSource <$> arbitrary
+
+-- | Use this method to build a EmptyDirVolumeSource
+mkEmptyDirVolumeSource :: EmptyDirVolumeSource
+mkEmptyDirVolumeSource = EmptyDirVolumeSource Nothing

@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.NamespaceSpec
     ( NamespaceSpec (..)
     , finalizers
+    , mkNamespaceSpec
     ) where
 
 import           Control.Lens.TH                   (makeLenses)
@@ -35,3 +36,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NamespaceSpec where
     arbitrary = NamespaceSpec <$> arbitrary
+
+-- | Use this method to build a NamespaceSpec
+mkNamespaceSpec :: NamespaceSpec
+mkNamespaceSpec = NamespaceSpec Nothing

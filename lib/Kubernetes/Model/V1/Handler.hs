@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.Handler
     , exec
     , httpGet
     , tcpSocket
+    , mkHandler
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -42,3 +43,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Handler where
     arbitrary = Handler <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Handler
+mkHandler :: Handler
+mkHandler = Handler Nothing Nothing Nothing

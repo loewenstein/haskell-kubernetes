@@ -28,6 +28,7 @@ module Kubernetes.Model.V1.Container
     , stdin
     , stdinOnce
     , tty
+    , mkContainer
     ) where
 
 import           Control.Lens.TH                          (makeLenses)
@@ -77,3 +78,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Container where
     arbitrary = Container <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Container
+mkContainer :: Text -> Container
+mkContainer xnamex = Container xnamex Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing

@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.FCVolumeSource
     , lun
     , fsType
     , readOnly
+    , mkFCVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -40,3 +41,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary FCVolumeSource where
     arbitrary = FCVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a FCVolumeSource
+mkFCVolumeSource :: [Text] -> Integer -> Text -> FCVolumeSource
+mkFCVolumeSource xtargetWWNsx xlunx xfsTypex = FCVolumeSource xtargetWWNsx xlunx xfsTypex Nothing

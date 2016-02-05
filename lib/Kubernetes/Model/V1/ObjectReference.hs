@@ -17,6 +17,7 @@ module Kubernetes.Model.V1.ObjectReference
     , apiVersion
     , resourceVersion
     , fieldPath
+    , mkObjectReference
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -46,3 +47,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ObjectReference where
     arbitrary = ObjectReference <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ObjectReference
+mkObjectReference :: ObjectReference
+mkObjectReference = ObjectReference Nothing Nothing Nothing Nothing Nothing Nothing Nothing

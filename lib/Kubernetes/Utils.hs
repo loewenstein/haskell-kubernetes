@@ -8,6 +8,7 @@
 {-# LANGUAGE DataKinds         #-}
 {-# LANGUAGE DeriveGeneric     #-}
 {-# LANGUAGE FlexibleInstances #-}
+{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE TemplateHaskell   #-}
 {-# LANGUAGE TypeFamilies      #-}
 {-# LANGUAGE TypeOperators     #-}
@@ -20,7 +21,6 @@ import           Data.Aeson      (FromJSON, ToJSON)
 import qualified Data.Aeson      as A
 import           Data.List       (intercalate)
 import           Data.List.Split (splitOn)
-import qualified Data.Map.Strict as Map
 import           Data.Scientific (coefficient, scientific)
 import qualified Data.Text       as T
 import           Data.Text.Read  (decimal)

@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.CinderVolumeSource
     , volumeID
     , fsType
     , readOnly
+    , mkCinderVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -38,3 +39,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary CinderVolumeSource where
     arbitrary = CinderVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a CinderVolumeSource
+mkCinderVolumeSource :: Text -> CinderVolumeSource
+mkCinderVolumeSource xvolumeIDx = CinderVolumeSource xvolumeIDx Nothing Nothing

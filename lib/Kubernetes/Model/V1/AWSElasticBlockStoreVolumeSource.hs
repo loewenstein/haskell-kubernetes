@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.AWSElasticBlockStoreVolumeSource
     , fsType
     , partition
     , readOnly
+    , mkAWSElasticBlockStoreVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -40,3 +41,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary AWSElasticBlockStoreVolumeSource where
     arbitrary = AWSElasticBlockStoreVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a AWSElasticBlockStoreVolumeSource
+mkAWSElasticBlockStoreVolumeSource :: Text -> Text -> AWSElasticBlockStoreVolumeSource
+mkAWSElasticBlockStoreVolumeSource xvolumeIDx xfsTypex = AWSElasticBlockStoreVolumeSource xvolumeIDx xfsTypex Nothing Nothing

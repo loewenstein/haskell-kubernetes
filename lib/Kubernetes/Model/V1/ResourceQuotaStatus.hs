@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.ResourceQuotaStatus
     ( ResourceQuotaStatus (..)
     , hard
     , used
+    , mkResourceQuotaStatus
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ResourceQuotaStatus where
     arbitrary = ResourceQuotaStatus <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a ResourceQuotaStatus
+mkResourceQuotaStatus :: ResourceQuotaStatus
+mkResourceQuotaStatus = ResourceQuotaStatus Nothing Nothing

@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.GlusterfsVolumeSource
     , endpoints
     , path
     , readOnly
+    , mkGlusterfsVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -38,3 +39,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary GlusterfsVolumeSource where
     arbitrary = GlusterfsVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a GlusterfsVolumeSource
+mkGlusterfsVolumeSource :: Text -> Text -> GlusterfsVolumeSource
+mkGlusterfsVolumeSource xendpointsx xpathx = GlusterfsVolumeSource xendpointsx xpathx Nothing

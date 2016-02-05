@@ -21,6 +21,7 @@ module Kubernetes.Model.V1.Event
     , lastTimestamp
     , count
     , type_
+    , mkEvent
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -59,3 +60,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Event where
     arbitrary = Event <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Event
+mkEvent :: ObjectMeta -> ObjectReference -> Event
+mkEvent xmetadatax xinvolvedObjectx = Event Nothing Nothing xmetadatax xinvolvedObjectx Nothing Nothing Nothing Nothing Nothing Nothing Nothing

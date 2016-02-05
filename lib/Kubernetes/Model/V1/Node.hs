@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.Node
     , metadata
     , spec
     , status
+    , mkNode
     ) where
 
 import           Control.Lens.TH                (makeLenses)
@@ -45,3 +46,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Node where
     arbitrary = Node <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Node
+mkNode :: Node
+mkNode = Node Nothing Nothing Nothing Nothing Nothing

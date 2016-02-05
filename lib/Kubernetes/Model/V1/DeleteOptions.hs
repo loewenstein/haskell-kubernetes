@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.DeleteOptions
     , kind
     , apiVersion
     , gracePeriodSeconds
+    , mkDeleteOptions
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -38,3 +39,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary DeleteOptions where
     arbitrary = DeleteOptions <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a DeleteOptions
+mkDeleteOptions :: Integer -> DeleteOptions
+mkDeleteOptions xgracePeriodSecondsx = DeleteOptions Nothing Nothing xgracePeriodSecondsx

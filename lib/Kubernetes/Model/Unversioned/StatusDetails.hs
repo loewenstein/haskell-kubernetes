@@ -15,6 +15,7 @@ module Kubernetes.Model.Unversioned.StatusDetails
     , kind
     , causes
     , retryAfterSeconds
+    , mkStatusDetails
     ) where
 
 import           Control.Lens.TH                          (makeLenses)
@@ -45,3 +46,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary StatusDetails where
     arbitrary = StatusDetails <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a StatusDetails
+mkStatusDetails :: StatusDetails
+mkStatusDetails = StatusDetails Nothing Nothing Nothing Nothing Nothing

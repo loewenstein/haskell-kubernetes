@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.SecurityContext
     , seLinuxOptions
     , runAsUser
     , runAsNonRoot
+    , mkSecurityContext
     ) where
 
 import           Control.Lens.TH                    (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary SecurityContext where
     arbitrary = SecurityContext <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a SecurityContext
+mkSecurityContext :: SecurityContext
+mkSecurityContext = SecurityContext Nothing Nothing Nothing Nothing Nothing

@@ -18,6 +18,7 @@ module Kubernetes.Model.V1.PodStatus
     , podIP
     , startTime
     , containerStatuses
+    , mkPodStatus
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -52,3 +53,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PodStatus where
     arbitrary = PodStatus <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PodStatus
+mkPodStatus :: PodStatus
+mkPodStatus = PodStatus Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing

@@ -16,6 +16,7 @@ module Kubernetes.Model.V1.ISCSIVolumeSource
     , iscsiInterface
     , fsType
     , readOnly
+    , mkISCSIVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ISCSIVolumeSource where
     arbitrary = ISCSIVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ISCSIVolumeSource
+mkISCSIVolumeSource :: Text -> Text -> Integer -> Text -> ISCSIVolumeSource
+mkISCSIVolumeSource xtargetPortalx xiqnx xlunx xfsTypex = ISCSIVolumeSource xtargetPortalx xiqnx xlunx Nothing xfsTypex Nothing

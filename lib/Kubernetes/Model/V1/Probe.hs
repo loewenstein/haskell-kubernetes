@@ -18,6 +18,7 @@ module Kubernetes.Model.V1.Probe
     , periodSeconds
     , successThreshold
     , failureThreshold
+    , mkProbe
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -52,3 +53,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Probe where
     arbitrary = Probe <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Probe
+mkProbe :: Probe
+mkProbe = Probe Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing

@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.HTTPGetAction
     , port
     , host
     , scheme
+    , mkHTTPGetAction
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -41,3 +42,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary HTTPGetAction where
     arbitrary = HTTPGetAction <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a HTTPGetAction
+mkHTTPGetAction :: IntegerOrText -> HTTPGetAction
+mkHTTPGetAction xportx = HTTPGetAction Nothing xportx Nothing Nothing

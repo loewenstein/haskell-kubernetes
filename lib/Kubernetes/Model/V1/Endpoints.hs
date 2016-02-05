@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.Endpoints
     , apiVersion
     , metadata
     , subsets
+    , mkEndpoints
     ) where
 
 import           Control.Lens.TH                    (makeLenses)
@@ -43,3 +44,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Endpoints where
     arbitrary = Endpoints <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Endpoints
+mkEndpoints :: [EndpointSubset] -> Endpoints
+mkEndpoints xsubsetsx = Endpoints Nothing Nothing Nothing xsubsetsx

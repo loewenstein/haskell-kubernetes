@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.NodeDaemonEndpoints
     ( NodeDaemonEndpoints (..)
     , kubeletEndpoint
+    , mkNodeDaemonEndpoints
     ) where
 
 import           Control.Lens.TH                    (makeLenses)
@@ -35,3 +36,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NodeDaemonEndpoints where
     arbitrary = NodeDaemonEndpoints <$> arbitrary
+
+-- | Use this method to build a NodeDaemonEndpoints
+mkNodeDaemonEndpoints :: NodeDaemonEndpoints
+mkNodeDaemonEndpoints = NodeDaemonEndpoints Nothing

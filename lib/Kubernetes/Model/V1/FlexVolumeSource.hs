@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.FlexVolumeSource
     , secretRef
     , readOnly
     , options
+    , mkFlexVolumeSource
     ) where
 
 import           Control.Lens.TH                          (makeLenses)
@@ -46,3 +47,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary FlexVolumeSource where
     arbitrary = FlexVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a FlexVolumeSource
+mkFlexVolumeSource :: Text -> FlexVolumeSource
+mkFlexVolumeSource xdriverx = FlexVolumeSource xdriverx Nothing Nothing Nothing Nothing

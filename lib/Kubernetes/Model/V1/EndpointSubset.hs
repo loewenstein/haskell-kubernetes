@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.EndpointSubset
     , addresses
     , notReadyAddresses
     , ports
+    , mkEndpointSubset
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -41,3 +42,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary EndpointSubset where
     arbitrary = EndpointSubset <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a EndpointSubset
+mkEndpointSubset :: EndpointSubset
+mkEndpointSubset = EndpointSubset Nothing Nothing Nothing

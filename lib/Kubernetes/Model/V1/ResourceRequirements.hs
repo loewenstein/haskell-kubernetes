@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.ResourceRequirements
     ( ResourceRequirements (..)
     , limits
     , requests
+    , mkResourceRequirements
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ResourceRequirements where
     arbitrary = ResourceRequirements <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a ResourceRequirements
+mkResourceRequirements :: ResourceRequirements
+mkResourceRequirements = ResourceRequirements Nothing Nothing

@@ -22,6 +22,7 @@ module Kubernetes.Model.V1.ObjectMeta
     , deletionGracePeriodSeconds
     , labels
     , annotations
+    , mkObjectMeta
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -57,3 +58,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ObjectMeta where
     arbitrary = ObjectMeta <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a ObjectMeta
+mkObjectMeta :: ObjectMeta
+mkObjectMeta = ObjectMeta Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing

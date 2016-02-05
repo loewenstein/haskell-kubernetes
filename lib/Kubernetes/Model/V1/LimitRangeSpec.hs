@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.LimitRangeSpec
     ( LimitRangeSpec (..)
     , limits
+    , mkLimitRangeSpec
     ) where
 
 import           Control.Lens.TH                    (makeLenses)
@@ -35,3 +36,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary LimitRangeSpec where
     arbitrary = LimitRangeSpec <$> arbitrary
+
+-- | Use this method to build a LimitRangeSpec
+mkLimitRangeSpec :: [LimitRangeItem] -> LimitRangeSpec
+mkLimitRangeSpec xlimitsx = LimitRangeSpec xlimitsx

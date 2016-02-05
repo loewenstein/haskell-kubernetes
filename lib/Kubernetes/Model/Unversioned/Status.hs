@@ -18,6 +18,7 @@ module Kubernetes.Model.Unversioned.Status
     , reason
     , details
     , code
+    , mkStatus
     ) where
 
 import           Control.Lens.TH                            (makeLenses)
@@ -53,3 +54,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Status where
     arbitrary = Status <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Status
+mkStatus :: Status
+mkStatus = Status Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing

@@ -16,6 +16,7 @@ module Kubernetes.Model.V1.NodeCondition
     , lastTransitionTime
     , reason
     , message
+    , mkNodeCondition
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NodeCondition where
     arbitrary = NodeCondition <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a NodeCondition
+mkNodeCondition :: Text -> Text -> NodeCondition
+mkNodeCondition xtype_x xstatusx = NodeCondition xtype_x xstatusx Nothing Nothing Nothing Nothing

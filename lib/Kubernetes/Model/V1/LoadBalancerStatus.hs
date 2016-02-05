@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.LoadBalancerStatus
     ( LoadBalancerStatus (..)
     , ingress
+    , mkLoadBalancerStatus
     ) where
 
 import           Control.Lens.TH                         (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary LoadBalancerStatus where
     arbitrary = LoadBalancerStatus <$> arbitrary
+
+-- | Use this method to build a LoadBalancerStatus
+mkLoadBalancerStatus :: LoadBalancerStatus
+mkLoadBalancerStatus = LoadBalancerStatus Nothing

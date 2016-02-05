@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.DownwardAPIVolumeSource
     ( DownwardAPIVolumeSource (..)
     , items
+    , mkDownwardAPIVolumeSource
     ) where
 
 import           Control.Lens.TH                           (makeLenses)
@@ -37,3 +38,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary DownwardAPIVolumeSource where
     arbitrary = DownwardAPIVolumeSource <$> arbitrary
+
+-- | Use this method to build a DownwardAPIVolumeSource
+mkDownwardAPIVolumeSource :: DownwardAPIVolumeSource
+mkDownwardAPIVolumeSource = DownwardAPIVolumeSource Nothing

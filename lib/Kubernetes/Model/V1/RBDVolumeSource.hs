@@ -18,6 +18,7 @@ module Kubernetes.Model.V1.RBDVolumeSource
     , keyring
     , secretRef
     , readOnly
+    , mkRBDVolumeSource
     ) where
 
 import           Control.Lens.TH                          (makeLenses)
@@ -51,3 +52,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary RBDVolumeSource where
     arbitrary = RBDVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a RBDVolumeSource
+mkRBDVolumeSource :: [Text] -> Text -> Text -> Text -> Text -> LocalObjectReference -> RBDVolumeSource
+mkRBDVolumeSource xmonitorsx ximagex xpoolx xuserx xkeyringx xsecretRefx = RBDVolumeSource xmonitorsx ximagex Nothing xpoolx xuserx xkeyringx xsecretRefx Nothing

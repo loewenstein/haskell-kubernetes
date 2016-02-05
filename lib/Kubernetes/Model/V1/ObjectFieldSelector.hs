@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.ObjectFieldSelector
     ( ObjectFieldSelector (..)
     , apiVersion
     , fieldPath
+    , mkObjectFieldSelector
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ObjectFieldSelector where
     arbitrary = ObjectFieldSelector <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a ObjectFieldSelector
+mkObjectFieldSelector :: Text -> ObjectFieldSelector
+mkObjectFieldSelector xfieldPathx = ObjectFieldSelector Nothing xfieldPathx

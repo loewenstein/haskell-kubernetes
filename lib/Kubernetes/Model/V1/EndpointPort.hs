@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.EndpointPort
     , name
     , port
     , protocol
+    , mkEndpointPort
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -38,3 +39,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary EndpointPort where
     arbitrary = EndpointPort <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a EndpointPort
+mkEndpointPort :: Integer -> EndpointPort
+mkEndpointPort xportx = EndpointPort Nothing xportx Nothing

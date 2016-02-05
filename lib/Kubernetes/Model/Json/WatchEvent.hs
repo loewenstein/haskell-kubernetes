@@ -12,6 +12,7 @@ module Kubernetes.Model.Json.WatchEvent
     ( WatchEvent (..)
     , type_
     , object
+    , mkWatchEvent
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary WatchEvent where
     arbitrary = WatchEvent <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a WatchEvent
+mkWatchEvent :: WatchEvent
+mkWatchEvent = WatchEvent Nothing Nothing

@@ -10,6 +10,7 @@
 
 module Kubernetes.Model.V1.PersistentVolumeAccessMode
     ( PersistentVolumeAccessMode (..)
+    , mkPersistentVolumeAccessMode
     ) where
 
 import           Control.Lens.TH (makeLenses)
@@ -29,3 +30,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PersistentVolumeAccessMode where
     arbitrary = return PersistentVolumeAccessMode
+
+-- | Use this method to build a PersistentVolumeAccessMode
+mkPersistentVolumeAccessMode :: PersistentVolumeAccessMode
+mkPersistentVolumeAccessMode = PersistentVolumeAccessMode

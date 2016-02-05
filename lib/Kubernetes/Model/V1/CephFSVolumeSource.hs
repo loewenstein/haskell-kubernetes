@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.CephFSVolumeSource
     , secretFile
     , secretRef
     , readOnly
+    , mkCephFSVolumeSource
     ) where
 
 import           Control.Lens.TH                          (makeLenses)
@@ -45,3 +46,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary CephFSVolumeSource where
     arbitrary = CephFSVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a CephFSVolumeSource
+mkCephFSVolumeSource :: [Text] -> CephFSVolumeSource
+mkCephFSVolumeSource xmonitorsx = CephFSVolumeSource xmonitorsx Nothing Nothing Nothing Nothing

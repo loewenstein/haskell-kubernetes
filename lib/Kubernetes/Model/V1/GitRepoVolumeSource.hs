@@ -13,6 +13,7 @@ module Kubernetes.Model.V1.GitRepoVolumeSource
     , repository
     , revision
     , directory
+    , mkGitRepoVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -38,3 +39,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary GitRepoVolumeSource where
     arbitrary = GitRepoVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a GitRepoVolumeSource
+mkGitRepoVolumeSource :: Text -> GitRepoVolumeSource
+mkGitRepoVolumeSource xrepositoryx = GitRepoVolumeSource xrepositoryx Nothing Nothing

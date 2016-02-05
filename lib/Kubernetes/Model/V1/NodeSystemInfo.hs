@@ -18,6 +18,7 @@ module Kubernetes.Model.V1.NodeSystemInfo
     , containerRuntimeVersion
     , kubeletVersion
     , kubeProxyVersion
+    , mkNodeSystemInfo
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -48,3 +49,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary NodeSystemInfo where
     arbitrary = NodeSystemInfo <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a NodeSystemInfo
+mkNodeSystemInfo :: Text -> Text -> Text -> Text -> Text -> Text -> Text -> Text -> NodeSystemInfo
+mkNodeSystemInfo xmachineIDx xsystemUUIDx xbootIDx xkernelVersionx xosImagex xcontainerRuntimeVersionx xkubeletVersionx xkubeProxyVersionx = NodeSystemInfo xmachineIDx xsystemUUIDx xbootIDx xkernelVersionx xosImagex xcontainerRuntimeVersionx xkubeletVersionx xkubeProxyVersionx

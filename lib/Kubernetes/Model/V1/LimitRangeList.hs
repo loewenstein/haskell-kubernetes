@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.LimitRangeList
     , apiVersion
     , metadata
     , items
+    , mkLimitRangeList
     ) where
 
 import           Control.Lens.TH                       (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary LimitRangeList where
     arbitrary = LimitRangeList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a LimitRangeList
+mkLimitRangeList :: [LimitRange] -> LimitRangeList
+mkLimitRangeList xitemsx = LimitRangeList Nothing Nothing Nothing xitemsx

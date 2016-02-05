@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.FlockerVolumeSource
     ( FlockerVolumeSource (..)
     , datasetName
+    , mkFlockerVolumeSource
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary FlockerVolumeSource where
     arbitrary = FlockerVolumeSource <$> arbitrary
+
+-- | Use this method to build a FlockerVolumeSource
+mkFlockerVolumeSource :: Text -> FlockerVolumeSource
+mkFlockerVolumeSource xdatasetNamex = FlockerVolumeSource xdatasetNamex

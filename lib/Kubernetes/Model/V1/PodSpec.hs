@@ -25,6 +25,7 @@ module Kubernetes.Model.V1.PodSpec
     , hostIPC
     , securityContext
     , imagePullSecrets
+    , mkPodSpec
     ) where
 
 import           Control.Lens.TH                          (makeLenses)
@@ -69,3 +70,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary PodSpec where
     arbitrary = PodSpec <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a PodSpec
+mkPodSpec :: [Container] -> PodSpec
+mkPodSpec xcontainersx = PodSpec Nothing xcontainersx Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing Nothing

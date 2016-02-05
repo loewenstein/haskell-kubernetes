@@ -11,6 +11,7 @@
 module Kubernetes.Model.V1.TCPSocketAction
     ( TCPSocketAction (..)
     , port
+    , mkTCPSocketAction
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -34,3 +35,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary TCPSocketAction where
     arbitrary = TCPSocketAction <$> arbitrary
+
+-- | Use this method to build a TCPSocketAction
+mkTCPSocketAction :: IntegerOrText -> TCPSocketAction
+mkTCPSocketAction xportx = TCPSocketAction xportx

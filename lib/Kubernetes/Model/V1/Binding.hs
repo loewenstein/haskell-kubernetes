@@ -14,6 +14,7 @@ module Kubernetes.Model.V1.Binding
     , apiVersion
     , metadata
     , target
+    , mkBinding
     ) where
 
 import           Control.Lens.TH                     (makeLenses)
@@ -44,3 +45,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Binding where
     arbitrary = Binding <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Binding
+mkBinding :: ObjectReference -> Binding
+mkBinding xtargetx = Binding Nothing Nothing Nothing xtargetx

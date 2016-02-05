@@ -12,6 +12,7 @@ module Kubernetes.Model.V1.ContainerImage
     ( ContainerImage (..)
     , repoTags
     , size
+    , mkContainerImage
     ) where
 
 import           Control.Lens.TH           (makeLenses)
@@ -36,3 +37,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary ContainerImage where
     arbitrary = ContainerImage <$> arbitrary <*> arbitrary
+
+-- | Use this method to build a ContainerImage
+mkContainerImage :: [Text] -> ContainerImage
+mkContainerImage xrepoTagsx = ContainerImage xrepoTagsx Nothing

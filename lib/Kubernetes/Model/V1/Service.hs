@@ -15,6 +15,7 @@ module Kubernetes.Model.V1.Service
     , metadata
     , spec
     , status
+    , mkService
     ) where
 
 import           Control.Lens.TH                   (makeLenses)
@@ -46,3 +47,7 @@ $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "t
 
 instance Arbitrary Service where
     arbitrary = Service <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
+
+-- | Use this method to build a Service
+mkService :: Service
+mkService = Service Nothing Nothing Nothing Nothing Nothing
