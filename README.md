@@ -19,7 +19,8 @@ This project contains haskell bindings to the `v1` Kubernetes api generated via 
 * Fields specified as "not required" (missing a `"required"` field in the swagger description) are represented as a `Maybe`, even when that field refers to a list (e.g. `Maybe [Foo]`). This is done for consistent JSON parsing of the generated `aeson` instances.
 * In lieu of suitable `Default` instances, builder methods are exported. Each datatype has a corresponding `mk{{datatype}}` method to construct it, requiring only required fields.
 * API coverage is almost full. As `servant-0.4.4` lacks support for `HEAD` and `OPTIONS` endpoints, those endpoints were excluded from the **client** *and* **server** implementation (any related datatypes are still generated).
-* client and server bindings are largely untested.
+* client bindings were spot tested.
+* the mock-server was spot tested.
 
 ## Dependencies
 
@@ -59,4 +60,3 @@ Permission is hereby granted, free of charge, to any person obtaining a copy of 
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE. -->
- 
