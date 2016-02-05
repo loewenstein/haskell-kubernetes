@@ -179,13 +179,13 @@ executable client
                      , transformers
   default-language:    Haskell2010
 
-executable server
-  hs-source-dirs:      server
-  main-is:             Main.hs
-  ghc-options:         -threaded -fcontext-stack=1000 -rtsopts -with-rtsopts=-N
-  build-depends:       base
-                     , haskell-kubernetes
-                     , servant-server
-                     , servant-mock
-                     , warp
-  default-language:    Haskell2010
+-- executable server
+  -- hs-source-dirs:      server
+  -- main-is:             Main.hs
+  -- ghc-options:         -threaded -fcontext-stack=1000 -rtsopts -with-rtsopts=-N
+  -- build-depends:       base
+                     -- , haskell-kubernetes
+                     -- , servant-server
+                     -- , servant-mock
+                     -- , warp
+  -- default-language:    Haskell2010
