@@ -18,10 +18,8 @@ module Kubernetes.Model.V1.Any
     ) where
 
 import           Control.Lens.TH           (makeLenses)
-import           Control.Monad             (replicateM)
+import           Control.Monad             (replicateM, mzero)
 import           Data.Aeson
-import           Data.Aeson.TH             (defaultOptions, deriveJSON,
-                                            fieldLabelModifier)
 import qualified Data.HashMap.Strict       as HMap
 import           Data.Text                 (Text)
 import           Data.Vector               (fromList)
@@ -36,7 +34,12 @@ newtype Any =
 
 makeLenses ''Any
 
-$(deriveJSON defaultOptions{fieldLabelModifier = drop 1} ''Any)
+instance FromJSON Any where
+  parseJSON (Object o) = return . Any $ o
+  parseJSON _            = mzero
+
+instance ToJSON Any where
+  toJSON (Any o) = Object o
 
 arbValue :: Gen Value
 arbValue =
