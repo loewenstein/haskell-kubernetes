@@ -56,7 +56,7 @@ data {{classname}} = {{classname}} deriving (Show, Eq, Generic)
 
 makeLenses ''{{classname}}
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''{{classname}})
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''{{classname}})
 
 {{#hasVars}}
 instance Arbitrary {{classname}} where
