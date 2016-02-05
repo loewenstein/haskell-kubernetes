@@ -30,7 +30,7 @@ data TCPSocketAction = TCPSocketAction
 
 makeLenses ''TCPSocketAction
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''TCPSocketAction)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''TCPSocketAction)
 
 instance Arbitrary TCPSocketAction where
     arbitrary = TCPSocketAction <$> arbitrary

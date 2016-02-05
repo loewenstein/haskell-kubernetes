@@ -36,7 +36,7 @@ data NodeSpec = NodeSpec
 
 makeLenses ''NodeSpec
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''NodeSpec)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''NodeSpec)
 
 instance Arbitrary NodeSpec where
     arbitrary = NodeSpec <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

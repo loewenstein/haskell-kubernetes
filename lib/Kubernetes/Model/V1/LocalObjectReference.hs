@@ -30,7 +30,7 @@ data LocalObjectReference = LocalObjectReference
 
 makeLenses ''LocalObjectReference
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''LocalObjectReference)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''LocalObjectReference)
 
 instance Arbitrary LocalObjectReference where
     arbitrary = LocalObjectReference <$> arbitrary

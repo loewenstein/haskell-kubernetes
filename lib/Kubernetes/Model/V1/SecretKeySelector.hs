@@ -32,7 +32,7 @@ data SecretKeySelector = SecretKeySelector
 
 makeLenses ''SecretKeySelector
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''SecretKeySelector)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''SecretKeySelector)
 
 instance Arbitrary SecretKeySelector where
     arbitrary = SecretKeySelector <$> arbitrary <*> arbitrary

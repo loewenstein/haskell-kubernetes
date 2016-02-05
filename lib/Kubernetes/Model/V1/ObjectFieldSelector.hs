@@ -32,7 +32,7 @@ data ObjectFieldSelector = ObjectFieldSelector
 
 makeLenses ''ObjectFieldSelector
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ObjectFieldSelector)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ObjectFieldSelector)
 
 instance Arbitrary ObjectFieldSelector where
     arbitrary = ObjectFieldSelector <$> arbitrary <*> arbitrary

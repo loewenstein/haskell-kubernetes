@@ -30,7 +30,7 @@ data HostPathVolumeSource = HostPathVolumeSource
 
 makeLenses ''HostPathVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''HostPathVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''HostPathVolumeSource)
 
 instance Arbitrary HostPathVolumeSource where
     arbitrary = HostPathVolumeSource <$> arbitrary

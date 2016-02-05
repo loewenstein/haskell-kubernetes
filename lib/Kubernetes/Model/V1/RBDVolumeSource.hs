@@ -47,7 +47,7 @@ data RBDVolumeSource = RBDVolumeSource
 
 makeLenses ''RBDVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''RBDVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''RBDVolumeSource)
 
 instance Arbitrary RBDVolumeSource where
     arbitrary = RBDVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

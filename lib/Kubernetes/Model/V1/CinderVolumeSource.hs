@@ -34,7 +34,7 @@ data CinderVolumeSource = CinderVolumeSource
 
 makeLenses ''CinderVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''CinderVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''CinderVolumeSource)
 
 instance Arbitrary CinderVolumeSource where
     arbitrary = CinderVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary

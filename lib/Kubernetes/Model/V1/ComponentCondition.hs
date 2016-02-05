@@ -36,7 +36,7 @@ data ComponentCondition = ComponentCondition
 
 makeLenses ''ComponentCondition
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ComponentCondition)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ComponentCondition)
 
 instance Arbitrary ComponentCondition where
     arbitrary = ComponentCondition <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

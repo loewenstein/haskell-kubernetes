@@ -33,7 +33,7 @@ data PodTemplateSpec = PodTemplateSpec
 
 makeLenses ''PodTemplateSpec
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''PodTemplateSpec)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''PodTemplateSpec)
 
 instance Arbitrary PodTemplateSpec where
     arbitrary = PodTemplateSpec <$> arbitrary <*> arbitrary

@@ -32,7 +32,7 @@ data ContainerImage = ContainerImage
 
 makeLenses ''ContainerImage
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ContainerImage)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ContainerImage)
 
 instance Arbitrary ContainerImage where
     arbitrary = ContainerImage <$> arbitrary <*> arbitrary

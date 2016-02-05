@@ -32,7 +32,7 @@ data ServiceStatus = ServiceStatus
 
 makeLenses ''ServiceStatus
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ServiceStatus)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ServiceStatus)
 
 instance Arbitrary ServiceStatus where
     arbitrary = ServiceStatus <$> arbitrary

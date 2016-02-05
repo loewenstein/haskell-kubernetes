@@ -32,7 +32,7 @@ data LoadBalancerStatus = LoadBalancerStatus
 
 makeLenses ''LoadBalancerStatus
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''LoadBalancerStatus)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''LoadBalancerStatus)
 
 instance Arbitrary LoadBalancerStatus where
     arbitrary = LoadBalancerStatus <$> arbitrary

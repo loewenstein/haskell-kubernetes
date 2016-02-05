@@ -40,7 +40,7 @@ data SecurityContext = SecurityContext
 
 makeLenses ''SecurityContext
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''SecurityContext)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''SecurityContext)
 
 instance Arbitrary SecurityContext where
     arbitrary = SecurityContext <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

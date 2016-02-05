@@ -31,7 +31,7 @@ data LimitRangeSpec = LimitRangeSpec
 
 makeLenses ''LimitRangeSpec
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''LimitRangeSpec)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''LimitRangeSpec)
 
 instance Arbitrary LimitRangeSpec where
     arbitrary = LimitRangeSpec <$> arbitrary

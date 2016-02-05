@@ -34,7 +34,7 @@ data PersistentVolumeStatus = PersistentVolumeStatus
 
 makeLenses ''PersistentVolumeStatus
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''PersistentVolumeStatus)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''PersistentVolumeStatus)
 
 instance Arbitrary PersistentVolumeStatus where
     arbitrary = PersistentVolumeStatus <$> arbitrary <*> arbitrary <*> arbitrary

@@ -39,7 +39,7 @@ data ServicePort = ServicePort
 
 makeLenses ''ServicePort
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ServicePort)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ServicePort)
 
 instance Arbitrary ServicePort where
     arbitrary = ServicePort <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

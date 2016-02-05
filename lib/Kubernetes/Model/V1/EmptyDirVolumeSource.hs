@@ -30,7 +30,7 @@ data EmptyDirVolumeSource = EmptyDirVolumeSource
 
 makeLenses ''EmptyDirVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''EmptyDirVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''EmptyDirVolumeSource)
 
 instance Arbitrary EmptyDirVolumeSource where
     arbitrary = EmptyDirVolumeSource <$> arbitrary

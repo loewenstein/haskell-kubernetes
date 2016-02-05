@@ -31,7 +31,7 @@ data ReplicationControllerStatus = ReplicationControllerStatus
 
 makeLenses ''ReplicationControllerStatus
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ReplicationControllerStatus)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ReplicationControllerStatus)
 
 instance Arbitrary ReplicationControllerStatus where
     arbitrary = ReplicationControllerStatus <$> arbitrary <*> arbitrary

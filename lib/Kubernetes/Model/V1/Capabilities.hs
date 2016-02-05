@@ -32,7 +32,7 @@ data Capabilities = Capabilities
 
 makeLenses ''Capabilities
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Capabilities)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Capabilities)
 
 instance Arbitrary Capabilities where
     arbitrary = Capabilities <$> arbitrary <*> arbitrary

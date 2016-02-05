@@ -55,7 +55,7 @@ data Event = Event
 
 makeLenses ''Event
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Event)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Event)
 
 instance Arbitrary Event where
     arbitrary = Event <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

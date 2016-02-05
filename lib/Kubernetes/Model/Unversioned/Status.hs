@@ -49,7 +49,7 @@ data Status = Status
 
 makeLenses ''Status
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Status)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Status)
 
 instance Arbitrary Status where
     arbitrary = Status <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

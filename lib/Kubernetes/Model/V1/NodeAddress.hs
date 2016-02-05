@@ -32,7 +32,7 @@ data NodeAddress = NodeAddress
 
 makeLenses ''NodeAddress
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''NodeAddress)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''NodeAddress)
 
 instance Arbitrary NodeAddress where
     arbitrary = NodeAddress <$> arbitrary <*> arbitrary

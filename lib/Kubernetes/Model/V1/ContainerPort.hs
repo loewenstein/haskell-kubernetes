@@ -38,7 +38,7 @@ data ContainerPort = ContainerPort
 
 makeLenses ''ContainerPort
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ContainerPort)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ContainerPort)
 
 instance Arbitrary ContainerPort where
     arbitrary = ContainerPort <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

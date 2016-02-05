@@ -41,7 +41,7 @@ data Node = Node
 
 makeLenses ''Node
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Node)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Node)
 
 instance Arbitrary Node where
     arbitrary = Node <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

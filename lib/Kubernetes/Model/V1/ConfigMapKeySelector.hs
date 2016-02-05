@@ -32,7 +32,7 @@ data ConfigMapKeySelector = ConfigMapKeySelector
 
 makeLenses ''ConfigMapKeySelector
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ConfigMapKeySelector)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ConfigMapKeySelector)
 
 instance Arbitrary ConfigMapKeySelector where
     arbitrary = ConfigMapKeySelector <$> arbitrary <*> arbitrary

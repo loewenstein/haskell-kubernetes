@@ -40,7 +40,7 @@ data NodeList = NodeList
 
 makeLenses ''NodeList
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''NodeList)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''NodeList)
 
 instance Arbitrary NodeList where
     arbitrary = NodeList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

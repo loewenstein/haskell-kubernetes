@@ -34,7 +34,7 @@ data NFSVolumeSource = NFSVolumeSource
 
 makeLenses ''NFSVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''NFSVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''NFSVolumeSource)
 
 instance Arbitrary NFSVolumeSource where
     arbitrary = NFSVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary

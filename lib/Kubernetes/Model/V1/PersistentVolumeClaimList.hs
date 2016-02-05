@@ -41,7 +41,7 @@ data PersistentVolumeClaimList = PersistentVolumeClaimList
 
 makeLenses ''PersistentVolumeClaimList
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''PersistentVolumeClaimList)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''PersistentVolumeClaimList)
 
 instance Arbitrary PersistentVolumeClaimList where
     arbitrary = PersistentVolumeClaimList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

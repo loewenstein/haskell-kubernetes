@@ -38,7 +38,7 @@ data Handler = Handler
 
 makeLenses ''Handler
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Handler)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Handler)
 
 instance Arbitrary Handler where
     arbitrary = Handler <$> arbitrary <*> arbitrary <*> arbitrary

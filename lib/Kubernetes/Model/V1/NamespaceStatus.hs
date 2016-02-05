@@ -30,7 +30,7 @@ data NamespaceStatus = NamespaceStatus
 
 makeLenses ''NamespaceStatus
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''NamespaceStatus)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''NamespaceStatus)
 
 instance Arbitrary NamespaceStatus where
     arbitrary = NamespaceStatus <$> arbitrary

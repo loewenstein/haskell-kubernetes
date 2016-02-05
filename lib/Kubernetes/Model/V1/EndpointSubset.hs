@@ -37,7 +37,7 @@ data EndpointSubset = EndpointSubset
 
 makeLenses ''EndpointSubset
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''EndpointSubset)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''EndpointSubset)
 
 instance Arbitrary EndpointSubset where
     arbitrary = EndpointSubset <$> arbitrary <*> arbitrary <*> arbitrary

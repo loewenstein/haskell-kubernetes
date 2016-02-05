@@ -35,7 +35,7 @@ data DownwardAPIVolumeFile = DownwardAPIVolumeFile
 
 makeLenses ''DownwardAPIVolumeFile
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''DownwardAPIVolumeFile)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''DownwardAPIVolumeFile)
 
 instance Arbitrary DownwardAPIVolumeFile where
     arbitrary = DownwardAPIVolumeFile <$> arbitrary <*> arbitrary

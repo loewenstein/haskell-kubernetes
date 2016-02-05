@@ -33,7 +33,7 @@ data DownwardAPIVolumeSource = DownwardAPIVolumeSource
 
 makeLenses ''DownwardAPIVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''DownwardAPIVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''DownwardAPIVolumeSource)
 
 instance Arbitrary DownwardAPIVolumeSource where
     arbitrary = DownwardAPIVolumeSource <$> arbitrary

@@ -39,7 +39,7 @@ data PodSecurityContext = PodSecurityContext
 
 makeLenses ''PodSecurityContext
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''PodSecurityContext)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''PodSecurityContext)
 
 instance Arbitrary PodSecurityContext where
     arbitrary = PodSecurityContext <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

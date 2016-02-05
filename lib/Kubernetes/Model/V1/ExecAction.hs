@@ -30,7 +30,7 @@ data ExecAction = ExecAction
 
 makeLenses ''ExecAction
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ExecAction)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ExecAction)
 
 instance Arbitrary ExecAction where
     arbitrary = ExecAction <$> arbitrary

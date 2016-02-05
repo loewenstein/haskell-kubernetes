@@ -42,7 +42,7 @@ data ContainerStateTerminated = ContainerStateTerminated
 
 makeLenses ''ContainerStateTerminated
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ContainerStateTerminated)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ContainerStateTerminated)
 
 instance Arbitrary ContainerStateTerminated where
     arbitrary = ContainerStateTerminated <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

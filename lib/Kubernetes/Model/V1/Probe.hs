@@ -48,7 +48,7 @@ data Probe = Probe
 
 makeLenses ''Probe
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Probe)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Probe)
 
 instance Arbitrary Probe where
     arbitrary = Probe <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

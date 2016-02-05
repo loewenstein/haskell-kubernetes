@@ -35,7 +35,7 @@ data EnvVar = EnvVar
 
 makeLenses ''EnvVar
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''EnvVar)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''EnvVar)
 
 instance Arbitrary EnvVar where
     arbitrary = EnvVar <$> arbitrary <*> arbitrary <*> arbitrary

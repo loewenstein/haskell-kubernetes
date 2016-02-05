@@ -25,7 +25,7 @@ data Capability = Capability deriving (Show, Eq, Generic)
 
 makeLenses ''Capability
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Capability)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Capability)
 
 instance Arbitrary Capability where
     arbitrary = return Capability

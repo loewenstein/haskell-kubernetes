@@ -41,7 +41,7 @@ data CephFSVolumeSource = CephFSVolumeSource
 
 makeLenses ''CephFSVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''CephFSVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''CephFSVolumeSource)
 
 instance Arbitrary CephFSVolumeSource where
     arbitrary = CephFSVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

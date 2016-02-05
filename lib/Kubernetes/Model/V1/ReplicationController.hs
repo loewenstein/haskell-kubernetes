@@ -44,7 +44,7 @@ data ReplicationController = ReplicationController
 
 makeLenses ''ReplicationController
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ReplicationController)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ReplicationController)
 
 instance Arbitrary ReplicationController where
     arbitrary = ReplicationController <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

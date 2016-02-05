@@ -36,7 +36,7 @@ data GCEPersistentDiskVolumeSource = GCEPersistentDiskVolumeSource
 
 makeLenses ''GCEPersistentDiskVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''GCEPersistentDiskVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''GCEPersistentDiskVolumeSource)
 
 instance Arbitrary GCEPersistentDiskVolumeSource where
     arbitrary = GCEPersistentDiskVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

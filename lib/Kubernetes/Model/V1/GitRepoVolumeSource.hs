@@ -34,7 +34,7 @@ data GitRepoVolumeSource = GitRepoVolumeSource
 
 makeLenses ''GitRepoVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''GitRepoVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''GitRepoVolumeSource)
 
 instance Arbitrary GitRepoVolumeSource where
     arbitrary = GitRepoVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary

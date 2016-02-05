@@ -40,7 +40,7 @@ data LimitRangeList = LimitRangeList
 
 makeLenses ''LimitRangeList
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''LimitRangeList)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''LimitRangeList)
 
 instance Arbitrary LimitRangeList where
     arbitrary = LimitRangeList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

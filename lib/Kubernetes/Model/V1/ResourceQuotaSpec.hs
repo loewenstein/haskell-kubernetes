@@ -30,7 +30,7 @@ data ResourceQuotaSpec = ResourceQuotaSpec
 
 makeLenses ''ResourceQuotaSpec
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ResourceQuotaSpec)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ResourceQuotaSpec)
 
 instance Arbitrary ResourceQuotaSpec where
     arbitrary = ResourceQuotaSpec <$> arbitrary

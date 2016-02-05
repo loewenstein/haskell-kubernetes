@@ -36,7 +36,7 @@ data SELinuxOptions = SELinuxOptions
 
 makeLenses ''SELinuxOptions
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''SELinuxOptions)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''SELinuxOptions)
 
 instance Arbitrary SELinuxOptions where
     arbitrary = SELinuxOptions <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

@@ -32,7 +32,7 @@ data EventSource = EventSource
 
 makeLenses ''EventSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''EventSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''EventSource)
 
 instance Arbitrary EventSource where
     arbitrary = EventSource <$> arbitrary <*> arbitrary

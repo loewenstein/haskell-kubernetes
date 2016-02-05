@@ -25,7 +25,7 @@ data PersistentVolumeAccessMode = PersistentVolumeAccessMode deriving (Show, Eq,
 
 makeLenses ''PersistentVolumeAccessMode
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''PersistentVolumeAccessMode)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''PersistentVolumeAccessMode)
 
 instance Arbitrary PersistentVolumeAccessMode where
     arbitrary = return PersistentVolumeAccessMode

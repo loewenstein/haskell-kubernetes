@@ -52,7 +52,7 @@ data NodeStatus = NodeStatus
 
 makeLenses ''NodeStatus
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''NodeStatus)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''NodeStatus)
 
 instance Arbitrary NodeStatus where
     arbitrary = NodeStatus <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

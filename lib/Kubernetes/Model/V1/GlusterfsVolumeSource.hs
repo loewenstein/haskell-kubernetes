@@ -34,7 +34,7 @@ data GlusterfsVolumeSource = GlusterfsVolumeSource
 
 makeLenses ''GlusterfsVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''GlusterfsVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''GlusterfsVolumeSource)
 
 instance Arbitrary GlusterfsVolumeSource where
     arbitrary = GlusterfsVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary

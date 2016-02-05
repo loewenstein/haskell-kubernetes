@@ -40,7 +40,7 @@ data NodeCondition = NodeCondition
 
 makeLenses ''NodeCondition
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''NodeCondition)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''NodeCondition)
 
 instance Arbitrary NodeCondition where
     arbitrary = NodeCondition <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

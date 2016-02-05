@@ -34,7 +34,7 @@ data VolumeMount = VolumeMount
 
 makeLenses ''VolumeMount
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''VolumeMount)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''VolumeMount)
 
 instance Arbitrary VolumeMount where
     arbitrary = VolumeMount <$> arbitrary <*> arbitrary <*> arbitrary

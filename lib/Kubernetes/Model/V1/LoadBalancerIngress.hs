@@ -32,7 +32,7 @@ data LoadBalancerIngress = LoadBalancerIngress
 
 makeLenses ''LoadBalancerIngress
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''LoadBalancerIngress)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''LoadBalancerIngress)
 
 instance Arbitrary LoadBalancerIngress where
     arbitrary = LoadBalancerIngress <$> arbitrary <*> arbitrary

@@ -40,7 +40,7 @@ data Binding = Binding
 
 makeLenses ''Binding
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Binding)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Binding)
 
 instance Arbitrary Binding where
     arbitrary = Binding <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

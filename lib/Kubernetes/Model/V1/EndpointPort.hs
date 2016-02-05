@@ -34,7 +34,7 @@ data EndpointPort = EndpointPort
 
 makeLenses ''EndpointPort
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''EndpointPort)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''EndpointPort)
 
 instance Arbitrary EndpointPort where
     arbitrary = EndpointPort <$> arbitrary <*> arbitrary <*> arbitrary

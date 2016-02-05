@@ -46,7 +46,7 @@ data ContainerStatus = ContainerStatus
 
 makeLenses ''ContainerStatus
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ContainerStatus)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ContainerStatus)
 
 instance Arbitrary ContainerStatus where
     arbitrary = ContainerStatus <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

@@ -39,7 +39,7 @@ data PersistentVolumeClaimStatus = PersistentVolumeClaimStatus
 
 makeLenses ''PersistentVolumeClaimStatus
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''PersistentVolumeClaimStatus)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''PersistentVolumeClaimStatus)
 
 instance Arbitrary PersistentVolumeClaimStatus where
     arbitrary = PersistentVolumeClaimStatus <$> arbitrary <*> arbitrary <*> arbitrary

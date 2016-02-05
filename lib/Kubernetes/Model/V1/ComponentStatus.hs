@@ -40,7 +40,7 @@ data ComponentStatus = ComponentStatus
 
 makeLenses ''ComponentStatus
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ComponentStatus)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ComponentStatus)
 
 instance Arbitrary ComponentStatus where
     arbitrary = ComponentStatus <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

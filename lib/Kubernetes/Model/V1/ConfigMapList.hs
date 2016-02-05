@@ -40,7 +40,7 @@ data ConfigMapList = ConfigMapList
 
 makeLenses ''ConfigMapList
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ConfigMapList)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ConfigMapList)
 
 instance Arbitrary ConfigMapList where
     arbitrary = ConfigMapList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

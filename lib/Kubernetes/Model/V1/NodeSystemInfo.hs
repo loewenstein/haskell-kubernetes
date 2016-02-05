@@ -44,7 +44,7 @@ data NodeSystemInfo = NodeSystemInfo
 
 makeLenses ''NodeSystemInfo
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''NodeSystemInfo)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''NodeSystemInfo)
 
 instance Arbitrary NodeSystemInfo where
     arbitrary = NodeSystemInfo <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

@@ -39,7 +39,7 @@ data Endpoints = Endpoints
 
 makeLenses ''Endpoints
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Endpoints)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Endpoints)
 
 instance Arbitrary Endpoints where
     arbitrary = Endpoints <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

@@ -18,7 +18,7 @@ module Kubernetes.Model.V1.Any
     ) where
 
 import           Control.Lens.TH           (makeLenses)
-import           Control.Monad             (replicateM, mzero)
+import           Control.Monad             (mzero, replicateM)
 import           Data.Aeson
 import qualified Data.HashMap.Strict       as HMap
 import           Data.Text                 (Text)
@@ -36,7 +36,7 @@ makeLenses ''Any
 
 instance FromJSON Any where
   parseJSON (Object o) = return . Any $ o
-  parseJSON _            = mzero
+  parseJSON _          = mzero
 
 instance ToJSON Any where
   toJSON (Any o) = Object o

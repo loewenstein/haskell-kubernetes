@@ -84,7 +84,7 @@ data Volume = Volume
 
 makeLenses ''Volume
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Volume)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Volume)
 
 instance Arbitrary Volume where
     arbitrary = Volume <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

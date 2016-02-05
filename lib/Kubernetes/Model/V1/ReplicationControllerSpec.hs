@@ -37,7 +37,7 @@ data ReplicationControllerSpec = ReplicationControllerSpec
 
 makeLenses ''ReplicationControllerSpec
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ReplicationControllerSpec)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ReplicationControllerSpec)
 
 instance Arbitrary ReplicationControllerSpec where
     arbitrary = ReplicationControllerSpec <$> arbitrary <*> arbitrary <*> arbitrary

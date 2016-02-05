@@ -29,7 +29,7 @@ data DaemonEndpoint = DaemonEndpoint
 
 makeLenses ''DaemonEndpoint
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''DaemonEndpoint)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''DaemonEndpoint)
 
 instance Arbitrary DaemonEndpoint where
     arbitrary = DaemonEndpoint <$> arbitrary

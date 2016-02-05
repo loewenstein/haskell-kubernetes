@@ -40,7 +40,7 @@ data ISCSIVolumeSource = ISCSIVolumeSource
 
 makeLenses ''ISCSIVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ISCSIVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ISCSIVolumeSource)
 
 instance Arbitrary ISCSIVolumeSource where
     arbitrary = ISCSIVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

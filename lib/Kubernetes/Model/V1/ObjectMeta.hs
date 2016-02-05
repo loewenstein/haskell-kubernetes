@@ -53,7 +53,7 @@ data ObjectMeta = ObjectMeta
 
 makeLenses ''ObjectMeta
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ObjectMeta)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ObjectMeta)
 
 instance Arbitrary ObjectMeta where
     arbitrary = ObjectMeta <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

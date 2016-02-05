@@ -34,7 +34,7 @@ data StatusCause = StatusCause
 
 makeLenses ''StatusCause
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''StatusCause)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''StatusCause)
 
 instance Arbitrary StatusCause where
     arbitrary = StatusCause <$> arbitrary <*> arbitrary <*> arbitrary

@@ -30,7 +30,7 @@ data ContainerStateRunning = ContainerStateRunning
 
 makeLenses ''ContainerStateRunning
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ContainerStateRunning)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ContainerStateRunning)
 
 instance Arbitrary ContainerStateRunning where
     arbitrary = ContainerStateRunning <$> arbitrary

@@ -25,7 +25,7 @@ data FinalizerName = FinalizerName deriving (Show, Eq, Generic)
 
 makeLenses ''FinalizerName
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''FinalizerName)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''FinalizerName)
 
 instance Arbitrary FinalizerName where
     arbitrary = return FinalizerName

@@ -40,7 +40,7 @@ data ServiceAccountList = ServiceAccountList
 
 makeLenses ''ServiceAccountList
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ServiceAccountList)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ServiceAccountList)
 
 instance Arbitrary ServiceAccountList where
     arbitrary = ServiceAccountList <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

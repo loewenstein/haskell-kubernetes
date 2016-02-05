@@ -43,7 +43,7 @@ data Namespace = Namespace
 
 makeLenses ''Namespace
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Namespace)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Namespace)
 
 instance Arbitrary Namespace where
     arbitrary = Namespace <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

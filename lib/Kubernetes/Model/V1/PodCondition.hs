@@ -40,7 +40,7 @@ data PodCondition = PodCondition
 
 makeLenses ''PodCondition
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''PodCondition)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''PodCondition)
 
 instance Arbitrary PodCondition where
     arbitrary = PodCondition <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

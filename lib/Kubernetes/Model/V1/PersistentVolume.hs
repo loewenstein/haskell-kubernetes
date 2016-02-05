@@ -44,7 +44,7 @@ data PersistentVolume = PersistentVolume
 
 makeLenses ''PersistentVolume
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''PersistentVolume)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''PersistentVolume)
 
 instance Arbitrary PersistentVolume where
     arbitrary = PersistentVolume <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

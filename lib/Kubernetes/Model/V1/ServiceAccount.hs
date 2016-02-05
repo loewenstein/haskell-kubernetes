@@ -43,7 +43,7 @@ data ServiceAccount = ServiceAccount
 
 makeLenses ''ServiceAccount
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ServiceAccount)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ServiceAccount)
 
 instance Arbitrary ServiceAccount where
     arbitrary = ServiceAccount <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

@@ -30,7 +30,7 @@ data FlockerVolumeSource = FlockerVolumeSource
 
 makeLenses ''FlockerVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''FlockerVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''FlockerVolumeSource)
 
 instance Arbitrary FlockerVolumeSource where
     arbitrary = FlockerVolumeSource <$> arbitrary

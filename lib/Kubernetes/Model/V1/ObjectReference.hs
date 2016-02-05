@@ -42,7 +42,7 @@ data ObjectReference = ObjectReference
 
 makeLenses ''ObjectReference
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ObjectReference)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ObjectReference)
 
 instance Arbitrary ObjectReference where
     arbitrary = ObjectReference <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

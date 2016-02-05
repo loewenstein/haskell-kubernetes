@@ -36,7 +36,7 @@ data FCVolumeSource = FCVolumeSource
 
 makeLenses ''FCVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''FCVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''FCVolumeSource)
 
 instance Arbitrary FCVolumeSource where
     arbitrary = FCVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

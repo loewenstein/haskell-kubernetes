@@ -25,7 +25,7 @@ data Patch = Patch deriving (Show, Eq, Generic)
 
 makeLenses ''Patch
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''Patch)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Patch)
 
 instance Arbitrary Patch where
     arbitrary = return Patch

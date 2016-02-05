@@ -32,7 +32,7 @@ data ListMeta = ListMeta
 
 makeLenses ''ListMeta
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ListMeta)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ListMeta)
 
 instance Arbitrary ListMeta where
     arbitrary = ListMeta <$> arbitrary <*> arbitrary

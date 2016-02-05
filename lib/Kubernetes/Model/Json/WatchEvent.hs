@@ -32,7 +32,7 @@ data WatchEvent = WatchEvent
 
 makeLenses ''WatchEvent
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''WatchEvent)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''WatchEvent)
 
 instance Arbitrary WatchEvent where
     arbitrary = WatchEvent <$> arbitrary <*> arbitrary

@@ -42,7 +42,7 @@ data FlexVolumeSource = FlexVolumeSource
 
 makeLenses ''FlexVolumeSource
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''FlexVolumeSource)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''FlexVolumeSource)
 
 instance Arbitrary FlexVolumeSource where
     arbitrary = FlexVolumeSource <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

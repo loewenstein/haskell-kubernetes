@@ -37,7 +37,7 @@ data HTTPGetAction = HTTPGetAction
 
 makeLenses ''HTTPGetAction
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''HTTPGetAction)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''HTTPGetAction)
 
 instance Arbitrary HTTPGetAction where
     arbitrary = HTTPGetAction <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary

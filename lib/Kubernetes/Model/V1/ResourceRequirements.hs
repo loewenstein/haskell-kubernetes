@@ -32,7 +32,7 @@ data ResourceRequirements = ResourceRequirements
 
 makeLenses ''ResourceRequirements
 
-$(deriveJSON defaultOptions{fieldLabelModifier = P.drop 1} ''ResourceRequirements)
+$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''ResourceRequirements)
 
 instance Arbitrary ResourceRequirements where
     arbitrary = ResourceRequirements <$> arbitrary <*> arbitrary
