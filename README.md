@@ -1,13 +1,14 @@
 haskell-kubernetes
 ==================
 
-[![Build Status](https://secure.travis-ci.org/sferik/twitter.png?branch=master)][travis]
+<!-- [![Build Status](https://secure.travis-ci.org/sferik/twitter.png?branch=master)][travis]
 [![Code Climate](https://codeclimate.com/github/sferik/twitter.png)][codeclimate]
 [![Coverage](https://coveralls.io/repos/sferik/twitter/badge.png?branch=master)][coveralls]
 
 [travis]: http://travis-ci.org/sferik/twitter
 [codeclimate]: https://codeclimate.com/github/sferik/twitter
 [coveralls]: https://coveralls.io/r/sferik/twitter
+-->
 
 This project contains haskell bindings to the `v1` Kubernetes api generated via [swagger-codegen](https://github.com/swagger-api/swagger-codegen). The client and (mock) server generated use the [servant](https://github.com/haskell-servant/servant) project, thanks to the work of [Masahiro Yamauchi](https://github.com/algas)!
 
