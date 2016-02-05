@@ -13,9 +13,10 @@ This project contains haskell bindings to the `v1` Kubernetes api generated via 
 
 ### About the Generated Code
 
-* Fields specified as "not required" (missing a `"required"` field in the swagger description) are represented as a `Maybe`, even when that field refers to a list (e.g. `Maybe [Foo]`).
 * `aeson` instances are generated for each type with the appropriate keys
 * Lenses are generated for every field, with plain names for each lens (e.g. `min`, `object`, etc.). So be careful with unqualified imports.
+* Fields specified as "not required" (missing a `"required"` field in the swagger description) are represented as a `Maybe`, even when that field refers to a list (e.g. `Maybe [Foo]`). This is done for consistent JSON parsing of the generated `aeson` instances.
+* In lieu of suitable `Default` instances, builder methods are exported. Each datatype has a corresponding `mk{{datatype}}` method to construct it, requiring only required fields.
 * API coverage is almost full. As `servant-0.4.4` lacks support for `HEAD` and `OPTIONS` endpoints, those endpoints were excluded from the **client** *and* **server** implementation (any related datatypes are still generated).
 * client and server bindings are largely untested.
 
