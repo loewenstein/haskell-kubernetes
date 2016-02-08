@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | NodeAddress contains information for the node&#39;s address.
 data NodeAddress = NodeAddress
-    { _type_   :: Text
-    , _address :: Text
+    { _type_   :: !(Text)
+    , _address :: !(Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NodeAddress

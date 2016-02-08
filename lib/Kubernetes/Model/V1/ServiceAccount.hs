@@ -35,11 +35,11 @@ import           Test.QuickCheck.Instances                ()
 
 -- | ServiceAccount binds together: * a name, understood by users, and perhaps by peripheral systems, for an identity * a principal that can be authenticated and authorized * a set of secrets
 data ServiceAccount = ServiceAccount
-    { _kind             :: Maybe Text
-    , _apiVersion       :: Maybe Text
-    , _metadata         :: Maybe ObjectMeta
-    , _secrets          :: Maybe [ObjectReference]
-    , _imagePullSecrets :: Maybe [LocalObjectReference]
+    { _kind             :: !(Maybe Text)
+    , _apiVersion       :: !(Maybe Text)
+    , _metadata         :: !(Maybe ObjectMeta)
+    , _secrets          :: !(Maybe [ObjectReference])
+    , _imagePullSecrets :: !(Maybe [LocalObjectReference])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ServiceAccount

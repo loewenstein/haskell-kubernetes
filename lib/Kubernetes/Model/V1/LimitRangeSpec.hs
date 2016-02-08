@@ -27,7 +27,7 @@ import           Test.QuickCheck.Instances          ()
 
 -- | LimitRangeSpec defines a min/max usage limit for resources that match on kind.
 data LimitRangeSpec = LimitRangeSpec
-    { _limits :: [LimitRangeItem]
+    { _limits :: !([LimitRangeItem])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''LimitRangeSpec

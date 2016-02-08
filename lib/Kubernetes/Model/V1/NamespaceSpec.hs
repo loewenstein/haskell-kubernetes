@@ -27,7 +27,7 @@ import           Test.QuickCheck.Instances         ()
 
 -- | NamespaceSpec describes the attributes on a Namespace.
 data NamespaceSpec = NamespaceSpec
-    { _finalizers :: Maybe [FinalizerName]
+    { _finalizers :: !(Maybe [FinalizerName])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NamespaceSpec

@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances           ()
 
 -- | Binding ties one object to another. For example, a pod is bound to a node by a scheduler.
 data Binding = Binding
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _target     :: ObjectReference
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _target     :: !(ObjectReference)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Binding

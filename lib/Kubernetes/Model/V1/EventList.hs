@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | EventList is a list of events.
 data EventList = EventList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [Event]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([Event])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EventList

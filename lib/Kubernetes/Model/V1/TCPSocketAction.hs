@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | TCPSocketAction describes an action based on opening a socket
 data TCPSocketAction = TCPSocketAction
-    { _port :: IntegerOrText
+    { _port :: !(IntegerOrText)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''TCPSocketAction

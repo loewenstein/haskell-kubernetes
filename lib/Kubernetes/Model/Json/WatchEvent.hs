@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- |
 data WatchEvent = WatchEvent
-    { _type_  :: Maybe Text
-    , _object :: Maybe Text
+    { _type_  :: !(Maybe Text)
+    , _object :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''WatchEvent

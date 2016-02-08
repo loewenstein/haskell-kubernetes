@@ -32,12 +32,12 @@ import           Test.QuickCheck.Instances ()
 
 -- | LimitRangeItem defines a min/max usage limit for any resource that matches on kind.
 data LimitRangeItem = LimitRangeItem
-    { _type_                :: Maybe Text
-    , _max                  :: Maybe Any
-    , _min                  :: Maybe Any
-    , _default_             :: Maybe Any
-    , _defaultRequest       :: Maybe Any
-    , _maxLimitRequestRatio :: Maybe Any
+    { _type_                :: !(Maybe Text)
+    , _max                  :: !(Maybe Any)
+    , _min                  :: !(Maybe Any)
+    , _default_             :: !(Maybe Any)
+    , _defaultRequest       :: !(Maybe Any)
+    , _maxLimitRequestRatio :: !(Maybe Any)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''LimitRangeItem

@@ -26,8 +26,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | ReplicationControllerStatus represents the current status of a replication controller.
 data ReplicationControllerStatus = ReplicationControllerStatus
-    { _replicas           :: Integer
-    , _observedGeneration :: Maybe Integer
+    { _replicas           :: !(Integer)
+    , _observedGeneration :: !(Maybe Integer)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ReplicationControllerStatus

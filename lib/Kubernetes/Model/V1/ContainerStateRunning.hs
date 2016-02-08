@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | ContainerStateRunning is a running state of a container.
 data ContainerStateRunning = ContainerStateRunning
-    { _startedAt :: Maybe Text
+    { _startedAt :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ContainerStateRunning

@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | ResourceRequirements describes the compute resource requirements.
 data ResourceRequirements = ResourceRequirements
-    { _limits   :: Maybe Any
-    , _requests :: Maybe Any
+    { _limits   :: !(Maybe Any)
+    , _requests :: !(Maybe Any)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ResourceRequirements

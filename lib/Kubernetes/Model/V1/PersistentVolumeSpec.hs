@@ -58,22 +58,22 @@ import           Test.QuickCheck.Instances                            ()
 
 -- | PersistentVolumeSpec is the specification of a persistent volume.
 data PersistentVolumeSpec = PersistentVolumeSpec
-    { _capacity                      :: Maybe Any
-    , _gcePersistentDisk             :: Maybe GCEPersistentDiskVolumeSource
-    , _awsElasticBlockStore          :: Maybe AWSElasticBlockStoreVolumeSource
-    , _hostPath                      :: Maybe HostPathVolumeSource
-    , _glusterfs                     :: Maybe GlusterfsVolumeSource
-    , _nfs                           :: Maybe NFSVolumeSource
-    , _rbd                           :: Maybe RBDVolumeSource
-    , _iscsi                         :: Maybe ISCSIVolumeSource
-    , _cinder                        :: Maybe CinderVolumeSource
-    , _cephfs                        :: Maybe CephFSVolumeSource
-    , _fc                            :: Maybe FCVolumeSource
-    , _flocker                       :: Maybe FlockerVolumeSource
-    , _flexVolume                    :: Maybe FlexVolumeSource
-    , _accessModes                   :: Maybe [PersistentVolumeAccessMode]
-    , _claimRef                      :: Maybe ObjectReference
-    , _persistentVolumeReclaimPolicy :: Maybe Text
+    { _capacity                      :: !(Maybe Any)
+    , _gcePersistentDisk             :: !(Maybe GCEPersistentDiskVolumeSource)
+    , _awsElasticBlockStore          :: !(Maybe AWSElasticBlockStoreVolumeSource)
+    , _hostPath                      :: !(Maybe HostPathVolumeSource)
+    , _glusterfs                     :: !(Maybe GlusterfsVolumeSource)
+    , _nfs                           :: !(Maybe NFSVolumeSource)
+    , _rbd                           :: !(Maybe RBDVolumeSource)
+    , _iscsi                         :: !(Maybe ISCSIVolumeSource)
+    , _cinder                        :: !(Maybe CinderVolumeSource)
+    , _cephfs                        :: !(Maybe CephFSVolumeSource)
+    , _fc                            :: !(Maybe FCVolumeSource)
+    , _flocker                       :: !(Maybe FlockerVolumeSource)
+    , _flexVolume                    :: !(Maybe FlexVolumeSource)
+    , _accessModes                   :: !(Maybe [PersistentVolumeAccessMode])
+    , _claimRef                      :: !(Maybe ObjectReference)
+    , _persistentVolumeReclaimPolicy :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeSpec

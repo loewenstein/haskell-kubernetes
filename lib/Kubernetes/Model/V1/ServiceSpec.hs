@@ -35,14 +35,14 @@ import           Test.QuickCheck.Instances       ()
 
 -- | ServiceSpec describes the attributes that a user creates on a service.
 data ServiceSpec = ServiceSpec
-    { _ports               :: [ServicePort]
-    , _selector            :: Maybe Any
-    , _clusterIP           :: Maybe Text
-    , _type_               :: Maybe Text
-    , _externalIPs         :: Maybe [Text]
-    , _deprecatedPublicIPs :: Maybe [Text]
-    , _sessionAffinity     :: Maybe Text
-    , _loadBalancerIP      :: Maybe Text
+    { _ports               :: !([ServicePort])
+    , _selector            :: !(Maybe Any)
+    , _clusterIP           :: !(Maybe Text)
+    , _type_               :: !(Maybe Text)
+    , _externalIPs         :: !(Maybe [Text])
+    , _deprecatedPublicIPs :: !(Maybe [Text])
+    , _sessionAffinity     :: !(Maybe Text)
+    , _loadBalancerIP      :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ServiceSpec

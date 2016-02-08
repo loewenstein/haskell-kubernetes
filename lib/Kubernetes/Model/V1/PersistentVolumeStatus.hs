@@ -28,9 +28,9 @@ import           Test.QuickCheck.Instances ()
 
 -- | PersistentVolumeStatus is the current status of a persistent volume.
 data PersistentVolumeStatus = PersistentVolumeStatus
-    { _phase   :: Maybe Text
-    , _message :: Maybe Text
-    , _reason  :: Maybe Text
+    { _phase   :: !(Maybe Text)
+    , _message :: !(Maybe Text)
+    , _reason  :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeStatus

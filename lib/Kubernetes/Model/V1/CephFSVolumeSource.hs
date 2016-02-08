@@ -33,11 +33,11 @@ import           Test.QuickCheck.Instances                ()
 
 -- | Represents a Ceph Filesystem mount that lasts the lifetime of a pod Cephfs volumes do not support ownership management or SELinux relabeling.
 data CephFSVolumeSource = CephFSVolumeSource
-    { _monitors   :: [Text]
-    , _user       :: Maybe Text
-    , _secretFile :: Maybe Text
-    , _secretRef  :: Maybe LocalObjectReference
-    , _readOnly   :: Maybe Bool
+    { _monitors   :: !([Text])
+    , _user       :: !(Maybe Text)
+    , _secretFile :: !(Maybe Text)
+    , _secretRef  :: !(Maybe LocalObjectReference)
+    , _readOnly   :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''CephFSVolumeSource

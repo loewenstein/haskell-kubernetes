@@ -52,24 +52,24 @@ import           Test.QuickCheck.Instances                ()
 
 -- | A single application container that you want to run within a pod.
 data Container = Container
-    { _name                   :: Text
-    , _image                  :: Maybe Text
-    , _command                :: Maybe [Text]
-    , _args                   :: Maybe [Text]
-    , _workingDir             :: Maybe Text
-    , _ports                  :: Maybe [ContainerPort]
-    , _env                    :: Maybe [EnvVar]
-    , _resources              :: Maybe ResourceRequirements
-    , _volumeMounts           :: Maybe [VolumeMount]
-    , _livenessProbe          :: Maybe Probe
-    , _readinessProbe         :: Maybe Probe
-    , _lifecycle              :: Maybe Lifecycle
-    , _terminationMessagePath :: Maybe Text
-    , _imagePullPolicy        :: Maybe Text
-    , _securityContext        :: Maybe SecurityContext
-    , _stdin                  :: Maybe Bool
-    , _stdinOnce              :: Maybe Bool
-    , _tty                    :: Maybe Bool
+    { _name                   :: !(Text)
+    , _image                  :: !(Maybe Text)
+    , _command                :: !(Maybe [Text])
+    , _args                   :: !(Maybe [Text])
+    , _workingDir             :: !(Maybe Text)
+    , _ports                  :: !(Maybe [ContainerPort])
+    , _env                    :: !(Maybe [EnvVar])
+    , _resources              :: !(Maybe ResourceRequirements)
+    , _volumeMounts           :: !(Maybe [VolumeMount])
+    , _livenessProbe          :: !(Maybe Probe)
+    , _readinessProbe         :: !(Maybe Probe)
+    , _lifecycle              :: !(Maybe Lifecycle)
+    , _terminationMessagePath :: !(Maybe Text)
+    , _imagePullPolicy        :: !(Maybe Text)
+    , _securityContext        :: !(Maybe SecurityContext)
+    , _stdin                  :: !(Maybe Bool)
+    , _stdinOnce              :: !(Maybe Bool)
+    , _tty                    :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Container

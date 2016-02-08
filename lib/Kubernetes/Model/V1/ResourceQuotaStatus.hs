@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | ResourceQuotaStatus defines the enforced hard limits and observed use.
 data ResourceQuotaStatus = ResourceQuotaStatus
-    { _hard :: Maybe Any
-    , _used :: Maybe Any
+    { _hard :: !(Maybe Any)
+    , _used :: !(Maybe Any)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ResourceQuotaStatus

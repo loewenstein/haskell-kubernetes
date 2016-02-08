@@ -29,7 +29,7 @@ import           Test.QuickCheck.Instances                 ()
 
 -- | DownwardAPIVolumeSource represents a volume containing downward API info. Downward API volumes support ownership management and SELinux relabeling.
 data DownwardAPIVolumeSource = DownwardAPIVolumeSource
-    { _items :: Maybe [DownwardAPIVolumeFile]
+    { _items :: !(Maybe [DownwardAPIVolumeFile])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''DownwardAPIVolumeSource

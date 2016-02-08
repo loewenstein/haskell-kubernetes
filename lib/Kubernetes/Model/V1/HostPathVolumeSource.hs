@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents a host path mapped into a pod. Host path volumes do not support ownership management or SELinux relabeling.
 data HostPathVolumeSource = HostPathVolumeSource
-    { _path :: Text
+    { _path :: !(Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''HostPathVolumeSource

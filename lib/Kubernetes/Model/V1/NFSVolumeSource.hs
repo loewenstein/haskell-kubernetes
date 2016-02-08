@@ -28,9 +28,9 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents an NFS mount that lasts the lifetime of a pod. NFS volumes do not support ownership management or SELinux relabeling.
 data NFSVolumeSource = NFSVolumeSource
-    { _server   :: Text
-    , _path     :: Text
-    , _readOnly :: Maybe Bool
+    { _server   :: !(Text)
+    , _path     :: !(Text)
+    , _readOnly :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NFSVolumeSource

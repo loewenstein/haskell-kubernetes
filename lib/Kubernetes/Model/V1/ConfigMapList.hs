@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | ConfigMapList is a resource containing a list of ConfigMap objects.
 data ConfigMapList = ConfigMapList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: Maybe [ConfigMap]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !(Maybe [ConfigMap])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ConfigMapList

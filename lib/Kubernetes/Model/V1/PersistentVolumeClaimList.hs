@@ -34,10 +34,10 @@ import           Test.QuickCheck.Instances                 ()
 
 -- | PersistentVolumeClaimList is a list of PersistentVolumeClaim items.
 data PersistentVolumeClaimList = PersistentVolumeClaimList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [PersistentVolumeClaim]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([PersistentVolumeClaim])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeClaimList

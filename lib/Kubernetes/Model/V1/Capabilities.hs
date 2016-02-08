@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances      ()
 
 -- | Adds and removes POSIX capabilities from running containers.
 data Capabilities = Capabilities
-    { _add  :: Maybe [Capability]
-    , _drop :: Maybe [Capability]
+    { _add  :: !(Maybe [Capability])
+    , _drop :: !(Maybe [Capability])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Capabilities

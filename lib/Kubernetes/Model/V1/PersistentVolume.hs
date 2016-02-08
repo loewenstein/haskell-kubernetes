@@ -36,11 +36,11 @@ import           Test.QuickCheck.Instances                  ()
 
 -- | PersistentVolume (PV) is a storage resource provisioned by an administrator. It is analogous to a node. More info: http://releases.k8s.io/HEAD/docs/user-guide/persistent-volumes.md
 data PersistentVolume = PersistentVolume
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _spec       :: Maybe PersistentVolumeSpec
-    , _status     :: Maybe PersistentVolumeStatus
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _spec       :: !(Maybe PersistentVolumeSpec)
+    , _status     :: !(Maybe PersistentVolumeStatus)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolume

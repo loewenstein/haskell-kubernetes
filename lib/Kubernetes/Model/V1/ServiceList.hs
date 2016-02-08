@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | ServiceList holds a list of services.
 data ServiceList = ServiceList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [Service]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([Service])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ServiceList

@@ -47,21 +47,21 @@ import           Test.QuickCheck.Instances                ()
 
 -- | PodSpec is a description of a pod.
 data PodSpec = PodSpec
-    { _volumes                       :: Maybe [Volume]
-    , _containers                    :: [Container]
-    , _restartPolicy                 :: Maybe Text
-    , _terminationGracePeriodSeconds :: Maybe Integer
-    , _activeDeadlineSeconds         :: Maybe Integer
-    , _dnsPolicy                     :: Maybe Text
-    , _nodeSelector                  :: Maybe Any
-    , _serviceAccountName            :: Maybe Text
-    , _serviceAccount                :: Maybe Text
-    , _nodeName                      :: Maybe Text
-    , _hostNetwork                   :: Maybe Bool
-    , _hostPID                       :: Maybe Bool
-    , _hostIPC                       :: Maybe Bool
-    , _securityContext               :: Maybe PodSecurityContext
-    , _imagePullSecrets              :: Maybe [LocalObjectReference]
+    { _volumes                       :: !(Maybe [Volume])
+    , _containers                    :: !([Container])
+    , _restartPolicy                 :: !(Maybe Text)
+    , _terminationGracePeriodSeconds :: !(Maybe Integer)
+    , _activeDeadlineSeconds         :: !(Maybe Integer)
+    , _dnsPolicy                     :: !(Maybe Text)
+    , _nodeSelector                  :: !(Maybe Any)
+    , _serviceAccountName            :: !(Maybe Text)
+    , _serviceAccount                :: !(Maybe Text)
+    , _nodeName                      :: !(Maybe Text)
+    , _hostNetwork                   :: !(Maybe Bool)
+    , _hostPID                       :: !(Maybe Bool)
+    , _hostIPC                       :: !(Maybe Bool)
+    , _securityContext               :: !(Maybe PodSecurityContext)
+    , _imagePullSecrets              :: !(Maybe [LocalObjectReference])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodSpec

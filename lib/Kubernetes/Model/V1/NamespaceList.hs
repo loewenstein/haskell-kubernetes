@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | NamespaceList is a list of Namespaces.
 data NamespaceList = NamespaceList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [Namespace]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([Namespace])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NamespaceList

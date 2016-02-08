@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | ResourceQuotaSpec defines the desired hard limits to enforce for Quota.
 data ResourceQuotaSpec = ResourceQuotaSpec
-    { _hard :: Maybe Any
+    { _hard :: !(Maybe Any)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ResourceQuotaSpec

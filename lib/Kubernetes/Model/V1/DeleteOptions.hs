@@ -28,9 +28,9 @@ import           Test.QuickCheck.Instances ()
 
 -- | DeleteOptions may be provided when deleting an API object
 data DeleteOptions = DeleteOptions
-    { _kind               :: Maybe Text
-    , _apiVersion         :: Maybe Text
-    , _gracePeriodSeconds :: Integer
+    { _kind               :: !(Maybe Text)
+    , _apiVersion         :: !(Maybe Text)
+    , _gracePeriodSeconds :: !(Integer)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''DeleteOptions

@@ -29,10 +29,10 @@ import           Test.QuickCheck.Instances ()
 
 -- | NodeSpec describes the attributes that a node is created with.
 data NodeSpec = NodeSpec
-    { _podCIDR       :: Maybe Text
-    , _externalID    :: Maybe Text
-    , _providerID    :: Maybe Text
-    , _unschedulable :: Maybe Bool
+    { _podCIDR       :: !(Maybe Text)
+    , _externalID    :: !(Maybe Text)
+    , _providerID    :: !(Maybe Text)
+    , _unschedulable :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NodeSpec

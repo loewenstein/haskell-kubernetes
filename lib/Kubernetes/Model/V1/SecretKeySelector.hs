@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | SecretKeySelector selects a key of a Secret.
 data SecretKeySelector = SecretKeySelector
-    { _name :: Maybe Text
-    , _key  :: Text
+    { _name :: !(Maybe Text)
+    , _key  :: !(Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''SecretKeySelector

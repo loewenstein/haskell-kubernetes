@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | PodTemplateList is a list of PodTemplates.
 data PodTemplateList = PodTemplateList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [PodTemplate]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([PodTemplate])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodTemplateList

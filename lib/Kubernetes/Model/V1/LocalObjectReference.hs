@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | LocalObjectReference contains enough information to let you locate the referenced object inside the same namespace.
 data LocalObjectReference = LocalObjectReference
-    { _name :: Maybe Text
+    { _name :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''LocalObjectReference

@@ -29,9 +29,9 @@ import           Test.QuickCheck.Instances        ()
 
 -- | EnvVar represents an environment variable present in a Container.
 data EnvVar = EnvVar
-    { _name      :: Text
-    , _value     :: Maybe Text
-    , _valueFrom :: Maybe EnvVarSource
+    { _name      :: !(Text)
+    , _value     :: !(Maybe Text)
+    , _valueFrom :: !(Maybe EnvVarSource)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EnvVar

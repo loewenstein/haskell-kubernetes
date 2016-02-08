@@ -29,10 +29,10 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents a Persistent Disk resource in Google Compute Engine.\n\nA GCE PD must exist and be formatted before mounting to a container. The disk must also be in the same GCE project and zone as the kubelet. A GCE PD can only be mounted as read/write once. GCE PDs support ownership management and SELinux relabeling.
 data GCEPersistentDiskVolumeSource = GCEPersistentDiskVolumeSource
-    { _pdName    :: Text
-    , _fsType    :: Text
-    , _partition :: Maybe Integer
-    , _readOnly  :: Maybe Bool
+    { _pdName    :: !(Text)
+    , _fsType    :: !(Text)
+    , _partition :: !(Maybe Integer)
+    , _readOnly  :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''GCEPersistentDiskVolumeSource

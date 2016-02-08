@@ -31,9 +31,9 @@ import           Test.QuickCheck.Instances           ()
 
 -- | ReplicationControllerSpec is the specification of a replication controller.
 data ReplicationControllerSpec = ReplicationControllerSpec
-    { _replicas :: Maybe Integer
-    , _selector :: Maybe Any
-    , _template :: Maybe PodTemplateSpec
+    { _replicas :: !(Maybe Integer)
+    , _selector :: !(Maybe Any)
+    , _template :: !(Maybe PodTemplateSpec)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ReplicationControllerSpec

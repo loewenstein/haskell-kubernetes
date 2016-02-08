@@ -32,10 +32,10 @@ import           Test.QuickCheck.Instances          ()
 
 -- | LimitRange sets resource usage limits for each kind of resource in a Namespace.
 data LimitRange = LimitRange
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _spec       :: Maybe LimitRangeSpec
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _spec       :: !(Maybe LimitRangeSpec)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''LimitRange

@@ -25,7 +25,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | DaemonEndpoint contains information about a single Daemon endpoint.
 data DaemonEndpoint = DaemonEndpoint
-    { _port :: Integer
+    { _port :: !(Integer)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''DaemonEndpoint

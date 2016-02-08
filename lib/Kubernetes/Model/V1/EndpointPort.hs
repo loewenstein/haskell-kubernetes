@@ -28,9 +28,9 @@ import           Test.QuickCheck.Instances ()
 
 -- | EndpointPort is a tuple that describes a single port.
 data EndpointPort = EndpointPort
-    { _name     :: Maybe Text
-    , _port     :: Integer
-    , _protocol :: Maybe Text
+    { _name     :: !(Maybe Text)
+    , _port     :: !(Integer)
+    , _protocol :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EndpointPort

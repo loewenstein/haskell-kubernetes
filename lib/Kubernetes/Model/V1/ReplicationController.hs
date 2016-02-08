@@ -36,11 +36,11 @@ import           Test.QuickCheck.Instances                       ()
 
 -- | ReplicationController represents the configuration of a replication controller.
 data ReplicationController = ReplicationController
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _spec       :: Maybe ReplicationControllerSpec
-    , _status     :: Maybe ReplicationControllerStatus
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _spec       :: !(Maybe ReplicationControllerSpec)
+    , _status     :: !(Maybe ReplicationControllerStatus)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ReplicationController

@@ -41,17 +41,17 @@ import           Test.QuickCheck.Instances           ()
 
 -- | Event is a report of an event somewhere in the cluster.
 data Event = Event
-    { _kind           :: Maybe Text
-    , _apiVersion     :: Maybe Text
-    , _metadata       :: ObjectMeta
-    , _involvedObject :: ObjectReference
-    , _reason         :: Maybe Text
-    , _message        :: Maybe Text
-    , _source         :: Maybe EventSource
-    , _firstTimestamp :: Maybe Text
-    , _lastTimestamp  :: Maybe Text
-    , _count          :: Maybe Integer
-    , _type_          :: Maybe Text
+    { _kind           :: !(Maybe Text)
+    , _apiVersion     :: !(Maybe Text)
+    , _metadata       :: !(ObjectMeta)
+    , _involvedObject :: !(ObjectReference)
+    , _reason         :: !(Maybe Text)
+    , _message        :: !(Maybe Text)
+    , _source         :: !(Maybe EventSource)
+    , _firstTimestamp :: !(Maybe Text)
+    , _lastTimestamp  :: !(Maybe Text)
+    , _count          :: !(Maybe Integer)
+    , _type_          :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Event

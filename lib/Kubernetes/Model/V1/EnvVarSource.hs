@@ -32,9 +32,9 @@ import           Test.QuickCheck.Instances                ()
 
 -- | EnvVarSource represents a source for the value of an EnvVar.
 data EnvVarSource = EnvVarSource
-    { _fieldRef        :: Maybe ObjectFieldSelector
-    , _configMapKeyRef :: Maybe ConfigMapKeySelector
-    , _secretKeyRef    :: Maybe SecretKeySelector
+    { _fieldRef        :: !(Maybe ObjectFieldSelector)
+    , _configMapKeyRef :: !(Maybe ConfigMapKeySelector)
+    , _secretKeyRef    :: !(Maybe SecretKeySelector)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EnvVarSource

@@ -33,11 +33,11 @@ import           Test.QuickCheck.Instances      ()
 
 -- | Node is a worker node in Kubernetes, formerly known as minion. Each node will have a unique identifier in the cache (i.e. in etcd).
 data Node = Node
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _spec       :: Maybe NodeSpec
-    , _status     :: Maybe NodeStatus
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _spec       :: !(Maybe NodeSpec)
+    , _status     :: !(Maybe NodeStatus)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Node

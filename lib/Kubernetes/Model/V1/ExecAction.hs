@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | ExecAction describes a \&quot;run in container\&quot; action.
 data ExecAction = ExecAction
-    { _command :: Maybe [Text]
+    { _command :: !(Maybe [Text])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ExecAction

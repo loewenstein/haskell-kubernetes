@@ -34,11 +34,11 @@ import           Test.QuickCheck.Instances                ()
 
 -- | FlexVolume represents a generic volume resource that is provisioned/attached using a exec based plugin. This is an alpha feature and may change in future.
 data FlexVolumeSource = FlexVolumeSource
-    { _driver    :: Text
-    , _fsType    :: Maybe Text
-    , _secretRef :: Maybe LocalObjectReference
-    , _readOnly  :: Maybe Bool
-    , _options   :: Maybe Any
+    { _driver    :: !(Text)
+    , _fsType    :: !(Maybe Text)
+    , _secretRef :: !(Maybe LocalObjectReference)
+    , _readOnly  :: !(Maybe Bool)
+    , _options   :: !(Maybe Any)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''FlexVolumeSource

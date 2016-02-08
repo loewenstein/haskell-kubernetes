@@ -28,9 +28,9 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents a volume that is populated with the contents of a git repository. Git repo volumes do not support ownership management. Git repo volumes support SELinux relabeling.
 data GitRepoVolumeSource = GitRepoVolumeSource
-    { _repository :: Text
-    , _revision   :: Maybe Text
-    , _directory  :: Maybe Text
+    { _repository :: !(Text)
+    , _revision   :: !(Maybe Text)
+    , _directory  :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''GitRepoVolumeSource

@@ -38,18 +38,18 @@ import           Test.QuickCheck.Instances ()
 
 -- | ObjectMeta is metadata that all persisted resources must have, which includes all objects users must create.
 data ObjectMeta = ObjectMeta
-    { _name                       :: Maybe Text
-    , _generateName               :: Maybe Text
-    , _namespace                  :: Maybe Text
-    , _selfLink                   :: Maybe Text
-    , _uid                        :: Maybe Text
-    , _resourceVersion            :: Maybe Text
-    , _generation                 :: Maybe Integer
-    , _creationTimestamp          :: Maybe Text
-    , _deletionTimestamp          :: Maybe Text
-    , _deletionGracePeriodSeconds :: Maybe Integer
-    , _labels                     :: Maybe Any
-    , _annotations                :: Maybe Any
+    { _name                       :: !(Maybe Text)
+    , _generateName               :: !(Maybe Text)
+    , _namespace                  :: !(Maybe Text)
+    , _selfLink                   :: !(Maybe Text)
+    , _uid                        :: !(Maybe Text)
+    , _resourceVersion            :: !(Maybe Text)
+    , _generation                 :: !(Maybe Integer)
+    , _creationTimestamp          :: !(Maybe Text)
+    , _deletionTimestamp          :: !(Maybe Text)
+    , _deletionGracePeriodSeconds :: !(Maybe Integer)
+    , _labels                     :: !(Maybe Any)
+    , _annotations                :: !(Maybe Any)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ObjectMeta

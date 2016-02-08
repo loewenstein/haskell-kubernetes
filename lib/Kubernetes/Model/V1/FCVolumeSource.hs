@@ -29,10 +29,10 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents a Fibre Channel volume. Fibre Channel volumes can only be mounted as read/write once. Fibre Channel volumes support ownership management and SELinux relabeling.
 data FCVolumeSource = FCVolumeSource
-    { _targetWWNs :: [Text]
-    , _lun        :: Integer
-    , _fsType     :: Text
-    , _readOnly   :: Maybe Bool
+    { _targetWWNs :: !([Text])
+    , _lun        :: !(Integer)
+    , _fsType     :: !(Text)
+    , _readOnly   :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''FCVolumeSource

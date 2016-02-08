@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | PersistentVolumeList is a list of PersistentVolume items.
 data PersistentVolumeList = PersistentVolumeList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [PersistentVolume]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([PersistentVolume])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeList

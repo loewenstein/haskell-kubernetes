@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | LoadBalancerIngress represents the status of a load-balancer ingress point: traffic intended for the service should be sent to an ingress point.
 data LoadBalancerIngress = LoadBalancerIngress
-    { _ip       :: Maybe Text
-    , _hostname :: Maybe Text
+    { _ip       :: !(Maybe Text)
+    , _hostname :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''LoadBalancerIngress

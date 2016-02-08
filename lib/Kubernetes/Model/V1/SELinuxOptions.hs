@@ -29,10 +29,10 @@ import           Test.QuickCheck.Instances ()
 
 -- | SELinuxOptions are the labels to be applied to the container
 data SELinuxOptions = SELinuxOptions
-    { _user  :: Maybe Text
-    , _role  :: Maybe Text
-    , _type_ :: Maybe Text
-    , _level :: Maybe Text
+    { _user  :: !(Maybe Text)
+    , _role  :: !(Maybe Text)
+    , _type_ :: !(Maybe Text)
+    , _level :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''SELinuxOptions

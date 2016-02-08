@@ -30,8 +30,8 @@ import           Test.QuickCheck.Instances               ()
 
 -- | DownwardAPIVolumeFile represents information to create the file containing the pod field
 data DownwardAPIVolumeFile = DownwardAPIVolumeFile
-    { _path     :: Text
-    , _fieldRef :: ObjectFieldSelector
+    { _path     :: !(Text)
+    , _fieldRef :: !(ObjectFieldSelector)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''DownwardAPIVolumeFile

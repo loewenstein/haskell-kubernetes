@@ -33,11 +33,11 @@ import           Test.QuickCheck.Instances                ()
 
 -- | StatusDetails is a set of additional properties that MAY be set by the server to provide additional information about a response. The Reason field of a Status object defines what attributes will be set. Clients must ignore fields that do not match the defined type of each attribute, and should assume that any attribute may be empty, invalid, or under defined.
 data StatusDetails = StatusDetails
-    { _name              :: Maybe Text
-    , _group             :: Maybe Text
-    , _kind              :: Maybe Text
-    , _causes            :: Maybe [StatusCause]
-    , _retryAfterSeconds :: Maybe Integer
+    { _name              :: !(Maybe Text)
+    , _group             :: !(Maybe Text)
+    , _kind              :: !(Maybe Text)
+    , _causes            :: !(Maybe [StatusCause])
+    , _retryAfterSeconds :: !(Maybe Integer)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''StatusDetails

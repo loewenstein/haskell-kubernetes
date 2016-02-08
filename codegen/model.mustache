@@ -47,7 +47,7 @@ import           Test.QuickCheck.Instances ()
 -- | {{description}}
 {{#hasVars}}
 data {{classname}} = {{classname}}
-    { _{{#vars}}{{& name}} :: {{^required}}Maybe {{/required}}{{datatype}}{{#hasMore}}
+    { _{{#vars}}{{& name}} :: !({{^required}}Maybe {{/required}}{{datatype}}){{#hasMore}}
     , _{{/hasMore}}{{/vars}}
     } deriving (Show, Eq, Generic)
 {{/hasVars}}

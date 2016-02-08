@@ -28,9 +28,9 @@ import           Test.QuickCheck.Instances ()
 
 -- | VolumeMount describes a mounting of a Volume within a container.
 data VolumeMount = VolumeMount
-    { _name      :: Text
-    , _readOnly  :: Maybe Bool
-    , _mountPath :: Text
+    { _name      :: !(Text)
+    , _readOnly  :: !(Maybe Bool)
+    , _mountPath :: !(Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''VolumeMount

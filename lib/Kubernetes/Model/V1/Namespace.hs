@@ -35,11 +35,11 @@ import           Test.QuickCheck.Instances           ()
 
 -- | Namespace provides a scope for Names. Use of multiple namespaces is optional.
 data Namespace = Namespace
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _spec       :: Maybe NamespaceSpec
-    , _status     :: Maybe NamespaceStatus
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _spec       :: !(Maybe NamespaceSpec)
+    , _status     :: !(Maybe NamespaceStatus)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Namespace

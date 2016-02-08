@@ -33,14 +33,14 @@ import           Test.QuickCheck.Instances ()
 
 -- | NodeSystemInfo is a set of ids/uuids to uniquely identify the node.
 data NodeSystemInfo = NodeSystemInfo
-    { _machineID               :: Text
-    , _systemUUID              :: Text
-    , _bootID                  :: Text
-    , _kernelVersion           :: Text
-    , _osImage                 :: Text
-    , _containerRuntimeVersion :: Text
-    , _kubeletVersion          :: Text
-    , _kubeProxyVersion        :: Text
+    { _machineID               :: !(Text)
+    , _systemUUID              :: !(Text)
+    , _bootID                  :: !(Text)
+    , _kernelVersion           :: !(Text)
+    , _osImage                 :: !(Text)
+    , _containerRuntimeVersion :: !(Text)
+    , _kubeletVersion          :: !(Text)
+    , _kubeProxyVersion        :: !(Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NodeSystemInfo

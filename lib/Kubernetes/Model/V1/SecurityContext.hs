@@ -32,11 +32,11 @@ import           Test.QuickCheck.Instances          ()
 
 -- | SecurityContext holds security configuration that will be applied to a container. Some fields are present in both SecurityContext and PodSecurityContext.  When both are set, the values in SecurityContext take precedence.
 data SecurityContext = SecurityContext
-    { _capabilities   :: Maybe Capabilities
-    , _privileged     :: Maybe Bool
-    , _seLinuxOptions :: Maybe SELinuxOptions
-    , _runAsUser      :: Maybe Integer
-    , _runAsNonRoot   :: Maybe Bool
+    { _capabilities   :: !(Maybe Capabilities)
+    , _privileged     :: !(Maybe Bool)
+    , _seLinuxOptions :: !(Maybe SELinuxOptions)
+    , _runAsUser      :: !(Maybe Integer)
+    , _runAsNonRoot   :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''SecurityContext

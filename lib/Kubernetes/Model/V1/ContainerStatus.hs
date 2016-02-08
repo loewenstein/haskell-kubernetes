@@ -35,14 +35,14 @@ import           Test.QuickCheck.Instances          ()
 
 -- | ContainerStatus contains details for the current status of this container.
 data ContainerStatus = ContainerStatus
-    { _name         :: Text
-    , _state        :: Maybe ContainerState
-    , _lastState    :: Maybe ContainerState
-    , _ready        :: Bool
-    , _restartCount :: Integer
-    , _image        :: Text
-    , _imageID      :: Text
-    , _containerID  :: Maybe Text
+    { _name         :: !(Text)
+    , _state        :: !(Maybe ContainerState)
+    , _lastState    :: !(Maybe ContainerState)
+    , _ready        :: !(Bool)
+    , _restartCount :: !(Integer)
+    , _image        :: !(Text)
+    , _imageID      :: !(Text)
+    , _containerID  :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ContainerStatus

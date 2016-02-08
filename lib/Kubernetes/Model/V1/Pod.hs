@@ -33,11 +33,11 @@ import           Test.QuickCheck.Instances      ()
 
 -- | Pod is a collection of containers that can run on a host. This resource is created by clients and scheduled onto hosts.
 data Pod = Pod
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _spec       :: Maybe PodSpec
-    , _status     :: Maybe PodStatus
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _spec       :: !(Maybe PodSpec)
+    , _status     :: !(Maybe PodStatus)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Pod

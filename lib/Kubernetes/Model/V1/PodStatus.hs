@@ -37,14 +37,14 @@ import           Test.QuickCheck.Instances           ()
 
 -- | PodStatus represents information about the status of a pod. Status may trail the actual state of a system.
 data PodStatus = PodStatus
-    { _phase             :: Maybe Text
-    , _conditions        :: Maybe [PodCondition]
-    , _message           :: Maybe Text
-    , _reason            :: Maybe Text
-    , _hostIP            :: Maybe Text
-    , _podIP             :: Maybe Text
-    , _startTime         :: Maybe Text
-    , _containerStatuses :: Maybe [ContainerStatus]
+    { _phase             :: !(Maybe Text)
+    , _conditions        :: !(Maybe [PodCondition])
+    , _message           :: !(Maybe Text)
+    , _reason            :: !(Maybe Text)
+    , _hostIP            :: !(Maybe Text)
+    , _podIP             :: !(Maybe Text)
+    , _startTime         :: !(Maybe Text)
+    , _containerStatuses :: !(Maybe [ContainerStatus])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodStatus

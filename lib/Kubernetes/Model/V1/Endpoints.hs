@@ -32,10 +32,10 @@ import           Test.QuickCheck.Instances          ()
 
 -- | Endpoints is a collection of endpoints that implement the actual service. Example:\n  Name: \&quot;mysvc\&quot;,\n  Subsets: [\n    {\n      Addresses: [{\&quot;ip\&quot;: \&quot;10.10.1.1\&quot;}, {\&quot;ip\&quot;: \&quot;10.10.2.2\&quot;}],\n      Ports: [{\&quot;name\&quot;: \&quot;a\&quot;, \&quot;port\&quot;: 8675}, {\&quot;name\&quot;: \&quot;b\&quot;, \&quot;port\&quot;: 309}]\n    },\n    {\n      Addresses: [{\&quot;ip\&quot;: \&quot;10.10.3.3\&quot;}],\n      Ports: [{\&quot;name\&quot;: \&quot;a\&quot;, \&quot;port\&quot;: 93}, {\&quot;name\&quot;: \&quot;b\&quot;, \&quot;port\&quot;: 76}]\n    },\n ]
 data Endpoints = Endpoints
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _subsets    :: [EndpointSubset]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _subsets    :: !([EndpointSubset])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Endpoints

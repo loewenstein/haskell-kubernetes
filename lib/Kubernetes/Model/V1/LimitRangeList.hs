@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | LimitRangeList is a list of LimitRange items.
 data LimitRangeList = LimitRangeList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [LimitRange]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([LimitRange])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''LimitRangeList

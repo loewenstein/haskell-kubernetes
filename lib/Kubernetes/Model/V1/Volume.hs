@@ -63,24 +63,24 @@ import           Test.QuickCheck.Instances                             ()
 
 -- | Volume represents a named volume in a pod that may be accessed by any container in the pod.
 data Volume = Volume
-    { _name                  :: Text
-    , _hostPath              :: Maybe HostPathVolumeSource
-    , _emptyDir              :: Maybe EmptyDirVolumeSource
-    , _gcePersistentDisk     :: Maybe GCEPersistentDiskVolumeSource
-    , _awsElasticBlockStore  :: Maybe AWSElasticBlockStoreVolumeSource
-    , _gitRepo               :: Maybe GitRepoVolumeSource
-    , _secret                :: Maybe SecretVolumeSource
-    , _nfs                   :: Maybe NFSVolumeSource
-    , _iscsi                 :: Maybe ISCSIVolumeSource
-    , _glusterfs             :: Maybe GlusterfsVolumeSource
-    , _persistentVolumeClaim :: Maybe PersistentVolumeClaimVolumeSource
-    , _rbd                   :: Maybe RBDVolumeSource
-    , _flexVolume            :: Maybe FlexVolumeSource
-    , _cinder                :: Maybe CinderVolumeSource
-    , _cephfs                :: Maybe CephFSVolumeSource
-    , _flocker               :: Maybe FlockerVolumeSource
-    , _downwardAPI           :: Maybe DownwardAPIVolumeSource
-    , _fc                    :: Maybe FCVolumeSource
+    { _name                  :: !(Text)
+    , _hostPath              :: !(Maybe HostPathVolumeSource)
+    , _emptyDir              :: !(Maybe EmptyDirVolumeSource)
+    , _gcePersistentDisk     :: !(Maybe GCEPersistentDiskVolumeSource)
+    , _awsElasticBlockStore  :: !(Maybe AWSElasticBlockStoreVolumeSource)
+    , _gitRepo               :: !(Maybe GitRepoVolumeSource)
+    , _secret                :: !(Maybe SecretVolumeSource)
+    , _nfs                   :: !(Maybe NFSVolumeSource)
+    , _iscsi                 :: !(Maybe ISCSIVolumeSource)
+    , _glusterfs             :: !(Maybe GlusterfsVolumeSource)
+    , _persistentVolumeClaim :: !(Maybe PersistentVolumeClaimVolumeSource)
+    , _rbd                   :: !(Maybe RBDVolumeSource)
+    , _flexVolume            :: !(Maybe FlexVolumeSource)
+    , _cinder                :: !(Maybe CinderVolumeSource)
+    , _cephfs                :: !(Maybe CephFSVolumeSource)
+    , _flocker               :: !(Maybe FlockerVolumeSource)
+    , _downwardAPI           :: !(Maybe DownwardAPIVolumeSource)
+    , _fc                    :: !(Maybe FCVolumeSource)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Volume

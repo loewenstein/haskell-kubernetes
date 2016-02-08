@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | NodeList is the whole list of all Nodes which have been registered with master.
 data NodeList = NodeList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [Node]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([Node])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NodeList

@@ -29,10 +29,10 @@ import           Test.QuickCheck.Instances ()
 
 -- | Information about the condition of a component.
 data ComponentCondition = ComponentCondition
-    { _type_   :: Text
-    , _status  :: Text
-    , _message :: Maybe Text
-    , _error   :: Maybe Text
+    { _type_   :: !(Text)
+    , _status  :: !(Text)
+    , _message :: !(Maybe Text)
+    , _error   :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ComponentCondition

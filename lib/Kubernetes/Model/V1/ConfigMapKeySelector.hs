@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | Selects a key from a ConfigMap.
 data ConfigMapKeySelector = ConfigMapKeySelector
-    { _name :: Maybe Text
-    , _key  :: Text
+    { _name :: !(Maybe Text)
+    , _key  :: !(Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ConfigMapKeySelector

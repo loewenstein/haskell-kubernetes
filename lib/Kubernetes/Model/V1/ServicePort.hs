@@ -31,11 +31,11 @@ import           Test.QuickCheck.Instances ()
 
 -- | ServicePort conatins information on service&#39;s port.
 data ServicePort = ServicePort
-    { _name       :: Maybe Text
-    , _protocol   :: Maybe Text
-    , _port       :: Integer
-    , _targetPort :: Maybe IntegerOrText
-    , _nodePort   :: Maybe Integer
+    { _name       :: !(Maybe Text)
+    , _protocol   :: !(Maybe Text)
+    , _port       :: !(Integer)
+    , _targetPort :: !(Maybe IntegerOrText)
+    , _nodePort   :: !(Maybe Integer)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ServicePort

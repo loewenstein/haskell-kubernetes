@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents an empty directory for a pod. Empty directory volumes support ownership management and SELinux relabeling.
 data EmptyDirVolumeSource = EmptyDirVolumeSource
-    { _medium :: Maybe Text
+    { _medium :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EmptyDirVolumeSource

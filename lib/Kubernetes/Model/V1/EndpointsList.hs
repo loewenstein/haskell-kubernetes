@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | EndpointsList is a list of endpoints.
 data EndpointsList = EndpointsList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [Endpoints]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([Endpoints])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EndpointsList

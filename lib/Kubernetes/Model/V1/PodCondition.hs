@@ -31,12 +31,12 @@ import           Test.QuickCheck.Instances ()
 
 -- | PodCondition contains details for the current condition of this pod.
 data PodCondition = PodCondition
-    { _type_              :: Text
-    , _status             :: Text
-    , _lastProbeTime      :: Maybe Text
-    , _lastTransitionTime :: Maybe Text
-    , _reason             :: Maybe Text
-    , _message            :: Maybe Text
+    { _type_              :: !(Text)
+    , _status             :: !(Text)
+    , _lastProbeTime      :: !(Maybe Text)
+    , _lastTransitionTime :: !(Maybe Text)
+    , _reason             :: !(Maybe Text)
+    , _message            :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodCondition

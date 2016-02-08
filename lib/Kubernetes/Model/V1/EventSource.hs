@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | EventSource contains information for an event.
 data EventSource = EventSource
-    { _component :: Maybe Text
-    , _host      :: Maybe Text
+    { _component :: !(Maybe Text)
+    , _host      :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EventSource

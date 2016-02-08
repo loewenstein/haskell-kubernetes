@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | SecretList is a list of Secret.
 data SecretList = SecretList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [Secret]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([Secret])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''SecretList

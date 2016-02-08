@@ -30,8 +30,8 @@ import           Test.QuickCheck.Instances           ()
 
 -- | EndpointAddress is a tuple that describes single IP address.
 data EndpointAddress = EndpointAddress
-    { _ip        :: Text
-    , _targetRef :: Maybe ObjectReference
+    { _ip        :: !(Text)
+    , _targetRef :: !(Maybe ObjectReference)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''EndpointAddress

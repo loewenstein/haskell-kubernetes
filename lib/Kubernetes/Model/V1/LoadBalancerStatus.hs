@@ -28,7 +28,7 @@ import           Test.QuickCheck.Instances               ()
 
 -- | LoadBalancerStatus represents the status of a load-balancer.
 data LoadBalancerStatus = LoadBalancerStatus
-    { _ingress :: Maybe [LoadBalancerIngress]
+    { _ingress :: !(Maybe [LoadBalancerIngress])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''LoadBalancerStatus

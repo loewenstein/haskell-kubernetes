@@ -32,9 +32,9 @@ import           Test.QuickCheck.Instances                    ()
 
 -- | ContainerState holds a possible state of container. Only one of its members may be specified. If none of them is specified, the default one is ContainerStateWaiting.
 data ContainerState = ContainerState
-    { _waiting    :: Maybe ContainerStateWaiting
-    , _running    :: Maybe ContainerStateRunning
-    , _terminated :: Maybe ContainerStateTerminated
+    { _waiting    :: !(Maybe ContainerStateWaiting)
+    , _running    :: !(Maybe ContainerStateRunning)
+    , _terminated :: !(Maybe ContainerStateTerminated)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ContainerState

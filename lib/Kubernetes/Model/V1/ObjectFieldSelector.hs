@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | ObjectFieldSelector selects an APIVersioned field of an object.
 data ObjectFieldSelector = ObjectFieldSelector
-    { _apiVersion :: Maybe Text
-    , _fieldPath  :: Text
+    { _apiVersion :: !(Maybe Text)
+    , _fieldPath  :: !(Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ObjectFieldSelector

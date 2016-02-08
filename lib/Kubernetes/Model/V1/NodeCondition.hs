@@ -31,12 +31,12 @@ import           Test.QuickCheck.Instances ()
 
 -- | NodeCondition contains condition infromation for a node.
 data NodeCondition = NodeCondition
-    { _type_              :: Text
-    , _status             :: Text
-    , _lastHeartbeatTime  :: Maybe Text
-    , _lastTransitionTime :: Maybe Text
-    , _reason             :: Maybe Text
-    , _message            :: Maybe Text
+    { _type_              :: !(Text)
+    , _status             :: !(Text)
+    , _lastHeartbeatTime  :: !(Maybe Text)
+    , _lastTransitionTime :: !(Maybe Text)
+    , _reason             :: !(Maybe Text)
+    , _message            :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NodeCondition

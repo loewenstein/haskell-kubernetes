@@ -36,11 +36,11 @@ import           Test.QuickCheck.Instances                       ()
 
 -- | PersistentVolumeClaim is a user&#39;s request for and claim to a persistent volume
 data PersistentVolumeClaim = PersistentVolumeClaim
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _spec       :: Maybe PersistentVolumeClaimSpec
-    , _status     :: Maybe PersistentVolumeClaimStatus
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _spec       :: !(Maybe PersistentVolumeClaimSpec)
+    , _status     :: !(Maybe PersistentVolumeClaimStatus)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeClaim

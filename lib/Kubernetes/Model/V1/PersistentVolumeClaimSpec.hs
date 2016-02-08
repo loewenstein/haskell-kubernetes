@@ -33,9 +33,9 @@ import           Test.QuickCheck.Instances                      ()
 
 -- | PersistentVolumeClaimSpec describes the common attributes of storage devices and allows a Source for provider-specific attributes
 data PersistentVolumeClaimSpec = PersistentVolumeClaimSpec
-    { _accessModes :: Maybe [PersistentVolumeAccessMode]
-    , _resources   :: Maybe ResourceRequirements
-    , _volumeName  :: Maybe Text
+    { _accessModes :: !(Maybe [PersistentVolumeAccessMode])
+    , _resources   :: !(Maybe ResourceRequirements)
+    , _volumeName  :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeClaimSpec

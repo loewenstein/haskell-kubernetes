@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances              ()
 
 -- | ComponentStatus (and ComponentStatusList) holds the cluster validation info.
 data ComponentStatus = ComponentStatus
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _conditions :: Maybe [ComponentCondition]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _conditions :: !(Maybe [ComponentCondition])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ComponentStatus

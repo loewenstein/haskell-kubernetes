@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | ListMeta describes metadata that synthetic resources must have, including lists and various status objects. A resource may have only one of {ObjectMeta, ListMeta}.
 data ListMeta = ListMeta
-    { _selfLink        :: Maybe Text
-    , _resourceVersion :: Maybe Text
+    { _selfLink        :: !(Maybe Text)
+    , _resourceVersion :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ListMeta

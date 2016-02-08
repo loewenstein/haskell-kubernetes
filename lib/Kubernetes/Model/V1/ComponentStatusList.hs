@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | Status of all the conditions for the component as a list of ComponentStatus objects.
 data ComponentStatusList = ComponentStatusList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [ComponentStatus]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([ComponentStatus])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ComponentStatusList

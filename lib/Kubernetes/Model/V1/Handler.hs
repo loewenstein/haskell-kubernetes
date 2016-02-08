@@ -32,9 +32,9 @@ import           Test.QuickCheck.Instances           ()
 
 -- | Handler defines a specific action that should be taken
 data Handler = Handler
-    { _exec      :: Maybe ExecAction
-    , _httpGet   :: Maybe HTTPGetAction
-    , _tcpSocket :: Maybe TCPSocketAction
+    { _exec      :: !(Maybe ExecAction)
+    , _httpGet   :: !(Maybe HTTPGetAction)
+    , _tcpSocket :: !(Maybe TCPSocketAction)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Handler

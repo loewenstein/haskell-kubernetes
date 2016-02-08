@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | Adapts a Secret into a volume.\n\nThe contents of the target Secret&#39;s Data field will be presented in a volume as files using the keys in the Data field as the file names. Secret volumes support ownership management and SELinux relabeling.
 data SecretVolumeSource = SecretVolumeSource
-    { _secretName :: Maybe Text
+    { _secretName :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''SecretVolumeSource

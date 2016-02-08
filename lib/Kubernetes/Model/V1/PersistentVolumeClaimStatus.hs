@@ -33,9 +33,9 @@ import           Test.QuickCheck.Instances                      ()
 
 -- | PersistentVolumeClaimStatus is the current status of a persistent volume claim.
 data PersistentVolumeClaimStatus = PersistentVolumeClaimStatus
-    { _phase       :: Maybe Text
-    , _accessModes :: Maybe [PersistentVolumeAccessMode]
-    , _capacity    :: Maybe Any
+    { _phase       :: !(Maybe Text)
+    , _accessModes :: !(Maybe [PersistentVolumeAccessMode])
+    , _capacity    :: !(Maybe Any)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeClaimStatus

@@ -32,11 +32,11 @@ import           Test.QuickCheck.Instances      ()
 
 -- | Secret holds secret data of a certain type. The total bytes of the values in the Data field must be less than MaxSecretSize bytes.
 data Secret = Secret
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _data_      :: Maybe Any
-    , _type_      :: Maybe Text
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _data_      :: !(Maybe Any)
+    , _type_      :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Secret

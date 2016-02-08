@@ -36,14 +36,14 @@ import           Test.QuickCheck.Instances                ()
 
 -- | Represents a Rados Block Device mount that lasts the lifetime of a pod. RBD volumes support ownership management and SELinux relabeling.
 data RBDVolumeSource = RBDVolumeSource
-    { _monitors  :: [Text]
-    , _image     :: Text
-    , _fsType    :: Maybe Text
-    , _pool      :: Text
-    , _user      :: Text
-    , _keyring   :: Text
-    , _secretRef :: LocalObjectReference
-    , _readOnly  :: Maybe Bool
+    { _monitors  :: !([Text])
+    , _image     :: !(Text)
+    , _fsType    :: !(Maybe Text)
+    , _pool      :: !(Text)
+    , _user      :: !(Text)
+    , _keyring   :: !(Text)
+    , _secretRef :: !(LocalObjectReference)
+    , _readOnly  :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''RBDVolumeSource

@@ -28,9 +28,9 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents a Glusterfs mount that lasts the lifetime of a pod. Glusterfs volumes do not support ownership management or SELinux relabeling.
 data GlusterfsVolumeSource = GlusterfsVolumeSource
-    { _endpoints :: Text
-    , _path      :: Text
-    , _readOnly  :: Maybe Bool
+    { _endpoints :: !(Text)
+    , _path      :: !(Text)
+    , _readOnly  :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''GlusterfsVolumeSource

@@ -35,11 +35,11 @@ import           Test.QuickCheck.Instances               ()
 
 -- | ResourceQuota sets aggregate quota restrictions enforced per namespace
 data ResourceQuota = ResourceQuota
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _spec       :: Maybe ResourceQuotaSpec
-    , _status     :: Maybe ResourceQuotaStatus
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _spec       :: !(Maybe ResourceQuotaSpec)
+    , _status     :: !(Maybe ResourceQuotaStatus)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ResourceQuota

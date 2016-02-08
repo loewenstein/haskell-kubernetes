@@ -32,13 +32,13 @@ import           Test.QuickCheck.Instances ()
 
 -- | ContainerStateTerminated is a terminated state of a container.
 data ContainerStateTerminated = ContainerStateTerminated
-    { _exitCode    :: Integer
-    , _signal      :: Maybe Integer
-    , _reason      :: Maybe Text
-    , _message     :: Maybe Text
-    , _startedAt   :: Maybe Text
-    , _finishedAt  :: Maybe Text
-    , _containerID :: Maybe Text
+    { _exitCode    :: !(Integer)
+    , _signal      :: !(Maybe Integer)
+    , _reason      :: !(Maybe Text)
+    , _message     :: !(Maybe Text)
+    , _startedAt   :: !(Maybe Text)
+    , _finishedAt  :: !(Maybe Text)
+    , _containerID :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ContainerStateTerminated

@@ -28,7 +28,7 @@ import           Test.QuickCheck.Instances              ()
 
 -- | ServiceStatus represents the current status of a service.
 data ServiceStatus = ServiceStatus
-    { _loadBalancer :: Maybe LoadBalancerStatus
+    { _loadBalancer :: !(Maybe LoadBalancerStatus)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ServiceStatus

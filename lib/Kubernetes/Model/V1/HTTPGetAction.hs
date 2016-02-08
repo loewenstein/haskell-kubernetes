@@ -30,10 +30,10 @@ import           Test.QuickCheck.Instances ()
 
 -- | HTTPGetAction describes an action based on HTTP Get requests.
 data HTTPGetAction = HTTPGetAction
-    { _path   :: Maybe Text
-    , _port   :: IntegerOrText
-    , _host   :: Maybe Text
-    , _scheme :: Maybe Text
+    { _path   :: !(Maybe Text)
+    , _port   :: !(IntegerOrText)
+    , _host   :: !(Maybe Text)
+    , _scheme :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''HTTPGetAction

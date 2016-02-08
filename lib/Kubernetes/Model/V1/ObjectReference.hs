@@ -32,13 +32,13 @@ import           Test.QuickCheck.Instances ()
 
 -- | ObjectReference contains enough information to let you inspect or modify the referred object.
 data ObjectReference = ObjectReference
-    { _kind            :: Maybe Text
-    , _namespace       :: Maybe Text
-    , _name            :: Maybe Text
-    , _uid             :: Maybe Text
-    , _apiVersion      :: Maybe Text
-    , _resourceVersion :: Maybe Text
-    , _fieldPath       :: Maybe Text
+    { _kind            :: !(Maybe Text)
+    , _namespace       :: !(Maybe Text)
+    , _name            :: !(Maybe Text)
+    , _uid             :: !(Maybe Text)
+    , _apiVersion      :: !(Maybe Text)
+    , _resourceVersion :: !(Maybe Text)
+    , _fieldPath       :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ObjectReference

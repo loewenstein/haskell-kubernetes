@@ -41,14 +41,14 @@ import           Test.QuickCheck.Instances               ()
 
 -- | NodeStatus is information about the current status of a node.
 data NodeStatus = NodeStatus
-    { _capacity        :: Maybe Any
-    , _allocatable     :: Maybe Any
-    , _phase           :: Maybe Text
-    , _conditions      :: Maybe [NodeCondition]
-    , _addresses       :: Maybe [NodeAddress]
-    , _daemonEndpoints :: Maybe NodeDaemonEndpoints
-    , _nodeInfo        :: Maybe NodeSystemInfo
-    , _images          :: [ContainerImage]
+    { _capacity        :: !(Maybe Any)
+    , _allocatable     :: !(Maybe Any)
+    , _phase           :: !(Maybe Text)
+    , _conditions      :: !(Maybe [NodeCondition])
+    , _addresses       :: !(Maybe [NodeAddress])
+    , _daemonEndpoints :: !(Maybe NodeDaemonEndpoints)
+    , _nodeInfo        :: !(Maybe NodeSystemInfo)
+    , _images          :: !([ContainerImage])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NodeStatus

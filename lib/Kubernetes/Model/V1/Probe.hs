@@ -37,14 +37,14 @@ import           Test.QuickCheck.Instances           ()
 
 -- | Probe describes a health check to be performed against a container to determine whether it is alive or ready to receive traffic.
 data Probe = Probe
-    { _exec                :: Maybe ExecAction
-    , _httpGet             :: Maybe HTTPGetAction
-    , _tcpSocket           :: Maybe TCPSocketAction
-    , _initialDelaySeconds :: Maybe Integer
-    , _timeoutSeconds      :: Maybe Integer
-    , _periodSeconds       :: Maybe Integer
-    , _successThreshold    :: Maybe Integer
-    , _failureThreshold    :: Maybe Integer
+    { _exec                :: !(Maybe ExecAction)
+    , _httpGet             :: !(Maybe HTTPGetAction)
+    , _tcpSocket           :: !(Maybe TCPSocketAction)
+    , _initialDelaySeconds :: !(Maybe Integer)
+    , _timeoutSeconds      :: !(Maybe Integer)
+    , _periodSeconds       :: !(Maybe Integer)
+    , _successThreshold    :: !(Maybe Integer)
+    , _failureThreshold    :: !(Maybe Integer)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Probe

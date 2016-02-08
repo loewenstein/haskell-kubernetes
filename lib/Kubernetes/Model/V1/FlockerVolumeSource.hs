@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents a Flocker volume mounted by the Flocker agent. Flocker volumes do not support ownership management or SELinux relabeling.
 data FlockerVolumeSource = FlockerVolumeSource
-    { _datasetName :: Text
+    { _datasetName :: !(Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''FlockerVolumeSource

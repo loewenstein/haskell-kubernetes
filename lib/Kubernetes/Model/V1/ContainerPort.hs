@@ -30,11 +30,11 @@ import           Test.QuickCheck.Instances ()
 
 -- | ContainerPort represents a network port in a single container.
 data ContainerPort = ContainerPort
-    { _name          :: Maybe Text
-    , _hostPort      :: Maybe Integer
-    , _containerPort :: Integer
-    , _protocol      :: Maybe Text
-    , _hostIP        :: Maybe Text
+    { _name          :: !(Maybe Text)
+    , _hostPort      :: !(Maybe Integer)
+    , _containerPort :: !(Integer)
+    , _protocol      :: !(Maybe Text)
+    , _hostIP        :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ContainerPort

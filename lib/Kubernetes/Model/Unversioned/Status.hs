@@ -38,14 +38,14 @@ import           Test.QuickCheck.Instances                  ()
 
 -- | Status is a return value for calls that don&#39;t return other objects.
 data Status = Status
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _status     :: Maybe Text
-    , _message    :: Maybe Text
-    , _reason     :: Maybe Text
-    , _details    :: Maybe StatusDetails
-    , _code       :: Maybe Integer
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _status     :: !(Maybe Text)
+    , _message    :: !(Maybe Text)
+    , _reason     :: !(Maybe Text)
+    , _details    :: !(Maybe StatusDetails)
+    , _code       :: !(Maybe Integer)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''Status

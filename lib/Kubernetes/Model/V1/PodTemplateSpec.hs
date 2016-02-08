@@ -28,8 +28,8 @@ import           Test.QuickCheck.Instances      ()
 
 -- | PodTemplateSpec describes the data a pod should have when created from a template
 data PodTemplateSpec = PodTemplateSpec
-    { _metadata :: Maybe ObjectMeta
-    , _spec     :: Maybe PodSpec
+    { _metadata :: !(Maybe ObjectMeta)
+    , _spec     :: !(Maybe PodSpec)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodTemplateSpec

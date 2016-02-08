@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | ServiceAccountList is a list of ServiceAccount objects
 data ServiceAccountList = ServiceAccountList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [ServiceAccount]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([ServiceAccount])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ServiceAccountList

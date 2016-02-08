@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | ContainerStateWaiting is a waiting state of a container.
 data ContainerStateWaiting = ContainerStateWaiting
-    { _reason  :: Maybe Text
-    , _message :: Maybe Text
+    { _reason  :: !(Maybe Text)
+    , _message :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ContainerStateWaiting

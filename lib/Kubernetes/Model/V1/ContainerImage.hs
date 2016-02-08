@@ -27,8 +27,8 @@ import           Test.QuickCheck.Instances ()
 
 -- | Describe a container image
 data ContainerImage = ContainerImage
-    { _repoTags :: [Text]
-    , _size     :: Maybe Integer
+    { _repoTags :: !([Text])
+    , _size     :: !(Maybe Integer)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ContainerImage

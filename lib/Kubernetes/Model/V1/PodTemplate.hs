@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances           ()
 
 -- | PodTemplate describes a template for creating copies of a predefined pod.
 data PodTemplate = PodTemplate
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _template   :: Maybe PodTemplateSpec
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _template   :: !(Maybe PodTemplateSpec)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodTemplate

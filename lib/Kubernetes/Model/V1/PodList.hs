@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | PodList is a list of Pods.
 data PodList = PodList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [Pod]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([Pod])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''PodList

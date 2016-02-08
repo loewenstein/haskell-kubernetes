@@ -27,7 +27,7 @@ import           Test.QuickCheck.Instances          ()
 
 -- | NodeDaemonEndpoints lists ports opened by daemons running on the Node.
 data NodeDaemonEndpoints = NodeDaemonEndpoints
-    { _kubeletEndpoint :: Maybe DaemonEndpoint
+    { _kubeletEndpoint :: !(Maybe DaemonEndpoint)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NodeDaemonEndpoints

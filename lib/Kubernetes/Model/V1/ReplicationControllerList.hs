@@ -34,10 +34,10 @@ import           Test.QuickCheck.Instances                 ()
 
 -- | ReplicationControllerList is a collection of replication controllers.
 data ReplicationControllerList = ReplicationControllerList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [ReplicationController]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([ReplicationController])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ReplicationControllerList

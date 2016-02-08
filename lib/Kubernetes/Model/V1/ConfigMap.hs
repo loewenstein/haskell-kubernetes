@@ -31,10 +31,10 @@ import           Test.QuickCheck.Instances      ()
 
 -- | ConfigMap holds configuration data for pods to consume.
 data ConfigMap = ConfigMap
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ObjectMeta
-    , _data_      :: Maybe Any
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ObjectMeta)
+    , _data_      :: !(Maybe Any)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ConfigMap

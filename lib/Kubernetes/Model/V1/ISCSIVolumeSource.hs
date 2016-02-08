@@ -31,12 +31,12 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents an ISCSI disk. ISCSI volumes can only be mounted as read/write once. ISCSI volumes support ownership management and SELinux relabeling.
 data ISCSIVolumeSource = ISCSIVolumeSource
-    { _targetPortal   :: Text
-    , _iqn            :: Text
-    , _lun            :: Integer
-    , _iscsiInterface :: Maybe Text
-    , _fsType         :: Text
-    , _readOnly       :: Maybe Bool
+    { _targetPortal   :: !(Text)
+    , _iqn            :: !(Text)
+    , _lun            :: !(Integer)
+    , _iscsiInterface :: !(Maybe Text)
+    , _fsType         :: !(Text)
+    , _readOnly       :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ISCSIVolumeSource

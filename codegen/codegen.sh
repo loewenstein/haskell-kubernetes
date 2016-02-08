@@ -131,7 +131,7 @@ repair_module_io() {
 
 # remove redundant Data.Text import
 remove_text_import_io() {
-  local file_list="$(ack --haskell -L ':: ((Maybe\s)?\[?Text\]?)' ./lib/Kubernetes/Model/)"
+  local file_list="$(ack --haskell -L ':: !\((Maybe\s)?\[?Text\]?\)' ./lib/Kubernetes/Model/)"
 
   for file in $file_list
   do
@@ -149,11 +149,11 @@ one_off_io() {
   sed -i 's/Data\.Text (Text)/Kubernetes.Utils (IntegerOrText)/g' "./lib/Kubernetes/Model/V1/TCPSocketAction.hs"
 
   # switch specific ports to use IntegerOrText
-  sed -i 's/_port :: Text/_port :: IntegerOrText/g' "./lib/Kubernetes/Model/V1/TCPSocketAction.hs"
+  sed -i 's/_port :: !(Text)/_port :: !(IntegerOrText)/g' "./lib/Kubernetes/Model/V1/TCPSocketAction.hs"
   sed -i 's/mkTCPSocketAction :: Text/mkTCPSocketAction :: IntegerOrText/g' "./lib/Kubernetes/Model/V1/TCPSocketAction.hs"
-  sed -i 's/_port :: Text/_port :: IntegerOrText/g' "./lib/Kubernetes/Model/V1/HTTPGetAction.hs"
+  sed -i 's/_port :: !(Text)/_port :: !(IntegerOrText)/g' "./lib/Kubernetes/Model/V1/HTTPGetAction.hs"
   sed -i 's/mkHTTPGetAction :: Text/mkHTTPGetAction :: IntegerOrText/g' "./lib/Kubernetes/Model/V1/HTTPGetAction.hs"
-  sed -i 's/_targetPort :: Maybe Text/_targetPort :: Maybe IntegerOrText/g' "./lib/Kubernetes/Model/V1/ServicePort.hs"
+  sed -i 's/_targetPort :: !(Maybe Text)/_targetPort :: !(Maybe IntegerOrText)/g' "./lib/Kubernetes/Model/V1/ServicePort.hs"
 }
 
 # style!

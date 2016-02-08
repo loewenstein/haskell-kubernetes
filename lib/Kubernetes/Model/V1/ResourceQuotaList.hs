@@ -33,10 +33,10 @@ import           Test.QuickCheck.Instances             ()
 
 -- | ResourceQuotaList is a list of ResourceQuota items.
 data ResourceQuotaList = ResourceQuotaList
-    { _kind       :: Maybe Text
-    , _apiVersion :: Maybe Text
-    , _metadata   :: Maybe ListMeta
-    , _items      :: [ResourceQuota]
+    { _kind       :: !(Maybe Text)
+    , _apiVersion :: !(Maybe Text)
+    , _metadata   :: !(Maybe ListMeta)
+    , _items      :: !([ResourceQuota])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ResourceQuotaList

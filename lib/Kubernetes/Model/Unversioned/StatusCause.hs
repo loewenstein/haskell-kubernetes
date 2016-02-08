@@ -28,9 +28,9 @@ import           Test.QuickCheck.Instances ()
 
 -- | StatusCause provides more information about an api.Status failure, including cases when multiple errors are encountered.
 data StatusCause = StatusCause
-    { _reason  :: Maybe Text
-    , _message :: Maybe Text
-    , _field   :: Maybe Text
+    { _reason  :: !(Maybe Text)
+    , _message :: !(Maybe Text)
+    , _field   :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''StatusCause

@@ -26,7 +26,7 @@ import           Test.QuickCheck.Instances ()
 
 -- | NamespaceStatus is information about the current status of a Namespace.
 data NamespaceStatus = NamespaceStatus
-    { _phase :: Maybe Text
+    { _phase :: !(Maybe Text)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''NamespaceStatus

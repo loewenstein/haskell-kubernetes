@@ -28,9 +28,9 @@ import           Test.QuickCheck.Instances ()
 
 -- | Represents a cinder volume resource in Openstack. A Cinder volume must exist before mounting to a container. The volume must also be in the same region as the kubelet. Cinder volumes support ownership management and SELinux relabeling.
 data CinderVolumeSource = CinderVolumeSource
-    { _volumeID :: Text
-    , _fsType   :: Maybe Text
-    , _readOnly :: Maybe Bool
+    { _volumeID :: !(Text)
+    , _fsType   :: !(Maybe Text)
+    , _readOnly :: !(Maybe Bool)
     } deriving (Show, Eq, Generic)
 
 makeLenses ''CinderVolumeSource
