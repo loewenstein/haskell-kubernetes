@@ -11,7 +11,7 @@ copyright:           2016 - SoundCloud Ltd.
 category:            Web
 build-type:          Simple
 -- extra-source-files:
-cabal-version:       >=1.10
+cabal-version:       >= 1.10
 
 library
   hs-source-dirs:      lib
@@ -143,25 +143,26 @@ library
                      , Kubernetes.Model.V1.VolumeMount
                        Kubernetes.Utils
   ghc-options:         -Wall -fcontext-stack=10000
-  build-depends:       base
-                     , aeson
-                     , bytestring
-                     , containers
-                     , either
-                     , http-types
-                     , lens
-                     , network-uri
-                     , QuickCheck
-                     , quickcheck-instances
-                     , scientific
-                     , servant
-                     , servant-client
-                     , servant-server
-                     , split
-                     , text
-                     , unordered-containers
-                     , vector
-                     , wai
+  build-depends:       base                 >= 4.8  && < 4.9
+                     , aeson                >= 0.9  && < 0.12
+                     , bytestring           >= 0.10 && < 0.11
+                     , containers           >= 0.5  && < 0.6
+                     , either               >= 4.4  && < 4.5
+                     , http-types           == 0.9.*
+                     , lens                 == 4.13.*
+                     , network-uri          >= 2.6  && < 2.7
+                     , QuickCheck           >= 2.8  && < 2.9
+                     , quickcheck-instances >= 0.3  && < 0.4
+                     , scientific           >= 0.3  && < 0.4
+                     , servant              >= 0.4  && < 0.5
+                     , servant-client       >= 0.4  && < 0.5
+                     , servant-server       >= 0.4  && < 0.5
+                     , split                >= 0.2  && < 0.3
+                     , text                 >= 1.2  && < 1.3
+                     , unordered-containers >= 0.2  && < 0.3
+                     , vector               >= 0.11 && < 0.12
+                     , wai                  >= 3.2  && < 3.3
+
   default-language:    Haskell2010
 
 executable client
@@ -169,23 +170,23 @@ executable client
   main-is:             Main.hs
   ghc-options:         -threaded -rtsopts -with-rtsopts=-N
   build-depends:       base
-                     , either
-                     , haskell-kubernetes
-                     , network-uri
-                     , QuickCheck
-                     , servant
-                     , servant-client
-                     , split
-                     , transformers
+                     , either               >= 4.4 && < 4.5
+                     , haskell-kubernetes   >= 0.3 && < 0.4
+                     , network-uri          >= 2.6 && < 2.7
+                     , QuickCheck           >= 2.8 && < 2.9
+                     , servant              >= 0.4 && < 0.5
+                     , servant-client       >= 0.4 && < 0.5
+                     , split                >= 0.2 && < 0.3
+                     , transformers         >= 0.4 && < 0.5
   default-language:    Haskell2010
 
--- executable server
-  -- hs-source-dirs:      server
-  -- main-is:             Main.hs
-  -- ghc-options:         -threaded -fcontext-stack=1000 -rtsopts -with-rtsopts=-N
-  -- build-depends:       base
-                     -- , haskell-kubernetes
-                     -- , servant-server
-                     -- , servant-mock
-                     -- , warp
-  -- default-language:    Haskell2010
+executable server
+  hs-source-dirs:      server
+  main-is:             Main.hs
+  ghc-options:         -threaded -fcontext-stack=1000 -rtsopts -with-rtsopts=-N
+  build-depends:       base
+                     , haskell-kubernetes   >= 0.3 && < 0.4
+                     , servant-server       >= 0.4 && < 0.5
+                     , servant-mock         >= 0.4 && < 0.5
+                     , warp                 >= 3.2 && < 3.3
+  default-language:    Haskell2010
