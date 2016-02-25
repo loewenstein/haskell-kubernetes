@@ -1,7 +1,8 @@
 { mkDerivation, aeson, base, bytestring, containers, either
 , http-types, lens, network-uri, QuickCheck, quickcheck-instances
-, scientific, servant, servant-client, servant-server, split
-, stdenv, text, transformers, unordered-containers, vector, wai
+, scientific, servant, servant-client, servant-mock, servant-server
+, split, stdenv, text, transformers, unordered-containers, vector
+, wai, warp
 }:
 mkDerivation {
   pname = "haskell-kubernetes";
@@ -15,8 +16,8 @@ mkDerivation {
     servant-server split text unordered-containers vector wai
   ];
   executableHaskellDepends = [
-    base either network-uri QuickCheck servant servant-client split
-    transformers
+    base either network-uri QuickCheck servant servant-client
+    servant-mock servant-server split transformers warp
   ];
   homepage = "https://github.com/soundcloud/haskell-kubernetes";
   description = "Haskell bindings to the Kubernetes API (via swagger & servant)";
