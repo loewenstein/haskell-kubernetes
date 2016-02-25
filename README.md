@@ -20,8 +20,8 @@ This project contains haskell bindings to the `v1` Kubernetes api generated via 
 * Fields specified as "not required" (missing a `"required"` field in the swagger description) are represented as a `Maybe`, even when that field refers to a list (e.g. `Maybe [Foo]`). This is done for consistent JSON parsing of the generated `aeson` instances.
 * In lieu of suitable `Default` instances, builder methods are exported. Each datatype has a corresponding `mk{{datatype}}` method to construct it, requiring only required fields.
 * API coverage is almost full. As `servant-0.4.4` lacks support for `HEAD` and `OPTIONS` endpoints, those endpoints were excluded from the **client** *and* **server** implementation (any related datatypes are still generated).
-* client bindings were spot tested.
-* the mock-server was spot tested.
+* client bindings were only spot tested (PR's welcomed!).
+* the mock-server was only spot tested (PR's welcomed!).
 
 ## Dependencies
 
@@ -54,7 +54,7 @@ See the [LICENSE](LICENSE.md) file for details.
 <!-- The content of the LICENSE.md file is as follows: 
 The MIT License (MIT)
 
-Copyright &copy; 2014 _name-of-copyright-holder_
+Copyright &copy; 2016 SoundCloud Ltd.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
