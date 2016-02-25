@@ -37,7 +37,7 @@ _haskell-kubernetes_ depends on the following software:
 In addition to the `README` (this file), there is a [directory of additional documentation](/doc):
 
 * The [Getting started](doc/GETTING_STARTED.md) information helps to understand limitations of the library, nuances about the generated datatypes, and the code generation process in general.
-* The [Contributing to _project-name_](doc/CONTRIBUTING.md) page lists severals ways that you can improve _project-name_.
+* The [Contributing to _haskell-kubernetes_](doc/CONTRIBUTING.md) page lists severals ways that you can improve _haskell-kubernetes_.
 * The list of [potential improvements](doc/TODO.md) are prioritized.
 
 ## Versioning
