@@ -7,7 +7,9 @@
 mkDerivation {
   pname = "haskell-kubernetes";
   version = "0.3.2";
-  src = ./.;
+  src = builtins.filterSource
+    (path: type: baseNameOf path != "dist" || baseNameOf path != ".git" || baseNameOf path != ".stack-work")
+    ./.;
   isLibrary = true;
   isExecutable = true;
   libraryHaskellDepends = [
