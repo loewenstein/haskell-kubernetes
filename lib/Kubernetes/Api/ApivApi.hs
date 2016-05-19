@@ -250,7 +250,6 @@ import Data.Proxy
 import Data.Text (Text)
 import Servant.API
 import Servant.Client
-import Network.URI (URIAuth (..), parseURI)
 import Kubernetes.Model.V1.ComponentStatusList
 import Kubernetes.Model.V1.ComponentStatus
 import Kubernetes.Model.V1.ConfigMapList
@@ -356,7 +355,7 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Put '[JSON] Text -- connectPutNamespacedPodProxy
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Post '[JSON] Text -- connectPostNamespacedPodProxy
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Delete '[JSON] Text -- connectDeleteNamespacedPodProxy
-    -- :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Options '[JSON] Text -- connectOptionsNamespacedPodProxy
+    -- :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> QueryParam "path" Text :> Option '[JSON] Text -- connectOptionsNamespacedPodProxy
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Get '[JSON] Text -- connectGetNamespacedPodProxy_0
     -- :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Head '[JSON] Text -- connectHeadNamespacedPodProxy_0
     :<|> "api" :> "v1" :> "namespaces" :> Capture "namespace" Text :> "pods" :> Capture "name" Text :> "proxy" :> Capture "path" Text :> QueryParam "path" Text :> Put '[JSON] Text -- connectPutNamespacedPodProxy_0
@@ -519,25 +518,6 @@ type ApivApi = "api" :> "v1" :> Get '[JSON] () -- getAPIResources
 
 proxyApivApi :: Proxy ApivApi
 proxyApivApi = Proxy
-
-
-serverPath :: String
-serverPath = "https://127.0.0.1:8080/"
-
-parseHostPort :: String -> (String, Int)
-parseHostPort path = (h,p)
-    where
-        authority = case parseURI path of
-            Just x -> uriAuthority x
-            _      -> Nothing
-        (h, p) = case authority of
-            Just y -> (uriRegName y, (getPort . uriPort) y)
-            _      -> ("localhost", 8080)
-        getPort p' = case (length p') of
-            0 -> 80
-            _ -> (read . drop 1) p'
-
-(host, port) = parseHostPort serverPath
 
 getAPIResources
     :<|> listNamespacedComponentStatus
@@ -766,4 +746,4 @@ getAPIResources
     :<|> watchSecretList
     :<|> watchServiceAccountList
     :<|> watchServiceList
-    = client proxyApivApi $ BaseUrl Http host port
+    = client proxyApivApi

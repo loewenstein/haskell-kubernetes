@@ -19,8 +19,6 @@ import           Control.Lens.TH (makeLenses)
 import           Control.Monad   (mzero)
 import           Data.Aeson      (FromJSON, ToJSON)
 import qualified Data.Aeson      as A
-import           Data.List       (intercalate)
-import           Data.List.Split (splitOn)
 import           Data.Scientific (coefficient, scientific)
 import qualified Data.Text       as T
 import           Data.Text.Read  (decimal)
@@ -45,21 +43,16 @@ instance ToJSON IntegerOrText where
   toJSON (IntegerOrText (Left i))  = A.Number (scientific i 0)
   toJSON (IntegerOrText (Right s)) = A.String s
 
-instance FromText IntegerOrText where
-  fromText txt = case decimal txt of
-    Right (i, t) | T.null t -> Just (IntegerOrText (Left i))
-    _                       -> Just (IntegerOrText (Right txt))
+instance FromHttpApiData IntegerOrText where
+  parseUrlPiece txt =
+    case decimal txt of
+      Right (i, t) | T.null t -> Right (IntegerOrText (Left i))
+      _                       -> Right (IntegerOrText (Right txt))
 
-instance ToText IntegerOrText where
-  toText iot = case iot of
+instance ToHttpApiData IntegerOrText where
+  toUrlPiece iot = case iot of
     IntegerOrText (Left i) -> T.pack (show i)
     IntegerOrText (Right t) -> t
-
-instance FromText [String] where
-    fromText = Just . splitOn "," . T.unpack
-
-instance ToText [String] where
-    toText = T.pack . intercalate ","
 
 lkp inputs l = case lookup l inputs of
         Nothing -> Left $ "label " ++ T.unpack l ++ " not found"
