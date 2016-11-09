@@ -41,7 +41,11 @@ data Secret = Secret
 
 makeLenses ''Secret
 
-$(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''Secret)
+$(deriveJSON defaultOptions{fieldLabelModifier =
+  (\n -> case n of
+    "_type_" -> "type"
+    "_data_" -> "data"
+    _ -> P.drop 1 n)} ''Secret)
 
 instance Arbitrary Secret where
     arbitrary = Secret <$> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary <*> arbitrary
