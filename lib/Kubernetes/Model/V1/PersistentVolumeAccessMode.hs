@@ -19,18 +19,18 @@ import           Data.Aeson.TH   (defaultOptions, deriveJSON,
 import           GHC.Generics    (Generic)
 import           Prelude         hiding (drop, error, max, min)
 import qualified Prelude         as P
-import           Test.QuickCheck (Arbitrary, arbitrary)
+import           Test.QuickCheck (Arbitrary, arbitrary, oneof)
 
 -- |
-data PersistentVolumeAccessMode = PersistentVolumeAccessMode deriving (Show, Eq, Generic)
+data PersistentVolumeAccessMode = ReadWriteOnce | ReadOnlyMany | ReadWriteMany deriving (Show, Eq, Generic)
 
 makeLenses ''PersistentVolumeAccessMode
 
 $(deriveJSON defaultOptions{fieldLabelModifier = (\n -> if n == "_type_" then "type" else P.drop 1 n)} ''PersistentVolumeAccessMode)
 
 instance Arbitrary PersistentVolumeAccessMode where
-    arbitrary = return PersistentVolumeAccessMode
+    arbitrary = oneof [return ReadWriteOnce, return ReadOnlyMany, return ReadWriteMany]
 
 -- | Use this method to build a PersistentVolumeAccessMode
 mkPersistentVolumeAccessMode :: PersistentVolumeAccessMode
-mkPersistentVolumeAccessMode = PersistentVolumeAccessMode
+mkPersistentVolumeAccessMode = ReadWriteOnce
