@@ -36,7 +36,7 @@ data ServiceList = ServiceList
     { _kind       :: !(Maybe Text)
     , _apiVersion :: !(Maybe Text)
     , _metadata   :: !(Maybe ListMeta)
-    , _items      :: !([Service])
+    , _items      :: !(Maybe [Service])
     } deriving (Show, Eq, Generic)
 
 makeLenses ''ServiceList
@@ -48,4 +48,4 @@ instance Arbitrary ServiceList where
 
 -- | Use this method to build a ServiceList
 mkServiceList :: [Service] -> ServiceList
-mkServiceList xitemsx = ServiceList Nothing Nothing Nothing xitemsx
+mkServiceList xitemsx = ServiceList Nothing Nothing Nothing (Just xitemsx)
